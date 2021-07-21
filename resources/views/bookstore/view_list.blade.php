@@ -104,13 +104,15 @@ function view_additional_orders($idno) {
         <td>
             @if(count(view_order($name->idno))>0)
             @foreach (view_order($name->idno) as $order)
-            *{{$order->subsidiary}}<br>
+            <?php $balance = $order->amount - ($order->payment+$order->debit_memo+$order->discount); ?>
+            @if($balance == 0) [PAID] @endif *{{$order->subsidiary}}<br>
             @endforeach
             @endif
             
             @if(count(view_additional_orders($name->idno))>0)
             @foreach (view_additional_orders($name->idno) as $order)
-            *{{$order->subsidiary}}<br>
+            <?php $balance = $order->amount - ($order->payment+$order->debit_memo+$order->discount); ?>
+            @if($balance == 0) [PAID] @endif *{{$order->subsidiary}}<br>
             @endforeach
             @endif
         </td>
@@ -161,13 +163,15 @@ function view_additional_orders($idno) {
         <td>
             @if(count(view_order($name->idno))>0)
             @foreach (view_order($name->idno) as $order)
-            *{{$order->subsidiary}}<br>
+            <?php $balance = $order->amount - ($order->payment+$order->debit_memo+$order->discount); ?>
+            @if($balance == 0) [PAID] @endif *{{$order->subsidiary}}<br>
             @endforeach
             @endif
             
             @if(count(view_additional_orders($name->idno))>0)
             @foreach (view_additional_orders($name->idno) as $order)
-            *{{$order->subsidiary}}<br>
+            <?php $balance = $order->amount - ($order->payment+$order->debit_memo+$order->discount); ?>
+            @if($balance == 0) [PAID] @endif *{{$order->subsidiary}}<br>
             @endforeach
             @endif
         </td>
