@@ -112,7 +112,7 @@ if (Auth::user()->accesslevel == env("ACCTNG_STAFF")) {
                                 <input class="form form-control" type='hidden' name='df' value="{{$scholar->depository_fee}}" type="text">
                             <!--</div>-->
                             <div class="col-sm-3">
-                                <label>Non-Discounted</label>
+                                <label>Student Development Fee</label>
                                 <input class="form form-control" type='text' name='non_discounted' value="{{$scholar->non_discounted}}" type="text">
                             </div>
                             <div class="col-sm-3">
