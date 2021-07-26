@@ -203,13 +203,13 @@ $school_year = \App\CtrEnrollmentSchoolYear::where('academic_type','BED')->first
           </ul>
         </li>
         <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>Class Leads</span>
+          <a href="#"><i class="fa fa-link"></i> <span>Cluster Leads</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{url('/bedregistrar',array('class_leads'))}}"></i> <span>Class Leaders</span></a></li>
+            <li><a href="{{url('/bedregistrar',array('class_leads'))}}"></i> <span>Cluster Leaders</span></a></li>
           </ul>
         </li>
             <li><a href="{{url('/bedregistrar',array('request_form'))}}"><i class="fa fa-link"></i> <span>Credential Request</span></a></li>
