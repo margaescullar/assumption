@@ -6,6 +6,8 @@ $school_years = DB::Select("Select distinct school_year from bed_levels");
 <?php 
 if(Auth::user()->accesslevel == env('REG_BE')){
     $layout = "layouts.appbedregistrar";
+}else if(Auth::user()->accesslevel == env('EDUTECH')){
+    $layout = "layouts.appedutech";
 }else if (Auth::user()->accesslevel==env("BED_CL")){
     $layout = "layouts.appbedclasslead";
     $cl_levels = \App\ClassLeadLevel::where('idno',Auth::user()->idno)->get(['level']);

@@ -139,6 +139,7 @@ $school_year = \App\CtrEnrollmentSchoolYear::where('academic_type','BED')->first
             <li><a href="{{url('/bedregistrar',array('withdrawn_students'))}}">Withdrawn Students</a></li>
             <li><a href="{{url('/bedregistrar',array('assessed_students'))}}">Assessed Students</a></li>
             <li><a href="{{url('/bedregistrar',array('not_yet_enrolled'))}}">Students Not Yet Enrolled</a></li>
+            <li><a href="{{url('/bedregistrar',array('directory'))}}">Directory</a></li>
           </ul>
         </li>        
       </ul>
