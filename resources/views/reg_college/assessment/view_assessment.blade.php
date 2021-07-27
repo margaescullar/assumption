@@ -147,8 +147,8 @@ if (count($previous) > 0) {
                 <div class='box-body'>
                         {{ csrf_field() }}
                             <input type="radio" name="is_audit" value='1'> Yes - Special Learning Needs<br>
-                            <input type="radio" name="is_audit" value='2'> Yes - Special Interest<br>
-                            <input type="radio" name="is_audit" value='3'> Yes - Exchange Student<br>
+                            <input type="radio" name="is_audit" value='2'> Yes - Special Interest(Credited)<br>
+                            <input type="radio" name="is_audit" value='3'> Yes - Exchange Student(Credited)<br>
                             <input type="radio" name="is_audit" value='0' checked> No
                         
                 </div>
