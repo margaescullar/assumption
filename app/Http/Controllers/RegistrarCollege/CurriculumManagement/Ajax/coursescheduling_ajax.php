@@ -92,6 +92,9 @@ class coursescheduling_ajax extends Controller {
             } else {
                 $available_rooms = \App\CtrRoom::where('is_no_conflict', 1)->get();
             }
+            //for bypassing the conflict checker
+                $available_rooms = \App\CtrRoom::all();
+                $is_conflict = array();
 
             return view('reg_college.curriculum_management.ajax.show_available_rooms', compact('day', 'time_start', 'time_end', 'course_offering_id', 'school_year', 'rooms', 'available_rooms', 'is_conflict'));
         }
@@ -151,6 +154,9 @@ class coursescheduling_ajax extends Controller {
             } else {
                 $available_rooms = \App\CtrRoom::where('is_no_conflict', 1)->get();
             }
+            //for bypassing the conflict checker
+                $available_rooms = \App\CtrRoom::all();
+                $is_conflict = array();
 
             return view('reg_college.curriculum_management.ajax.show_available_rooms2', compact('schedule_id','day', 'time_start', 'time_end', 'course_offering_id', 'school_year', 'rooms', 'available_rooms', 'is_conflict'));
         }
