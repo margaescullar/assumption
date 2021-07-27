@@ -284,10 +284,20 @@ class GetStudentList2 extends Controller {
                 $sections->update();
             \App\Http\Controllers\Admin\Logs::log("Update bedlevel/promotions section of $idno to $section");
             } else if (Auth::user()->accesslevel == env('GUIDANCE_BED')) {
+                
+                $status = \App\Status::where('idno', $idno)->first();
+                $status->section = $section;
+                $status->update();
+                $bedlevel = \App\BedLevel::where('idno', $idno)->where('level', $level)->where('school_year', $status->school_year)->where('period', $status->period)->first();
+                if(count($bedlevel)>0){
+                    $bedlevel->section = $section;
+                    $bedlevel->update();
+                }
+                
                 $sections = \App\Promotion::where('idno', $idno)->first();
                 $sections->section = $section;
                 $sections->save();
-            \App\Http\Controllers\Admin\Logs::log("Update promotions section of $idno to $section");
+            \App\Http\Controllers\Admin\Logs::log("Update bedlevel/promotions section of $idno to $section by guidance account.");
             }
         }
     }

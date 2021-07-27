@@ -110,9 +110,9 @@ $school_year = \App\CtrEnrollmentSchoolYear::where('academic_type','BED')->first
                         <li><a href="{{url('/')}}"><i class="fa fa-home"></i> <span>Home</span></a></li>
                         <li><a href="{{url('/bedregistrar',array('enrollment_statistics',$school_year->school_year))}}"><i class="fa fa-link"></i> <span>Enrollment Statistics</span></a></li>
                         @if(Auth::user()->idno == "guidance1" || Auth::user()->idno == "mparco")
-                        <li><a href="{{url('/bedregistrar/sectioning')}}"><i class="fa fa-group"></i> <span>Sectioning of Registrar for mparco</span></a></li>
+                        <li><a href="{{url('/bedregistrar/sectioning')}}"><i class="fa fa-group"></i> <span>Sectioning</span></a></li>
                         @else
-                        <li><a href="{{url('/bedregistrar/sectioning')}}"><i class="fa fa-group"></i> <span>Pre-Sectioning/Promotions</span></a></li>
+                        <li><a href="{{url('/bedregistrar/sectioning')}}"><i class="fa fa-group"></i> <span>Sectioning</span></a></li>
                         @endif
                         
                 </section>

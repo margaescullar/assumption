@@ -6,7 +6,7 @@ $strands =  \App\CtrAcademicProgram::selectRaw('distinct strand')->where('academ
 <?php
     if(Auth::user()->accesslevel == env('GUIDANCE_BED')){
     $layout = "layouts.appguidance_bed";
-    $title = "Pre-Sectioning";
+    $title = "Sectioning";
     $title_level = "Incoming Level";
     $school_year = \App\CtrEnrollmentSchoolYear::where('academic_type', 'BED')->first();
     } else {
@@ -69,6 +69,7 @@ $strands =  \App\CtrAcademicProgram::selectRaw('distinct strand')->where('academ
 @section('maincontent')
  <!-- search form (Optional) -->
  <div class="col-md-12">
+     <p>Note: This is sectioning and not pre-sectioning. All changes in the section will take effect to the current school year and period.</p>
      <div class="col-md-6">
          <div class="box">
              <div class="box-body">
