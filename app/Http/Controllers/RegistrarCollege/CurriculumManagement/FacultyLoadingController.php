@@ -52,6 +52,9 @@ class FacultyLoadingController extends Controller {
                     ->get();
             $count = $count + count($is_conflict);
             }
+            //for bypassing the conflict checker
+                $count=0;
+                
             if ($count <= 0){            
                 $updatecourse_offering = \App\ScheduleCollege::where('schedule_id', $schedule_id)->get();
                 foreach($updatecourse_offering as $updatesched){
