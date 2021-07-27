@@ -848,8 +848,6 @@ class Registration extends Controller {
     function sectioning($type=null) {
         if (Auth::user()->accesslevel == env("REG_BE") || Auth::user()->accesslevel == env("GUIDANCE_BED")) {
             return view("reg_be.sectioning",compact('type'));
-            
-            
         }
     }
 
