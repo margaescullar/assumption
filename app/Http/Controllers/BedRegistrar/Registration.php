@@ -845,9 +845,9 @@ class Registration extends Controller {
         $update->save();
     }
 
-    function sectioning() {
+    function sectioning($type=null) {
         if (Auth::user()->accesslevel == env("REG_BE") || Auth::user()->accesslevel == env("GUIDANCE_BED")) {
-            return view("reg_be.sectioning");
+            return view("reg_be.sectioning",compact('type'));
         }
     }
 

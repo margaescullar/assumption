@@ -113,7 +113,7 @@ Route::get('/bedregistrar/print/students_not_yet_enrolled/{department}/{school_y
 Route::get('/bedregistrar/export/withdrawn_list/{department}/{school_year}/{period}','BedRegistrar\Ajax\GetStudentList2@export_withdrawn_list');
 Route::get('/bedregistrar/export/student_list/{level}/{strand}/{section}/{school_year}/{period}/{value}','BedRegistrar\Ajax\GetStudentList2@export_student_list');
 Route::get('/bedregistrar/export_student_now','BedRegistrar\Ajax\GetStudentList2@print_to_excel');
-Route::get('/bedregistrar/sectioning','BedRegistrar\Registration@sectioning');
+Route::get('/bedregistrar/sectioning/{type?}','BedRegistrar\Registration@sectioning');
 
 
 Route::get('/bedregistrar/withdrawn_students','BedRegistrar\Registration@withdrawn_students');
