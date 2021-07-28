@@ -18,6 +18,11 @@ $i=1;
         <th>Student ID</th>
         <th>Student Name</th>
         <th>Section</th>
+        @if(Auth::user()->accesslevel == env('EDUTECH'))
+        <th>Main Email</th>
+        <th>Father's Email</th>
+        <th>Mother's Email</th>
+        @else
         <th>Street</th>
         <th>Barangay</th>
         <th>Municipality/City</th>
@@ -37,6 +42,7 @@ $i=1;
         <th>Cell No.</th>
         <th>Email</th>
         <th>Siblings</th>
+        @endif
     </tr>
     @if(count($status)>0)
     @foreach($status as $name)
@@ -50,6 +56,11 @@ $i=1;
         <td>{{get_name($name->idno)}}</td>
         <td>{{$name->section}}</td>
         @if(count($get_directory)>0)
+        @if(Auth::user()->accesslevel == env('EDUTECH'))
+        <td>{{$email->email}}</td>
+        <td>{{$get_parent->f_email}}</td>
+        <td>{{$get_parent->m_email}}</td>
+        @else
         <td>{{$get_directory->street}}</td>
         <td>{{$get_directory->barangay}}</td>
         <td>{{$get_directory->municipality}}</td>
@@ -75,6 +86,7 @@ $i=1;
             @endforeach
             @endif
         </td>
+        @endif
         @else
         <td></td>
         <td></td>
@@ -115,6 +127,11 @@ $i=1;
         <th>#</th>
         <th>Student ID</th>
         <th>Student Name</th>
+        @if(Auth::user()->accesslevel == env('EDUTECH'))
+        <th>Main Email</th>
+        <th>Father's Email</th>
+        <th>Mother's Email</th>
+        @else
         <th>Street</th>
         <th>Barangay</th>
         <th>Municipality/City</th>
@@ -134,6 +151,7 @@ $i=1;
         <th>Cell No.</th>
         <th>Email</th>
         <th>Siblings</th>
+        @endif
     </tr>
     @if(count($status)>0)
     @foreach($status as $name)
@@ -146,6 +164,11 @@ $i=1;
         <td>{{$name->idno}}</td>
         <td>{{get_name($name->idno)}}</td>
         @if(count($get_directory)>0)
+        @if(Auth::user()->accesslevel == env('EDUTECH'))
+        <td>{{$email->email}}</td>
+        <td>{{$get_parent->f_email}}</td>
+        <td>{{$get_parent->m_email}}</td>
+        @else
         <td>{{$get_directory->street}}</td>
         <td>{{$get_directory->barangay}}</td>
         <td>{{$get_directory->municipality}}</td>
@@ -171,6 +194,7 @@ $i=1;
             @endforeach
             @endif
         </td>
+        @endif
         @else
         <td></td>
         <td></td>
