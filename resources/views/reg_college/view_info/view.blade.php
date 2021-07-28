@@ -94,6 +94,7 @@ $layout = "layouts.appreg_college";
                     <option value="9" @if ($user->status == 9) selected=''@endif>9 - See GenEd Dept</option>
                     <option value="10" @if ($user->status == 10) selected=''@endif>10 - See Educ Dept</option>
                     <option value="11" @if ($user->status == 11) selected=''@endif>11 - See MSBMW Dept</option>
+                    <option value="12" @if ($user->status == 12) selected=''@endif>12 - See Associate Dean</option>
                 </select>
             </div>
         </div>
