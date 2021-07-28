@@ -257,6 +257,7 @@ Route::get('/ajax/registrar_college/reports/student_list/list_per_instructor/get
 Route::get('/registrar_college/reports/enrollment_statistics/{school_year}/{period}','RegistrarCollege\Reports\EnrollmentStatisticsController@index');
 Route::get('/registrar_college/reports/enrollment_statistics/print_enrollment_statistics/{school_year}/{period}','RegistrarCollege\Reports\EnrollmentStatisticsController@print_statistics');
 Route::get('/registrar_college/reports/enrollment_statistics/print_enrollment_official/{school_year}/{period}','RegistrarCollege\Reports\EnrollmentStatisticsController@print_official');
+Route::get('registrar_college/reports/update_enrollment_statistics/{program_code}/{school_year}/{period}','RegistrarCollege\Reports\EnrollmentStatisticsController@update_display');
 
 
 //Dean - MAIN///////////////////////////////////////////////////////////////////

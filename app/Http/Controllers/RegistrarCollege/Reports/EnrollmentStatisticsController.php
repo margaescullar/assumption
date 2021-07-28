@@ -20,10 +20,11 @@ class EnrollmentStatisticsController extends Controller {
         if (Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel == env('ACCTNG_HEAD')|| Auth::user()->accesslevel == env('ACCTNG_STAFF') || Auth::user()->accesslevel == env('ADMISSION_HED') || Auth::user()->accesslevel==env('DEAN')){
             //$school_year = \App\CtrAcademicSchoolYear::where('academic_type', 'College')->first()->school_year;
             //$period = \App\CtrAcademicSchoolYear::where('academic_type', 'College')->first()->period;
-            $academic_programs = \App\CtrAcademicProgram::distinct()->where('academic_type', 'College')->get(['program_code', 'program_name']);
+            $academic_programs = \App\CtrAcademicProgram::distinct()->where('academic_type', 'College')->where('is_display',1)->get(['program_code', 'program_name','is_display']);
+            $hide_academic_programs = \App\CtrAcademicProgram::distinct()->where('academic_type', 'College')->where('is_display',0)->get(['program_code', 'program_name','is_display']);
             $departments = \App\CtrAcademicProgram::distinct()->where('academic_type', 'College')->get(['department']);
 
-            return view('reg_college.reports.enrollment_statistics', compact('school_year', 'period', 'academic_programs', 'departments'));
+            return view('reg_college.reports.enrollment_statistics', compact('school_year', 'period', 'academic_programs', 'departments','hide_academic_programs'));
         }
     }
 
@@ -31,7 +32,7 @@ class EnrollmentStatisticsController extends Controller {
         if (Auth::user()->accesslevel == env('REG_COLLEGE')|| Auth::user()->accesslevel == env('ADMISSION_HED') || Auth::user()->accesslevel==env('DEAN')) {
             //$school_year = \App\CtrAcademicSchoolYear::where('academic_type', 'College')->first()->school_year;
             //$period = \App\CtrAcademicSchoolYear::where('academic_type', 'College')->first()->period;
-            $academic_programs = \App\CtrAcademicProgram::distinct()->where('academic_type', 'College')->get(['program_code', 'program_name']);
+            $academic_programs = \App\CtrAcademicProgram::distinct()->where('academic_type', 'College')->where('is_display',1)->get(['program_code', 'program_name','is_display']);
             $departments = \App\CtrAcademicProgram::distinct()->where('academic_type', 'College')->get(['department']);
 
             $pdf = PDF::loadView('reg_college.reports.print_enrollment_statistics', compact('school_year', 'period', 'academic_programs', 'departments'));
@@ -51,6 +52,24 @@ class EnrollmentStatisticsController extends Controller {
             $pdf->setPaper('letter', 'landscape');
             return $pdf->stream("student_list_.pdf");
         }
+    }
+    
+    function update_display($program_code,$school_year,$period){
+        if (Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel==env('DEAN')) {
+            $update_programs = \App\CtrAcademicProgram::where('program_code',$program_code)->get();
+            foreach($update_programs as $update_program){
+                if($update_program->is_display == 1){
+                    $update_program->is_display = 0;
+                }else{
+                    $update_program->is_display = 1;
+                }
+                $update_program->save();
+            }
+            
+            return redirect("/registrar_college/reports/enrollment_statistics/$school_year/$period");
+
+        }
+        
     }
 
 }
