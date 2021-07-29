@@ -37,6 +37,26 @@ function get_ns($idno,$schoolyear,$period){
 }
 $i=1;
 ?>
+<body>
+    @if(Auth::user()->accesslevel == env('BED_CL'))
+<script type="text/php">
+        if ( isset($pdf) ) {
+            $watermark = $pdf->open_object();
+            $x = 110;
+            $y = 450;
+            $text = "C O N F I D E N T I A L";
+            $font = $fontMetrics->get_font("helvetica");
+            $size = 40;
+            $color = array(0.565, 0.565, 0.565);
+            $pdf->set_opacity(0.9);
+            $pdf->text($x, $y, $text, $font, $size,$color);
+            $pdf->close_object();
+            $pdf->add_object($watermark, 'all');
+        }
+</script>
+@endif
+    
+    
 <center>
 <div><strong>Assumption College</strong></div>
 <div>Basic Education Division</div>
@@ -199,3 +219,5 @@ $i=1;
  
 @endif
 {{date('M d, Y')}}
+
+</body>
