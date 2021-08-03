@@ -59,8 +59,8 @@ class ViewScholarship extends Controller {
                 $scholar->accounting_code = \App\CtrDiscount::where('discount_code', $request->discount_code)->first()->accounting_code;
                 $scholar->tuition_fee = $request->tf;
                 $scholar->other_fee = $request->of;
-                $scholar->misc_fee = $request->of;
-                $scholar->depository_fee = $request->of;
+                $scholar->misc_fee = $request->mf;
+                $scholar->depository_fee = $request->df;
                 $scholar->non_discounted = $request->non_discounted;
                 $scholar->srf = $request->srf;
                 $scholar->dorm = $request->dorm;

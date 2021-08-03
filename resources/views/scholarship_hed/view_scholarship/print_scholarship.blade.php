@@ -43,6 +43,14 @@
             <td>{{$scholar->misc_fee}}%</td>
         </tr>
         <tr>
+            <td>OTHER FEE: </td>
+            <td>{{$scholar->other_fee}}%</td>
+        </tr>
+        <tr>
+            <td>DEPO. FEE: </td>
+            <td>{{$scholar->depository_fee}}%</td>
+        </tr>
+        <tr>
             <td>DORMITORY: </td>
             <td>{{$scholar->dorm}}%</td>
         </tr>
