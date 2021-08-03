@@ -122,11 +122,11 @@ $layout = "layouts.appscholarship_college";
                             </div>
                             <div class="col-sm-2">
                                 <label>Miscellaneous</label>
-                                <input class="form form-control" name='of' value="{{$scholar->other_fee}}" type="text">
+                                <input class="form form-control" name='mf' value="{{$scholar->misc_fee}}" type="text">
                             </div>
                             <div class="col-sm-2">
                                 <label>Other</label>
-                                <input class="form form-control" name='mf' value="{{$scholar->other_fee}}" type="text">
+                                <input class="form form-control" name='of' value="{{$scholar->other_fee}}" type="text">
                             </div>
                             <div class="col-sm-2">
                                 <label>Depository</label>
@@ -139,12 +139,12 @@ $layout = "layouts.appscholarship_college";
                                 <input class="form form-control" type='text' name='srf' value="{{$scholar->srf}}" type="text">
                             </div>
                             <div class="col-sm-2">
-                                <label>Dorm</label>
-                                <input class="form form-control" type='text' name='dorm' value="{{$scholar->dorm}}" type="text">
-                            </div>
-                            <div class="col-sm-2">
                                 <label>Meal</label>
                                 <input class="form form-control" type='text' name='meal' value="{{$scholar->meal}}" type="text">
+                            </div>
+                            <div class="col-sm-2">
+                                <label>Dorm</label>
+                                <input class="form form-control" type='text' name='dorm' value="{{$scholar->dorm}}" type="text">
                             </div>
                         </div>
                         

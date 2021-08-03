@@ -54,7 +54,9 @@
             <th align="center">Course</th>
             <th align="center">Level</th>
             <th align="center">Tuition %</th>
+            <th align="center">Misc %</th>
             <th align="center">Others %</th>
+            <th align="center">Depository %</th>
             <th align="center">SRF %</th>
             <th align="center">Non Discounted %</th>
             <th align="center">Meal %</th>
@@ -69,7 +71,9 @@
             <td align="center">{{$scholar->program_code}}</td>
             <td align="center">{{$scholar->getRomanLevel()}}</td>
             <td align="center">{{$scholar->tuition_fee}}</td>
+            <td align="center">{{$scholar->misc_fee}}</td>
             <td align="center">{{$scholar->other_fee}}</td>
+            <td align="center">{{$scholar->depository_fee}}</td>
             <td align="center">{{$scholar->srf}}</td>
             <td align="center">{{$scholar->non_discounted}}</td>
             <td align="center">{{$scholar->meal}}</td>
@@ -78,7 +82,7 @@
         </tr>
         @endforeach
         <tr>
-            <td colspan="12">Total: {{$control-1}}</td>
+            <td colspan="14">Total: {{$control-1}}</td>
         </tr>
     </table>
     @endif

@@ -10,7 +10,9 @@
             <th>Program Enrolled</th>
             <th>Level</th>
             <th>Tuition %</th>
+            <th>Misc %</th>
             <th>Others %</th>
+            <th>Depository %</th>
             <th>SRF %</th>
             <th>Non Discounted %</th>
             <th>Meal %</th>
@@ -27,7 +29,9 @@
             <td>{{$scholar->program_code}}</td>
             <td>{{$scholar->level}}</td>
             <td>{{$scholar->tuition_fee}}</td>
+            <td>{{$scholar->misc_fee}}</td>
             <td>{{$scholar->other_fee}}</td>
+            <td>{{$scholar->depository_fee}}</td>
             <td>{{$scholar->srf}}</td>
             <td>{{$scholar->non_discounted}}</td>
             <td>{{$scholar->meal}}</td>
