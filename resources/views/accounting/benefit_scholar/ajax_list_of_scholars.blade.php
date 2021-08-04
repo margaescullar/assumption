@@ -9,9 +9,11 @@
             <th>Name</th>
             <th>Level</th>
             <th>Tuition %</th>
+            <th>Misc %</th>
             <th>Others %</th>
-            <th>SRF %</th>
+            <th>Depository %</th>
             <th>Non Discounted %</th>
+            <th>SRF %</th>
             <th>Remarks</th>
         <tr>
     </thead>
@@ -23,9 +25,11 @@
             <td>{{$scholar->getFullNameAttribute()}}</td>
             <td>{{$scholar->level}}</td>
             <td>{{$scholar->tuition_fee}}</td>
+            <td>{{$scholar->misc_fee}}</td>
             <td>{{$scholar->other_fee}}</td>
-            <td>{{$scholar->srf}}</td>
+            <td>{{$scholar->depository_fee}}</td>
             <td>{{$scholar->non_discounted}}</td>
+            <td>{{$scholar->srf}}</td>
             <td>{{$scholar->remarks}}</td>
         </tr>
         @endforeach

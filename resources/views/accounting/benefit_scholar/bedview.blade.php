@@ -85,7 +85,7 @@ if (Auth::user()->accesslevel == env("ACCTNG_STAFF")) {
                     <form method="post" action="{{url('accounting','bed_update_scholar')}}" onsubmit="return confirm('Do you really want to udpate the scholarship?');">
                         {{ csrf_field() }}
                         <input type='hidden' value='{{$idno}}' name='idno'>
-                        <div class="form-group">
+                        <div class="form-group row">
                             <div class="col-sm-12">
                                 <label>Scholarship</label>
                                 <select class="form form-control" name="discount_code">
@@ -101,16 +101,18 @@ if (Auth::user()->accesslevel == env("ACCTNG_STAFF")) {
                             </div>
                             <div class="col-sm-3">
                                 <label>Miscellaneous</label>
+                                <input class="form form-control" name='mf' value="{{$scholar->misc_fee}}" type="text">
+                            </div>
+                            <div class="col-sm-3">
+                                <label>Other</label>
                                 <input class="form form-control" name='of' value="{{$scholar->other_fee}}" type="text">
                             </div>
-<!--                            <div class="col-sm-2">
-                                <label>Other</label>-->
-                                <input class="form form-control" type='hidden' name='mf' value="{{$scholar->other_fee}}" type="text">
-<!--                            </div>
-                            <div class="col-sm-2">
-                                <label>Depository</label>-->
-                                <input class="form form-control" type='hidden' name='df' value="{{$scholar->depository_fee}}" type="text">
-                            <!--</div>-->
+                            <div class="col-sm-3">
+                                <label>Depository</label>
+                                <input class="form form-control" name='df' value="{{$scholar->depository_fee}}" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <div class="col-sm-3">
                                 <label>Student Development Fee</label>
                                 <input class="form form-control" type='text' name='non_discounted' value="{{$scholar->non_discounted}}" type="text">
@@ -119,6 +121,8 @@ if (Auth::user()->accesslevel == env("ACCTNG_STAFF")) {
                                 <label>SRF</label>
                                 <input class="form form-control" type='text' name='srf' value="{{$scholar->srf}}" type="text">
                             </div>
+                        </div>
+                        <div class="form-group row">
                             <div class="col-sm-12">
                                 <label>Remarks</label>
                                 <input class="form form-control" type='text' name='remarks' value="{{$scholar->remarks}}" type="text">

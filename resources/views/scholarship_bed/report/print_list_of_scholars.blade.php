@@ -53,9 +53,11 @@
             <th align="center">Name</th>
             <th align="center">Level</th>
             <th align="center">Tuition %</th>
+            <th align="center">Misc %</th>
             <th align="center">Others %</th>
-            <th align="center">SRF %</th>
+            <th align="center">Depository %</th>
             <th align="center">Non Discounted %</th>
+            <th align="center">SRF %</th>
             <th align="center">Remarks</th>
         </tr>
         @foreach($scholars as $scholar)
@@ -65,14 +67,16 @@
             <td>{{$scholar->getFullNameAttribute()}}</td>
             <td align="center">{{$scholar->level}}</td>
             <td align="center">{{$scholar->tuition_fee}}</td>
+            <td align="center">{{$scholar->misc_fee}}</td>
             <td align="center">{{$scholar->other_fee}}</td>
-            <td align="center">{{$scholar->srf}}</td>
+            <td align="center">{{$scholar->depository_fee}}</td>
             <td align="center">{{$scholar->non_discounted}}</td>
+            <td align="center">{{$scholar->srf}}</td>
             <td align="center">{{$scholar->remarks}}</td>
         </tr>
         @endforeach
         <tr>
-            <td colspan="9">Total: {{$control-1}}</td>
+            <td colspan="11">Total: {{$control-1}}</td>
         </tr>
     </table>
     @endif
