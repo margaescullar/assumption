@@ -154,6 +154,7 @@ $strands =  \App\CtrAcademicProgram::selectRaw('distinct strand')->where('academ
          array['strand']=$("#strand").val();  
        }
        array['level']=$("#level").val();
+        array['type']="{{$type}}";
        array['section']=$("#section").val();
        $.ajax({
            type:'GET',
@@ -169,6 +170,7 @@ $strands =  \App\CtrAcademicProgram::selectRaw('distinct strand')->where('academ
           var array={};
        
        array['level']=$("#level").val();
+        array['type']="{{$type}}";
        if($("#level").val()=="Grade 11" || $("#level").val()=="Grade 12"){
        array['strand']=$("#strand").val();  
        }
@@ -188,6 +190,7 @@ $strands =  \App\CtrAcademicProgram::selectRaw('distinct strand')->where('academ
        var array={};
        array['section']=$("#section").val();
        array['level']=$("#level").val();
+        array['type']="{{$type}}";
        if($("#level").val()=="Grade 11" || $("#level").val()=="Grade 12"){
          array['strand']=$("#strand").val();  
        }

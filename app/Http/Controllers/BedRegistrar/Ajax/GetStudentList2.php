@@ -161,7 +161,9 @@ class GetStudentList2 extends Controller {
             $strand = "";
             $level = Input::get('level');
             $section = Input::get('section');
-            if (Auth::user()->accesslevel == env('REG_BE')) {
+            $type = Input::get('type');
+            
+            if (Auth::user()->accesslevel == env('REG_BE') or $type != "pre_sectioning") {
                 if ($level == "Grade 11" || $level == "Grade 12") {
                     $school_year = \App\CtrAcademicSchoolYear::where('academic_type', 'SHS')->first();
                     $schoolyear = $school_year->school_year;
@@ -179,7 +181,7 @@ class GetStudentList2 extends Controller {
                                     . " bed_levels.level as level, bed_levels.strand as strand, bed_levels.section as section from users, bed_levels where users.idno = bed_levels.idno "
                                     . " and bed_levels.level = '$level' and  bed_levels.school_year = '$schoolyear' and (bed_levels.section != '$section' or bed_levels.section is null)  order by lastname, firstname, middlename");
                 }
-            } else if (Auth::user()->accesslevel == env('GUIDANCE_BED')) {
+            } else if (Auth::user()->accesslevel == env('GUIDANCE_BED') and $type == "pre_sectioning") {
                 if ($level == "Grade 11" || $level == "Grade 12") {
                     $school_year = \App\CtrAcademicSchoolYear::where('academic_type', 'SHS')->first();
                     $schoolyear = $school_year->school_year;
@@ -223,8 +225,9 @@ class GetStudentList2 extends Controller {
             $strand = "";
             $level = Input::get('level');
             $section = Input::get('section');
+            $type = Input::get('type');
             
-            if (Auth::user()->accesslevel == env('REG_BE')) {
+            if (Auth::user()->accesslevel == env('REG_BE') or $type != "pre_sectioning") {
                 if ($level == "Grade 11" || $level == "Grade 12") {
                     $school_year = \App\CtrAcademicSchoolYear::where('academic_type', 'SHS')->first();
                     $schoolyear = $school_year->school_year;
@@ -242,7 +245,7 @@ class GetStudentList2 extends Controller {
                                     . " bed_levels.level as level, bed_levels.strand as strand, bed_levels.section as section from users, bed_levels where users.idno = bed_levels.idno "
                                     . " and bed_levels.level = '$level' and bed_levels.school_year = '$schoolyear' and bed_levels.section = '$section' order by lastname, firstname, middlename");
                 }
-            } else if (Auth::user()->accesslevel == env('GUIDANCE_BED')) {
+            } else if (Auth::user()->accesslevel == env('GUIDANCE_BED') and $type == "pre_sectioning") {
                 if ($level == "Grade 11" || $level == "Grade 12") {
                     $school_year = \App\CtrAcademicSchoolYear::where('academic_type', 'SHS')->first();
                     $schoolyear = $school_year->school_year;
