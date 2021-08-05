@@ -407,7 +407,7 @@ function getPromotion($level) {
         <td align="center">Promoted</td>
         @endif
         @else
-        <td align="center">Pass</td>
+        <td align="center">@if($subject->final_remarks != null){{$subject->final_remarks}} @else Pass @endif </td>
         @endif
         @if($subject->units>0)
         <?php $total_final_grade += $subject->final_grade; ?>
