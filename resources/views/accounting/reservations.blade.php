@@ -13,6 +13,9 @@ else if (Auth::user()->accesslevel == env("ACCTNG_HEAD")) {
 else if (Auth::user()->accesslevel == env("ADMISSION_HED")){
   $layout = "layouts.appadmission-hed";  
 }
+else if (Auth::user()->accesslevel == env("REG_BE")){
+  $layout = "layouts.appbedregistrar";  
+}
 ?>
 @extends($layout)
 @section('messagemenu')
@@ -82,7 +85,9 @@ else if (Auth::user()->accesslevel == env("ADMISSION_HED")){
                         <option>Elementary</option>
                         <option>Junior High School</option>
                         <option>Senior High School</option>
+                        @if(Auth::user()->accesslevel != env("REG_BE"))
                         <option>College Department</option>
+                        @endif
                     </select>
                 </div>
                 @endif

@@ -142,7 +142,7 @@ function getPromotion($level,$period=null) {
                     @if($department == "College Department")
                     <td>{{$list->program_code}} </td>
                     @endif
-                    <td>{{$list->level}}</td>
+<!--                    <td>{{$list->level}}</td>-->
                     <td>{{$list->receipt_no}}</td>
                     <td>{{$list->transaction_date}}</td>
                     <td align='right'>{{number_format($list->amount,2)}}</td>

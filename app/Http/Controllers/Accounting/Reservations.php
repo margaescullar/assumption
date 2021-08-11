@@ -16,13 +16,13 @@ class Reservations extends Controller {
     }
 
     function index() {
-        if (Auth::user()->accesslevel == env("ACCTNG_STAFF") || Auth::user()->accesslevel == env("ACCTNG_HEAD") || Auth::user()->accesslevel == env("ADMISSION_HED")) {
+        if (Auth::user()->accesslevel == env("ACCTNG_STAFF") || Auth::user()->accesslevel == env("ACCTNG_HEAD") || Auth::user()->accesslevel == env("ADMISSION_HED") || Auth::user()->accesslevel == env("REG_BE")) {
             return view('accounting.reservations');
         }
     }
     
     function print_reservationsPDF(Request $request){
-        if (Auth::user()->accesslevel == env('ACCTNG_STAFF') || Auth::user()->accesslevel == env('ACCTNG_HEAD') || Auth::user()->accesslevel == env("ADMISSION_HED")) {
+        if (Auth::user()->accesslevel == env('ACCTNG_STAFF') || Auth::user()->accesslevel == env('ACCTNG_HEAD') || Auth::user()->accesslevel == env("ADMISSION_HED") || Auth::user()->accesslevel == env("REG_BE")) {
 
             $dep = "";
             $department = $request->department;
@@ -105,7 +105,7 @@ class Reservations extends Controller {
     }
     
     function print_reservationsEXCEL(Request $request){
-        if (Auth::user()->accesslevel == env('ACCTNG_STAFF') || Auth::user()->accesslevel == env('ACCTNG_HEAD')  || Auth::user()->accesslevel == env("ADMISSION_HED")) {
+        if (Auth::user()->accesslevel == env('ACCTNG_STAFF') || Auth::user()->accesslevel == env('ACCTNG_HEAD')  || Auth::user()->accesslevel == env("ADMISSION_HED") || Auth::user()->accesslevel == env("REG_BE")) {
             $dep = "";
             $department = $request->department;
             $school_year = $request->school_year;
