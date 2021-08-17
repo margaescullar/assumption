@@ -53,6 +53,7 @@ $y=1;
         <th>Student ID</th>
         <th>Student Name</th>
         <th>Status</th>
+        <th>Last Enrolled</th>
     </tr>
     @if(count($students)>0)
     @foreach($students as $name)
@@ -69,6 +70,11 @@ $y=1;
             @elseif($check_status->status == 11) For Approval
             @elseif($check_status->status == 4) Withdrawn-{{$check_status->date_dropped}}
             @else <strong>Not Yet Enrolled</strong> @endif
+        </td>
+        <td><?php $getLevels = \App\BedLevel::where('idno',$name->idno)->orderBy('school_year','desc')->first(); ?>
+        @if(isset($getLevels))
+        {{$getLevels->school_year}}
+        @endif
         </td>
     </tr>
     @endif
