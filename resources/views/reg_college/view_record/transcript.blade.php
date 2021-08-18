@@ -604,8 +604,16 @@ $count = 0;
 ?>
             <?php $grades = \App\GradeCollege::where('idno', $idno)->where('school_year', $sy->school_year)->where('period', $pr->period)->get(); ?>
             <h4>
+            <div class="form-group row">
                 {{$sy->school_year}}-{{$sy->school_year+1}}, {{$pr->period}} 
-                <a href="{{url('registrar_college',array('grade_management','print_report_card',$sy->school_year,$pr->period,$idno))}}" class="pull-right"><button class="btn btn-primary">Print Report Card</button></a>
+                
+                <div class="col-sm-3 pull-right">
+                <a target="_blank" href="{{url('registrar_college',array('print_registration_form',$idno,$sy->school_year,$pr->period))}}"><button class="btn btn-warning col-sm-12">Print Registration Form</button></a>
+                </div>
+                <div class="col-sm-3 pull-right">
+                <a target="_blank" href="{{url('registrar_college',array('grade_management','print_report_card',$sy->school_year,$pr->period,$idno))}}"><button class="btn btn-primary col-sm-12">Print Report Card</button></a>
+                </div>
+            </div>
             
             </h4>            
             <table class="table table-striped table-condensed" width="100%">

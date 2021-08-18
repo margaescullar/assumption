@@ -23,17 +23,21 @@ $total_misc = 0;
         {{$period}}<br>
         @endif
         {{$level}}<br><br>
-        <table width="60%">
-            <tr>
-                <th>Tuition Fee</th>
+        <table width="75%">
+            <tr>@if($level == "1st Year" || $level == "2nd Year" || $level == "3rd Year" || $level == "4th Year" || $level == "5th Year")
+                <td>Tuition Fee per Unit</td>
+                <td align="right"><div style="border-bottom: 1px solid black">{{number_format($amount,2)}} x no. of units</div></td>
+                @else
+                <td>Tuition Fee</td>
                 <td align="right"><div style="border-bottom: 1px solid black">{{number_format($amount,2)}}</div></td>
+                @endif
             </tr>
             
             
             
             
             <tr>
-                <th>Miscellaneous Fees</th>
+                <td>Miscellaneous Fees</td>
                 <td></td>
             </tr>
             @foreach ($miscellaneous_fees as $miscellaneous_fee)
@@ -53,7 +57,7 @@ $total_misc = 0;
             @endif
             @endforeach
             <tr>
-                <th><div class='tab'>Total Miscellaneous Fees</div></th>
+                <td><div class='tab'>Total Miscellaneous Fees</div></td>
                 <td align="right"><div style="border-bottom: 1px solid black">{{number_format($total_misc,2)}}</div></td>
             </tr>
             
@@ -61,7 +65,7 @@ $total_misc = 0;
             
             
             <tr>
-                <th>Other Fees</th>
+                <td>Other Fees</td>
                 <td></td>
             </tr>
             @foreach ($other_fees as $other_fee)
@@ -81,13 +85,13 @@ $total_misc = 0;
             @endif
             @endforeach
             <tr>
-                <th><div class='tab'>Total Other Fees</div></th>
+                <td><div class='tab'>Total Other Fees</div></td>
                 <td align="right"><div style="border-bottom: 1px solid black">{{number_format($total_other,2)}}</div></td>
             </tr>
             
             
             <tr>
-                <th>Depository Fees</th>
+                <td>Depository Fees</td>
                 <td></td>
             </tr>
             @foreach ($depository_fees as $depository_fee)
@@ -99,7 +103,7 @@ $total_misc = 0;
             @endforeach
             @foreach ($other_collections as $other_collection)
             @if($other_collection->category == "Depository Fees")
-            <?php $total_misc = $total_misc + $other_collection->amount; ?>
+            <?php $total_depo = $total_depo + $other_collection->amount; ?>
             <tr>
                 <td><div class='tab'>{{$other_collection->subsidiary}}</div></td>
                 <td align="right"><div style="border-bottom: 1px solid black">{{$other_collection->amount}}</div></td>
@@ -107,7 +111,7 @@ $total_misc = 0;
             @endif
             @endforeach
             <tr>
-                <th><div class='tab'>Total Depository Fees</div></th>
+                <td><div class='tab'>Total Depository Fees</div></td>
                 <td align="right"><div style="border-bottom: 1px solid black">{{number_format($total_depo,2)}}</div></td>
             </tr>
             
@@ -115,9 +119,13 @@ $total_misc = 0;
                 <td><br></td>
                 <td></td>
             </tr>
-            <tr>
-                <th>Total School Fees</th>
+            <tr>@if($level == "1st Year" || $level == "2nd Year" || $level == "3rd Year" || $level == "4th Year" || $level == "5th Year")
+                <td>Total Miscellaneous, Other, and Depository Fees</td>
+                <td align="right"><div style="border-bottom: 3px double black">{{number_format($total_other + $total_misc + $total_depo,2)}}</div></td>
+                @else
+                <td>Total School Fees</td>
                 <td align="right"><div style="border-bottom: 3px double black">{{number_format($amount + $total_other + $total_misc + $total_depo,2)}}</div></td>
+                @endif
             </tr>
         </table>
     </body>
