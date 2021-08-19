@@ -1,6 +1,6 @@
 <?php
 $school_year = \App\CtrEnrollmentSchoolYear::where('academic_type', 'College')->first();
-$faculties = \App\User::where('accesslevel', 1)->orderBy('lastname', 'ASC')->get();
+$faculties = \App\User::where('accesslevel', 1)->where('status',1)->orderBy('lastname', 'ASC')->get();
 ?>
 <?php
 if(Auth::user()->accesslevel == env('DEAN')){

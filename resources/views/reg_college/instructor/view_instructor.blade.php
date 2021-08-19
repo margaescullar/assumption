@@ -61,6 +61,7 @@ $layout = "layouts.appreg_college";
                   <th>ID Number</th>
                   <th>Name</th>
                   <th>Modify</th>
+                  <th>Enable/Disable</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -69,6 +70,7 @@ $layout = "layouts.appreg_college";
                   <td>{{$instructor->idno}}</td>
                   <td>{{$instructor->lastname}}, {{$instructor->firstname}} {{$instructor->extensionname}}</td>
                   <td><a href="{{url('registrar_college', array('instructor', 'modify_instructor', $instructor->idno))}}"><button class="btn btn-success"><span class="fa fa-pencil"></button></a></td>
+                  <td><a href="{{url('registrar_college', array('instructor', 'enable_disable', $instructor->idno))}}">@if($instructor->status == 0)<button class="btn btn-primary">Enable</button> @else <button class="btn btn-danger">Disable</button> @endif </a></td>
                 </tr>
             @endforeach
                 </tbody>

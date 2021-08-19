@@ -198,6 +198,7 @@ Route::get('/registrar_college/instructor/view_instructor', 'RegistrarCollege\In
 Route::get('/registrar_college/instructor/add_instructor', 'RegistrarCollege\Instructor\ViewInstructorsController@view_add');
 Route::post('/registrar_college/instructor/add_new_instructor', 'RegistrarCollege\Instructor\ViewInstructorsController@add');
 Route::get('/registrar_college/instructor/modify_instructor/{idno}', 'RegistrarCollege\Instructor\ViewInstructorsController@view_modify');
+Route::get('/registrar_college/instructor/enable_disable/{idno}', 'RegistrarCollege\Instructor\ViewInstructorsController@enable_disable');
 Route::post('/registrar_college/instructor/modify_old_instructor', 'RegistrarCollege\Instructor\ViewInstructorsController@modify');
 
 
@@ -695,3 +696,11 @@ Route::get('bedregistrar/class_leads','BedRegistrar\ClassLeadsController@index')
 Route::get('update_class_leads','BedRegistrar\Ajax\AjaxClassLeads@update_class_leads');
 Route::get('modify_class_leads_level','BedRegistrar\Ajax\AjaxClassLeads@modify_levels');
 Route::post('update_class_leads_level','BedRegistrar\ClassLeadsController@update_levels');
+
+
+
+//Updating of Receipt
+Route::get('/cashier/view_receipt/update_receipt/{reference_id}','Cashier\UpdateReceiptController@index');
+Route::post('/update_receipt','Cashier\UpdateReceiptController@update');
+
+

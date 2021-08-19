@@ -114,6 +114,21 @@ class ViewInstructorsController extends Controller {
         }
     }
 
+    function enable_disable($idno) {
+        if (Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel == env('DEAN')) {
+            $user_info = \App\User::where('idno', $idno)->first();
+            if($user_info->status == 0){
+//                disable
+                $user_info->status=1;
+            }else{
+//                enable
+                $user_info->status=0;
+            }
+            $user_info->save();
+        }
+        return redirect(url('/registrar_college/instructor/view_instructor'));
+    }
+
     function modify(Request $request) {
         if (Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel == env('DEAN')) {
             $this->validate($request, [
