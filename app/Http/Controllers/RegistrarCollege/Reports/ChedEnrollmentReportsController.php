@@ -32,7 +32,11 @@ class ChedEnrollmentReportsController extends Controller
                 'period' => 'required'
             ]);
             $students = \App\CollegeLevel::where('program_code', $request->program_code)->where('level', $request->level)->where('school_year', $request->school_year)->where('period', $request->period)->whereRaw('(is_audit = 0 or is_audit > 1)')->where('college_levels.status',3)->join('users', 'users.idno','=','college_levels.idno')->orderBy('users.lastname', 'asc')->get(['college_levels.status', 'college_levels.period','college_levels.school_year','college_levels.level','college_levels.program_code','users.idno']);
+            if($request->school_year < 2021){
             $pdf = PDF::loadView('reg_college.reports.print_ched_enrollment_report', compact('students','request'));           
+            }else{
+            $pdf = PDF::loadView('reg_college.reports.print_ched_enrollment_report_v2', compact('students','request'));           
+            }
             $pdf->setPaper('letter','landscape');
             return $pdf->stream("$request->program_code-$request->level.pdf");
         }

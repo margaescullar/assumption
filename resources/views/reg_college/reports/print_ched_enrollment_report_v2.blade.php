@@ -69,23 +69,26 @@
 
     <table  style='margin-top: 135px;' width="100%">
         <thead>
-            <tr>
+<!--            <tr>
                 <td width="15%"><b>Institutional Identifier:</b></td><td width="50%"><b>13022</b></td>
                 <td><b>Semester/Trimester:</b></td><td><b>{{$request->period}}</td>
-            </tr>
-            <tr>
+            </tr>-->
+<!--            <tr>
                 <td><b>Name of Institution:</b></td><td><b>Assumption College</b></td>
                 <td><b>Year Level:</b></td><td><b>{{$request->level}}</b></td>
-            </tr>
-            <tr>
+            </tr>-->
+<!--            <tr>
                 <td><b>Address:</b></td><td><b>San Lorenzo Village, Makati City</b></td><td></td><td></td>
-            </tr>
+            </tr>-->
             <tr>
                 <td><b>Program:</b></td><td><b><?php $program_name = \App\CtrAcademicProgram::where('program_code', $request->program_code)->first()->program_name; ?>{{$program_name}}</b></td><td></td><td></td>
             </tr>
             <tr>
-                <td><b>Tel. No.:</b></td><td><b>817-0757 loc. 2030</b></td><td></td><td></td>
+                <td><b>Year Level:</b></td><td><b>{{$request->level}}</b></td>
             </tr>
+<!--            <tr>
+                <td><b>Tel. No.:</b></td><td><b>817-0757 loc. 2030</b></td><td></td><td></td>
+            </tr>-->
         </thead>
     </table>
     </header>
@@ -109,11 +112,12 @@
             <tr>
                 <th style="border-top: 1pt dotted black;border-bottom: 1pt dotted black"><?php $counter = 1; ?></th>
                 <th style="text-align: left;border-top: 1pt dotted black;border-bottom: 1pt dotted black">Student#</th>
-                <th style="text-align: left;border-top: 1pt dotted black;border-bottom: 1pt dotted black">Student Name</th>
-                <th style="text-align: left;border-top: 1pt dotted black;border-bottom: 1pt dotted black">Yr</th>
+                <th style="text-align: left;border-top: 1pt dotted black;border-bottom: 1pt dotted black">First Name</th>
+                <th style="text-align: left;border-top: 1pt dotted black;border-bottom: 1pt dotted black">Middle Name</th>
+                <th style="text-align: left;border-top: 1pt dotted black;border-bottom: 1pt dotted black">Surname</th>
                 <th style="text-align: center;border-top: 1pt dotted black;border-bottom: 1pt dotted black">Gender</th>
-                <th style="text-align: center;border-top: 1pt dotted black;border-bottom: 1pt dotted black">Course Code</th>
-                <th style="text-align: center;border-top: 1pt dotted black;border-bottom: 1pt dotted black">Course Description</th>
+                <th style="text-align: center;border-top: 1pt dotted black;border-bottom: 1pt dotted black">Code</th>
+                <th style="text-align: center;border-top: 1pt dotted black;border-bottom: 1pt dotted black">Description</th>
                 <th style="text-align: center;border-top: 1pt dotted black;border-bottom: 1pt dotted black">Units</th>
             </tr>
         </thead>
@@ -128,8 +132,9 @@
             <tr>
                 <td valign="top" style="text-align: left">{{$counter}}.<?php $counter = $counter + 1; ?></td>
                 <td valign="top">{{$student->idno}}</td>
-                <td valign="top">{{strtoupper($user->lastname)}}, {{strtoupper($user->firstname)}} {{strtoupper($user->middlename)}}</td>
-                <td valign="top">{{$student->level}}</td>
+                <td valign="top">{{strtoupper($user->firstname)}}</td>
+                <td valign="top">{{strtoupper($user->middlename)}}</td>
+                <td valign="top">{{strtoupper($user->lastname)}}</td>
                 <td valign="top" align="center">F</td>
                     @foreach ($grades as $grade)
                     @if ($loop->first)
@@ -139,7 +144,7 @@
                     </tr>
                     @else
                     <tr>
-                        <td colspan="5"></td>
+                        <td colspan="6"></td>
                         <td>{{$grade->course_code}}</td>
                         <td>{{$grade->course_name}}</td>
                         <td>{{$units = $grade->lec + $grade->lab}}</td>
@@ -148,7 +153,7 @@
                     <?php $totalunits = $totalunits + $units; ?>
                     @if ($loop->last)
                     <tr>
-                        <td colspan="5"></td>
+                        <td colspan="6"></td>
                         <td style="border-top: 1pt double dotted black" colspan="2" align="right">TOTAL UNITS:</td>
                         <td style="border-top: 1pt double dotted black"><b>{{$totalunits}}</b></td>
                     </tr>
