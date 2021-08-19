@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class CashReceipts extends Model {
 
-    
     public function __construct($reference_id) {
         $this->receipt_no = $this->receipt_no($reference_id);
         $this->amount_received = $this->amount_received($reference_id);
