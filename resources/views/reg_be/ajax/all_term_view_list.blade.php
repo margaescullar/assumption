@@ -12,6 +12,31 @@ function getAdviser($school_year,$period,$level,$strand,$section){
         return "No Class Adviser Assigned";
     }
 }
+function get_name($idno,$schoolyear,$period){
+    $names = \App\User::where('idno',$idno)->first();
+    if($period == "Select Period"){
+    $is_widthraw = \App\BedLevel::where('idno',$idno)->where('school_year', $schoolyear)->first();
+    }else{
+    $is_widthraw = \App\BedLevel::where('idno',$idno)->where('school_year', $schoolyear)->where('period', $period)->first();
+    }
+    
+    if($names->middlename == NULL){
+        $names->middlename = "";
+    }else{
+        $names->middlename = "(".ucwords(strtolower($names->middlename)).")";
+    }
+    
+    if ($is_widthraw->status == 4){
+        $print = "Withdrawn-". $is_widthraw->date_dropped;
+    } else {
+        $print = "";
+    }   
+    
+    return strtoupper($names->lastname).", ".ucwords(strtolower($names->firstname))." ".$names->middlename." ".$print;
+
+    
+    }
+
 ?>
 <a href="javascript:void(0)" onclick = "export_all_term_summary('default')" class="form btn btn-success pull-right"> Export All Term Summary</a>
 <a href="javascript:void(0)" onclick = "export_all_term_summary('name_only')" class="form btn btn-warning pull-right"> Export (Names Only)</a>
@@ -22,7 +47,7 @@ function getAdviser($school_year,$period,$level,$strand,$section){
         <td style='font-weight: bold;' colspan='2'>Grade Level</td><td>{{$level}}</td>
     </tr>
     <tr>
-        <td style='font-weight: bold;' colspan='2'>Section</td><td>{{$section}}</td>
+        <td style='font-weight: bold;' colspan='2'>Section</td><td>@if($section == "%%") All @else {{$section}} @endif</td>
     </tr>
     <tr>
         <td style='font-weight: bold;' colspan='2'>School Year</td><td>{{$school_year}} - {{$school_year+1}}</td>
@@ -45,7 +70,7 @@ function getAdviser($school_year,$period,$level,$strand,$section){
     <tr>
         <td>{{$ctr++}}</td>
         <td>{{$list->idno}}</td>
-        <td>{{strtoupper($list->lastname)}}, {{$list->firstname}} ({{$list->middlename}})</td>
+        <td>{{get_name($list->idno, $school_year, $period)}}</td>
         <?php $terms = ['1stQtr','2ndQtr','3rdQtr','4thQtr']; ?>
         @foreach($terms as $key => $quarter)
         @if(!$loop->first)
@@ -180,7 +205,7 @@ function getAdviser($school_year,$period,$level,$strand,$section){
     <tr>
         <td>{{$ctr++}}</td>
         <td>{{$list->idno}}</td>
-        <td>{{strtoupper($list->lastname)}}, {{$list->firstname}} ({{$list->middlename}})</td>
+        <td>{{get_name($list->idno, $school_year, $period)}}</td>
         <td>{{$list->section}}</td>
     </tr>
         @endforeach
