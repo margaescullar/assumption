@@ -38,8 +38,10 @@ function get_name($idno,$schoolyear,$period){
     }
 
 ?>
+@if(Auth::user()->accesslevel == env('REG_BE'))
 <a href="javascript:void(0)" onclick = "export_all_term_summary('default')" class="form btn btn-success pull-right"> Export All Term Summary</a>
 <a href="javascript:void(0)" onclick = "export_all_term_summary('name_only')" class="form btn btn-warning pull-right"> Export (Names Only)</a>
+@endif
 <table class="table table-striped table-condensed table-bordered" style='font-size: 10pt'>
     <tr>
         <td style='font-weight: bold;' colspan='2'>Class Adviser</td><td>{{getAdviser($school_year,$period,$level,$strand,$section)}}</td>
