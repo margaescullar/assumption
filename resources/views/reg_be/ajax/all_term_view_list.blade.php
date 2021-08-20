@@ -13,7 +13,8 @@ function getAdviser($school_year,$period,$level,$strand,$section){
     }
 }
 ?>
-<a href="javascript:void(0)" onclick = "export_all_term_summary()" class="form btn btn-success pull-right"> Export All Term Summary</a>
+<a href="javascript:void(0)" onclick = "export_all_term_summary('default')" class="form btn btn-success pull-right"> Export All Term Summary</a>
+<a href="javascript:void(0)" onclick = "export_all_term_summary('name_only')" class="form btn btn-warning pull-right"> Export (Names Only)</a>
 <table class="table table-striped table-condensed table-bordered" style='font-size: 10pt'>
     <tr>
         <td style='font-weight: bold;' colspan='2'>Class Adviser</td><td>{{getAdviser($school_year,$period,$level,$strand,$section)}}</td>
@@ -29,6 +30,7 @@ function getAdviser($school_year,$period,$level,$strand,$section){
     <tr>
         <td style='font-weight: bold;' colspan='2'>Quarter</td><td>All Term</td>
     </tr>
+    @if($type == "default")
     <tr>
         <th>#</th>
         <th>ID Number</th>
@@ -43,7 +45,7 @@ function getAdviser($school_year,$period,$level,$strand,$section){
     <tr>
         <td>{{$ctr++}}</td>
         <td>{{$list->idno}}</td>
-        <td>{{$list->lastname}}, {{$list->firstname}}</td>
+        <td>{{$list->lastname}}, {{$list->firstname}} {{$list->middename}}</td>
         <?php $terms = ['1stQtr','2ndQtr','3rdQtr','4thQtr']; ?>
         @foreach($terms as $key => $quarter)
         @if(!$loop->first)
@@ -163,8 +165,26 @@ function getAdviser($school_year,$period,$level,$strand,$section){
             @endif
         </td>
         @endforeach
-        <!--<td style='background-color: whitesmoke'></td>-->
         @endforeach
         @endforeach
+        
+        @else
+        <tr>
+        <th>#</th>
+        <th>ID Number</th>
+        <th>Name</th>
+        <th>Section</th>
+        </tr>
+        
+    @foreach($lists as $list)
+    <tr>
+        <td>{{$ctr++}}</td>
+        <td>{{$list->idno}}</td>
+        <td>{{$list->lastname}}, {{$list->firstname}} {{$list->middename}}</td>
+        <td>{{$list->section}}</td>
+    </tr>
+        @endforeach
+        
+        @endif
     </tr>
 </table>

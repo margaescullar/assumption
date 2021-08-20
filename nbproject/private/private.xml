@@ -11,6 +11,10 @@
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/home/sean/NetBeansProjects/assumption/app/Http/Controllers/Accounting/BreakdownOfFees.php</file>
+            <file>file:/home/sean/NetBeansProjects/assumption/resources/views/accounting/breakdown_of_fees.blade.php</file>
+            <file>file:/home/sean/NetBeansProjects/assumption/resources/views/cashier/ledger.blade.php</file>
+        </group>
     </open-files>
 </project-private>

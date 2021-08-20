@@ -159,7 +159,7 @@ Route::get('/bedregistrar/grade_summary/quarter_summary/export/{level}/{strand}/
 //BED All Term Summary
 Route::get('/bedregistrar/all_term_summary','BedRegistrar\AllTermSummary@index');
 Route::get('/bedregistrar/ajax/all_term_view_list', 'BedRegistrar\Ajax\AllTermSummaryAjax@all_term_view_list');
-Route::get('/bedregistrar/grade_summary/all_term_summary/export/{level}/{strand}/{section}/{school_year}/{period?}', 'BedRegistrar\AllTermSummary@export_all_term_summary');
+Route::get('/bedregistrar/grade_summary/all_term_summary/export/{level}/{strand}/{section}/{school_year}/{type}/{period?}', 'BedRegistrar\AllTermSummary@export_all_term_summary');
 
 //BED SAC Grade Summary
 Route::get('/bedregistrar/sac_grade_summary','BedRegistrar\GradeSummary@index_sac');

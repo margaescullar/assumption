@@ -23,23 +23,27 @@ class AllTermSummaryAjax extends Controller {
                 $period = Input::get('period');
                 $strand = Input::get("strand");
                 $is_ee = Input::get('is_ee');
+                $type= "default";
+                if($section == "All"){
+                    $section = '%%';
+                }
 
                 $lists = self::getListSubjectHeads($school_year, $level, $section, $period, $strand, 'lists',$is_ee);
                 $subject_heads = self::getListSubjectHeads($school_year, $level, $section, $period, $strand, 'subject_heads',$is_ee);
 
-                return view("reg_be.ajax.all_term_view_list", compact('school_year', 'level', 'section', 'period', 'strand', 'lists', 'subject_heads', 'is_ee'));
+                return view("reg_be.ajax.all_term_view_list", compact('school_year', 'level', 'section', 'period', 'strand', 'lists', 'subject_heads', 'is_ee','type'));
             }
         }
     }
 
     public static function getListSubjectHeads($school_year, $level, $section, $period, $strand, $display,$is_ee) {
         if ($level == "Grade 11" || $level == "Grade 12") {
-            $lists = \App\BedLevel::where('school_year', $school_year)->where('period', $period)->where('strand', $strand)->where('level', $level)->where('section', $section)->where('status', env('ENROLLED'))->join('users','users.idno','=','bed_levels.idno')->orderBy('lastname','asc')->get();
+            $lists = \App\BedLevel::where('school_year', $school_year)->where('period', $period)->where('strand', $strand)->where('level', $level)->where('section', 'like', $section)->where('status', env('ENROLLED'))->join('users','users.idno','=','bed_levels.idno')->orderBy('lastname','asc')->get();
             $subject_heads = \App\GradeBasicEd::distinct()->where('school_year', $school_year)->where('period', $period)->where('strand', $strand)->where('level', $level)->get(['group_code']);
         } elseif ($level == "Pre-Kinder" || $level == "Kinder") {
             dd('not yet started...');
         } else {
-            $lists = \App\BedLevel::where('school_year', $school_year)->where('level', $level)->where('section', $section)->where('bed_levels.status', env('ENROLLED'))->join('users','users.idno','=','bed_levels.idno')->orderBy('lastname','asc')->get();
+            $lists = \App\BedLevel::where('school_year', $school_year)->where('level', $level)->where('section', 'like',$section)->where('bed_levels.status', env('ENROLLED'))->join('users','users.idno','=','bed_levels.idno')->orderBy('lastname','asc')->get();
             $subject_heads = \App\GradeBasicEd::distinct()->where('school_year', $school_year)->where('level', $level)->orderBy('sort_to')->get(['group_code']);
         }
 

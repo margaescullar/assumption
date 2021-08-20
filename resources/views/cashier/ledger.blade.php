@@ -942,6 +942,9 @@ $ledger_list_additional = \App\Ledger::where('idno',$user->idno)->where('categor
          <div class="form-group">
         <a class="form form-control btn btn-success" href="{{url('cashier',array('reservation',$user->idno))}}">Reservation/Student Deposit</a>
         </div>
+        <div class="form-group">
+        <a href="{{url('/accounting',array('breakdown_of_fees',$user->idno))}}" class="form form-control btn btn-primary">Breakdown of Fees</a>
+        </div>
         @elseif(Auth::user()->accesslevel==env("ACCTNG_STAFF") || Auth::user()->accesslevel == env("ACCTNG_HEAD"))
 <!--        <div class="form-group">
         <a href="{{url('/accounting',array('edit_ledger',$user->idno))}}" class="form form-control btn btn-primary">EDIT LEDGER</a>

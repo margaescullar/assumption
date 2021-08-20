@@ -226,8 +226,8 @@ if(Auth::user()->accesslevel == env('REG_BE')){
     
     });
     
-    function export_all_term_summary(){
-        window.open("/bedregistrar/grade_summary/all_term_summary/export/" +$("#level").val() + "/" + $("#strand").val() + "/" + $("#section").val() + "/" + $("#school_year").val() + "/" + $("#is_ee_only").val() + "/" + $("#period").val())
+    function export_all_term_summary(type){
+        window.open("/bedregistrar/grade_summary/all_term_summary/export/" +$("#level").val() + "/" + $("#strand").val() + "/" + $("#section").val() + "/" + $("#school_year").val() + "/" + $("#is_ee_only").val() + "/" + type + "/" + $("#period").val())
     }
 </script>    
 @endsection

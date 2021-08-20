@@ -3,6 +3,8 @@
         $layout = "layouts.appaccountingstaff";    
     }else if (Auth::user()->accesslevel==env("ACCTNG_HEAD")){
         $layout = "layouts.appaccountinghead";    
+    }else if (Auth::user()->accesslevel==env("CASHIER")){
+        $layout = "layouts.appcashier";    
     }
 ?>
 @extends($layout)

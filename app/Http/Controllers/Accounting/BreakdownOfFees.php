@@ -15,7 +15,7 @@ class BreakdownOfFees extends Controller
         $this->middleware('auth');
     }
     function index($idno){
-        if (Auth::user()->accesslevel == env("ACCTNG_STAFF") || Auth::user()->accesslevel==env("ACCTNG_HEAD")) {
+        if (Auth::user()->accesslevel == env("ACCTNG_STAFF") || Auth::user()->accesslevel==env("ACCTNG_HEAD") || Auth::user()->accesslevel==env("CASHIER")) {
             $user = \App\User::where('idno', $idno)->first();
             $ledger_sy = \App\Ledger::distinct()->where('idno', $idno)->get(['school_year']);
             return view('accounting.breakdown_of_fees', compact('ledger_sy', 'idno', 'user'));
