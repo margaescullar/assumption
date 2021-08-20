@@ -45,7 +45,7 @@ function getAdviser($school_year,$period,$level,$strand,$section){
     <tr>
         <td>{{$ctr++}}</td>
         <td>{{$list->idno}}</td>
-        <td>{{$list->lastname}}, {{$list->firstname}} {{$list->middename}}</td>
+        <td>{{$list->lastname}}, {{$list->firstname}} {{$list->middlename}}</td>
         <?php $terms = ['1stQtr','2ndQtr','3rdQtr','4thQtr']; ?>
         @foreach($terms as $key => $quarter)
         @if(!$loop->first)
@@ -180,7 +180,7 @@ function getAdviser($school_year,$period,$level,$strand,$section){
     <tr>
         <td>{{$ctr++}}</td>
         <td>{{$list->idno}}</td>
-        <td>{{$list->lastname}}, {{$list->firstname}} {{$list->middename}}</td>
+        <td>{{$list->lastname}}, {{$list->firstname}} {{$list->middlename}}</td>
         <td>{{$list->section}}</td>
     </tr>
         @endforeach
