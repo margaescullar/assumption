@@ -33,7 +33,7 @@ function get_value($id,$reference_id){
 </li>
 @endsection
 @section('header')
-<!--<h1>Module not yet done...</h1>-->
+<h1>Module not yet done...</h1>
 <section class="content-header">
       <h1>
         Update OR Number: {{$payment->receipt_no}}
