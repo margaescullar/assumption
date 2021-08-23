@@ -155,7 +155,10 @@ if(Auth::user()->accesslevel == env("CASHIER")){
             @endif
             </div>
             
-            </div> 
+        </div>
+        <div class="col-sm-12">
+            <a href="{{url('cashier',array('view_receipt','update_receipt',$payment->reference_id))}}"><button class="btn btn-warning col-sm-12">EDIT RECEIPT</button></a>
+        </div>
         @if($payment->reason_reverse!="")
     <div class="alert alert-info col-md-12">Reason of Reverse/Cancellation:<button class="pull-right" data-toggle="modal" data-target="#show_reason">Edit Reason</button></span></b><br><b>{{$payment->reason_reverse}}</b></div> 
     @endif
