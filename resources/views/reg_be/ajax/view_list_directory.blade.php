@@ -22,6 +22,13 @@ $i=1;
         <th>Main Email</th>
         <th>Father's Email</th>
         <th>Mother's Email</th>
+        @elseif(Auth::user()->accesslevel == env('OSA'))
+        <th>Personal Tel No.</th>
+        <th>Personal Cell No.</th>
+        <th>Father's Tel No.</th>
+        <th>Father's Cell No</th>
+        <th>Mother's Tel No.</th>
+        <th>Mother's Cell No.</th>
         @else
         <th>Street</th>
         <th>Barangay</th>
@@ -60,6 +67,13 @@ $i=1;
         <td>{{$email->email}}</td>
         <td>{{$get_parent->f_email}}</td>
         <td>{{$get_parent->m_email}}</td>
+        @elseif(Auth::user()->accesslevel == env('OSA'))
+        <td>{{$get_directory->tel_no}}</td>
+        <td>{{$get_directory->cell_no}}</td>
+        <td>{{$get_parent->f_phone}}</td>
+        <td>{{$get_parent->f_cell_no}}</td>
+        <td>{{$get_parent->m_phone}}</td>
+        <td>{{$get_parent->m_cell_no}}</td>
         @else
         <td>{{$get_directory->street}}</td>
         <td>{{$get_directory->barangay}}</td>
@@ -131,6 +145,13 @@ $i=1;
         <th>Main Email</th>
         <th>Father's Email</th>
         <th>Mother's Email</th>
+        @elseif(Auth::user()->accesslevel == env('OSA'))
+        <th>Personal Tel No.</th>
+        <th>Personal Cell No.</th>
+        <th>Father's Tel No.</th>
+        <th>Father's Cell No</th>
+        <th>Mother's Tel No.</th>
+        <th>Mother's Cell No.</th>
         @else
         <th>Street</th>
         <th>Barangay</th>
@@ -168,6 +189,13 @@ $i=1;
         <td>{{$email->email}}</td>
         <td>{{$get_parent->f_email}}</td>
         <td>{{$get_parent->m_email}}</td>
+        @elseif(Auth::user()->accesslevel == env('OSA'))
+        <td>{{$get_directory->tel_no}}</td>
+        <td>{{$get_directory->cell_no}}</td>
+        <td>{{$get_parent->f_phone}}</td>
+        <td>{{$get_parent->f_cell_no}}</td>
+        <td>{{$get_parent->m_phone}}</td>
+        <td>{{$get_parent->m_cell_no}}</td>
         @else
         <td>{{$get_directory->street}}</td>
         <td>{{$get_directory->barangay}}</td>

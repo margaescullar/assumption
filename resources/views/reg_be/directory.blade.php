@@ -11,8 +11,8 @@ if(Auth::user()->accesslevel == env('REG_BE')){
 }else if (Auth::user()->accesslevel==env("BED_CL")){
     $layout = "layouts.appbedclasslead";
     $cl_levels = \App\ClassLeadLevel::where('idno',Auth::user()->idno)->get(['level']);
-}else{
-    $layout = "layouts.appadmission-bed";
+}else if (Auth::user()->accesslevel==env("OSA")){
+    $layout = "layouts.apposa";
 }
 ?>
 @extends($layout)

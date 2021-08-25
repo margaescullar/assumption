@@ -19,7 +19,7 @@ class GetStudentListDirectory extends Controller {
 
     function view_list() {
         if (Request::ajax()) {
-            if (Auth::user()->accesslevel == env("REG_BE") || Auth::user()->accesslevel == env('ADMISSION_BED') || Auth::user()->accesslevel == env('BED_CL') || Auth::user()->accesslevel == env('EDUTECH')) {
+            if (Auth::user()->accesslevel == env("REG_BE") || Auth::user()->accesslevel == env('ADMISSION_BED') || Auth::user()->accesslevel == env('BED_CL') || Auth::user()->accesslevel == env('EDUTECH') || Auth::user()->accesslevel == env('OSA')) {
                 $schoolyear = Input::get('school_year');
                 $level = Input::get('level');
                 $section = Input::get('section');

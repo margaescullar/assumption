@@ -69,7 +69,7 @@ $school_year = \App\CtrEnrollmentSchoolYear::where('academic_type', 'BED')->firs
 
                                         <p>
                                             {{Auth::user()->lastname}}, {{Auth::user()->firstname}}
-                                            <small>Accounting</small>
+                                            <small>BED Registrar</small>
                                         </p>
                                     </li>
 

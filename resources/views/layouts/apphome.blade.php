@@ -58,7 +58,7 @@ if(file_exists(public_path("images/".Auth::user()->idno.".jpg"))){
 
                                         <p>
                                             {{Auth::user()->lastname}}, {{Auth::user()->firstname}}
-                                            <small>Cashier</small>
+                                            <small></small>
                                         </p>
                                     </li>
 

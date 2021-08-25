@@ -33,7 +33,7 @@ class UpdateReceiptController extends Controller {
         $this->postCashDebit($request);
         DB::commit();
         
-        \App\Http\Controllers\Admin\Logs::log("Update Receipt Details");
+        \App\Http\Controllers\Admin\Logs::log("Update Receipt Details of $request->reference_id");
         return redirect(url('/cashier',array('viewreceipt',$request->reference_id)));
     }
 
