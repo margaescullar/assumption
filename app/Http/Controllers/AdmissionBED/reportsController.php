@@ -90,7 +90,7 @@ class reportsController extends Controller
     }
     
     function statistics(){
-        $stats = \App\PreRegistration::where('admission_sy','>=','2022')->get();
+        $stats = \App\PreRegistration::where('admission_sy','>=','2018')->get();
         return view('admission-bed.reports.statistics', compact('stats','school_year'));
     }
 }
