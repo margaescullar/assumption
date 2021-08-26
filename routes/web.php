@@ -487,6 +487,7 @@ Route::get('/bedadmission/reports/approved/{date_start}/{date_end}','AdmissionBE
 Route::get('/bedadmission/reports/regrets/{date_start}/{date_end}','AdmissionBED\reportsController@regrets');
 Route::get('/bedadmission/reports/reservations','AdmissionBED\reportsController@reservations');
 Route::get('/bedadmission/reports/statistics/','AdmissionBED\reportsController@statistics');
+Route::get('/bedadmission/reports/export_statistics/','AdmissionBED\reportsController@export_statistics');
 
 //PRE-REGISTRATION SETTINGS BED ADMISSION
 Route::get('/bedadmission/settings/admission_sy','AdmissionBED\PreRegistrationSettings@admission_sy');

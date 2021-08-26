@@ -5,9 +5,7 @@ namespace App\Http\Controllers\AdmissionBED;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Barryvdh\DomPDF\Facade;
-use Session;
+use Excel;
 
 class reportsController extends Controller
 {
@@ -90,7 +88,20 @@ class reportsController extends Controller
     }
     
     function statistics(){
-        $stats = \App\PreRegistration::where('admission_sy','>=','2018')->get();
-        return view('admission-bed.reports.statistics', compact('stats','school_year'));
+        $stats = \App\PreRegistration::where('admission_sy','>=','2018')->orderByRaw('admission_sy desc, length(level), level')->get();
+        return view('admission-bed.reports.statistics', compact('stats'));
+    }
+    
+    function export_statistics(){
+        $stats = \App\PreRegistration::where('admission_sy','>=','2018')->orderByRaw('admission_sy desc, length(level), level')->get();
+        
+        ob_end_clean();
+        Excel::create('Stat', function($excel) use ($stats) {
+            $excel->setTitle("Stat");
+
+            $excel->sheet('Stat', function ($sheet) use ($stats) {
+                $sheet->loadView('admission-bed.reports.statistics-content', compact('stats'));
+            });
+        })->download('xlsx');
     }
 }

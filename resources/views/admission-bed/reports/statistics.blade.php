@@ -55,44 +55,13 @@ $layout = "layouts.appadmission-shs";
 </section>
 @endsection
 @section('maincontent')
-<div class="col-md-12">
-</div> 
 <div class="col-md-12">  
     <div class="box">
         <div class="box-header">
-            <div class="box-title">Result</div>
+            <a target='_blank' href='{{url('/bedadmission/reports',array('export_statistics'))}}'><button class='btn btn-success pull-right'>Export</button></a>
         </div>
         <div class="box-body">
-            <table class='table'>
-                <tr>
-                    <td align='center'>SY</td>
-                    <!--<td align='center'>Applicants</td>-->
-                    <td align='center'>Pre-Registered</td>
-                    <td align='center'>For Approval</td>
-                    <td align='center'>Regret</td>
-                    <td align='center'>Approved</td>
-                </tr>
-                @foreach($stats->groupBy('admission_sy') as $sy=>$stat)
-                <?php
-                $total_applicants = $stat->count('idno');
-                $non_paid = $stat->where('is_complete',0)->count('is_complete');
-                $paid = $stat->where('is_complete',1)->count('is_complete');
-                $waived = $stat->where('is_complete',2)->count('is_complete');
-                $for_approval = count(\App\Status::where('statuses.status', env('FOR_APPROVAL'))->where('statuses.academic_type', "!=","College")->where('users.admission_sy',$sy)->join('users', 'users.idno','=','statuses.idno')->get());
-                $approved     = count(\App\Status::where('statuses.status', "<=",env('ENROLLED'))->where('statuses.academic_type', "!=","College")->where('users.admission_sy',$sy)->join('users', 'users.idno','=','statuses.idno')->get());
-                $regret_final     = count(\App\Status::where('statuses.status', env('REGRET_FINAL'))->where('statuses.academic_type', "!=","College")->where('users.admission_sy',$sy)->join('users', 'users.idno','=','statuses.idno')->get());
-                $regret_retreive  = count(\App\Status::where('statuses.status', env('REGRET_RETREIVE'))->where('statuses.academic_type', "!=","College")->where('users.admission_sy',$sy)->join('users', 'users.idno','=','statuses.idno')->get());
-                ?>
-                <tr>
-                    <td align='center'>{{$sy}}</td>
-                    <td align='center'>{{$total_applicants}}</td>
-                    <!--<td align='center'>{{$non_paid+$paid+$waived}}</td>-->
-                    <td align='center'>{{$for_approval}}</td>
-                    <td align='center'>{{$regret_final}}</td>
-                    <td align='center'><strong>{{$approved}}</strong></td>
-                <tr>
-                @endforeach
-            </table>
+            @include('admission-bed.reports.statistics-content')
         </div>
     </div> 
 </div>
