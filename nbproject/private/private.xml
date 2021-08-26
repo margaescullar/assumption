@@ -11,6 +11,15 @@
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/home/sean/NetBeansProjects/assumption/resources/views/reg_be/directory.blade.php</file>
+            <file>file:/home/sean/NetBeansProjects/assumption/app/Http/Controllers/BedRegistrar/DirectoryController.php</file>
+            <file>file:/home/sean/NetBeansProjects/assumption/resources/views/layouts/appbedclasslead.blade.php</file>
+            <file>file:/home/sean/NetBeansProjects/assumption/resources/views/reg_be/view_list_directory_export.blade.php</file>
+            <file>file:/home/sean/NetBeansProjects/assumption/app/Http/Controllers/BedRegistrar/Ajax/GetStudentListDirectory.php</file>
+            <file>file:/home/sean/NetBeansProjects/assumption/resources/views/reg_be/ajax/view_list_directory.blade.php</file>
+            <file>file:/home/sean/NetBeansProjects/assumption/resources/views/cashier/viewreceipt.blade.php</file>
+            <file>file:/home/sean/NetBeansProjects/assumption/resources/views/layouts/apposa.blade.php</file>
+        </group>
     </open-files>
 </project-private>

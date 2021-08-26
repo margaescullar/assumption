@@ -159,6 +159,7 @@ $school_year = \App\CtrEnrollmentSchoolYear::where('academic_type','BED')->first
             <li><a href="{{url('/bedadmission',array('reports','approved',date('Y-m-d'),date('Y-m-d')))}}">Approved </a></li>
             <li><a href="{{url('/bedadmission',array('reports','regrets',date('Y-m-d'),date('Y-m-d')))}}">Regrets </a></li>
             <li><a href="{{url('/bedadmission',array('reports','reservations'))}}">Reservations </a></li>
+            <li><a href="{{url('/bedadmission',array('reports','statistics'))}}">Statistical Report </a></li>
           </ul>
         </li>
         <li class="treeview">

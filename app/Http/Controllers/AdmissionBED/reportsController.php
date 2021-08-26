@@ -88,4 +88,9 @@ class reportsController extends Controller
             return view('admission-bed.reports.reservations', compact('reservations'));
         }
     }
+    
+    function statistics(){
+        $stats = \App\PreRegistration::where('admission_sy','>=','2022')->get();
+        return view('admission-bed.reports.statistics', compact('stats','school_year'));
+    }
 }

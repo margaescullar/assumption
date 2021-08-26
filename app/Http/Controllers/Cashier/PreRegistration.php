@@ -205,6 +205,8 @@ class PreRegistration extends Controller {
         
         $add_new_user = new \App\User;
         $add_new_user->idno = $applicant_details->idno;
+        $add_new_user->application_reference_idno = $applicant_details->idno;
+        $add_new_user->admission_sy = $applicant_details->admission_sy;
         $add_new_user->firstname = $applicant_details->firstname;
         $add_new_user->middlename = $applicant_details->middlename;
         $add_new_user->lastname = $applicant_details->lastname;
