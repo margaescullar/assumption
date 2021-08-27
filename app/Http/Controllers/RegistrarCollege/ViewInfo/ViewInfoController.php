@@ -206,7 +206,7 @@ class ViewInfoController extends Controller {
             $this->updateEducBackground($request);
             $this->updateUser($request);
 
-            \App\Http\Controllers\Admin\Logs::log("Update information of student: $request->idno");
+            \App\Http\Controllers\Admin\Logs::log("Update information of student: $request->idno, User status: $request->user_status");
             DB::Commit();
 
             Session::flash('message', 'Information Updated!');
