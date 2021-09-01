@@ -38,7 +38,7 @@ use AuthenticatesUsers;
 //        $this->addadmin();
 //        $this->add999999();
 //        $this->updateLedger();
-        //$this->generatePassword();
+//        $this->generatePassword();
 //        $this->updateTransactionDate();
 //        $this->nameFaker();
         $this->middleware('guest')->except('logout');
