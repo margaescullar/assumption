@@ -467,9 +467,9 @@ if (count($previous) > 0) {
                     </td>
                     <td>
                         @if($optional->is_required==1)
-                        <input name="qty_books[{{$optional->id}}]" value="1" min=1 type="number"  oninput="process_sub1({{$optional->id}},this.value,{{$optional->amount}},this)">
+                        <input name="qty_books[{{$optional->id}}]" value="1" min=1 type="number" onKeyDown="return false" oninput="process_sub1({{$optional->id}},this.value,{{$optional->amount}},this)">
                         @else
-                        <input name="qty_books[{{$optional->id}}]" value="1" type="number"  oninput="process_sub1({{$optional->id}},this.value,{{$optional->amount}},this)">
+                        <input name="qty_books[{{$optional->id}}]" value="1" type="number" onKeyDown="return false" oninput="process_sub1({{$optional->id}},this.value,{{$optional->amount}},this)">
                         @endif
                     </td>
                     <td>{{$optional->amount}}</td>

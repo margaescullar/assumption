@@ -40,6 +40,7 @@ use AuthenticatesUsers;
 //        $this->updateLedger();
         //$this->generatePassword();
 //        $this->updateTransactionDate();
+//        $this->nameFaker();
         $this->middleware('guest')->except('logout');
     }
 
@@ -112,6 +113,16 @@ use AuthenticatesUsers;
             }
         }
         return "Done";
+    }
+    
+    function nameFaker(){
+        $users = \App\User::where('idno',0000000)->get();
+        foreach ($users as $user){
+            $faker = Faker::create();
+            $user->firstname = $faker->firstNameFemale;
+            $user->lastname = $faker->lastName();
+            $user->save();
+        }
     }
 
 }

@@ -7,6 +7,7 @@
     "require": {
         "php": ">=7.0.0",
         "barryvdh/laravel-dompdf": "^0.8.0",
+        "fakerphp/faker": "^1.15",
         "fideloper/proxy": "~3.3",
         "gr8shivam/laravel-sms-api": "^3.0",
         "h4cc/wkhtmltopdf-amd64": "0.12.x",
@@ -19,7 +20,6 @@
     },
     "require-dev": {
         "filp/whoops": "~2.0",
-        "fzaninotto/faker": "~1.4",
         "mockery/mockery": "~1.0",
         "phpunit/phpunit": "~6.0"
     },

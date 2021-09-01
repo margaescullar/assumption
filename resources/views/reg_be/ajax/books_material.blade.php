@@ -19,9 +19,9 @@ $other_materials = \App\CtrMaterial::where('level',$current_level)->where('categ
                     </td>
                     <td>
                         @if($optional->is_required==1)
-                        <input name="qty_books[{{$optional->id}}]" type="number" min="1" value="1" oninput="process_sub1({{$optional->id}},this.value,{{$optional->amount}},this)">
+                        <input name="qty_books[{{$optional->id}}]" onKeyDown="return false" type="number" min="1" value="1" oninput="process_sub1({{$optional->id}},this.value,{{$optional->amount}},this)">
                         @else
-                        <input name="qty_books[{{$optional->id}}]" type="number"  value="1" oninput="process_sub1({{$optional->id}},this.value,{{$optional->amount}},this)">
+                        <input name="qty_books[{{$optional->id}}]" onKeyDown="return false" type="number"  value="1" oninput="process_sub1({{$optional->id}},this.value,{{$optional->amount}},this)">
                         @endif
                     </td>
                 <td>{{$optional->amount}}</td>
