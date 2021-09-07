@@ -11,6 +11,14 @@
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/home/sean/NetBeansProjects/assumption/app/Http/Controllers/Cashier/MainPayment.php</file>
+            <file>file:/home/sean/NetBeansProjects/assumption/app/IdRequest.php</file>
+            <file>file:/home/sean/NetBeansProjects/assumption/resources/views/reg_be/request_form_id/index.blade.php</file>
+            <file>file:/home/sean/NetBeansProjects/assumption/routes/web3.php</file>
+            <file>file:/home/sean/NetBeansProjects/assumption/app/Http/Controllers/BedRegistrar/RequestFormID.php</file>
+            <file>file:/home/sean/NetBeansProjects/assumption/resources/views/layouts/appbedregistrar.blade.php</file>
+            <file>file:/home/sean/NetBeansProjects/assumption/app/FormRequest.php</file>
+        </group>
     </open-files>
 </project-private>

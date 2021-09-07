@@ -22,11 +22,11 @@
         
         <td><a  href="{{url('/bedregistrar',array('info',$list->idno))}}">View Info</a></td>
         
-        @if($status->status == 3)<td><a  href="{{url('/bedregistrar',array('grades',$list->idno))}}">View Grades</a></td>
-            @elseif($status->status == 2) <td><a  href="{{url('/bedregistrar',array('grades',$list->idno))}}">View Grades</a></td>
-            @elseif($status->status == 10) <td>View Grades</td>
-            @elseif($status->status == 11) <td>View Grades</td>
-            @else <td><a  href="{{url('/bedregistrar',array('grades',$list->idno))}}">View Grades</a></td> @endif
+        @if($status->status == 3)<td><a  href="{{url('/bedregistrar',array('grades',$list->idno))}}">View Records</a></td>
+            @elseif($status->status == 2) <td><a  href="{{url('/bedregistrar',array('grades',$list->idno))}}">View Records</a></td>
+            @elseif($status->status == 10) <td>View Records</td>
+            @elseif($status->status == 11) <td>View Records</td>
+            @else <td><a  href="{{url('/bedregistrar',array('grades',$list->idno))}}">View Records</a></td> @endif
         
     </tr>
     @endif

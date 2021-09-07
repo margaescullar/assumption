@@ -13,6 +13,8 @@ if(Auth::user()->accesslevel == env('REG_BE')){
     $cl_levels = \App\ClassLeadLevel::where('idno',Auth::user()->idno)->get(['level']);
 }else if (Auth::user()->accesslevel==env("OSA")){
     $layout = "layouts.apposa";
+}else if(Auth::user()->accesslevel == env('OAA')){
+    $layout = "layouts.appoaa";
 }
 ?>
 @extends($layout)

@@ -53,7 +53,7 @@ $i=1;
         </center></th>
         <th width="5%" align="center">Sect</th>
         
-        @if(Auth::user()->accesslevel == env('EDUTECH'))
+        @if(Auth::user()->accesslevel == env('EDUTECH') or Auth::user()->accesslevel == env('OAA'))
         <th>Main Email</th>
         <th>Father's Email</th>
         <th>Mother's Email</th>
@@ -112,7 +112,7 @@ $i=1;
         </td>
         <td align="center">{{$name->section}}</td>
         @if(count($get_directory)>0)
-        @if(Auth::user()->accesslevel == env('EDUTECH'))
+        @if(Auth::user()->accesslevel == env('EDUTECH') or Auth::user()->accesslevel == env('OAA'))
         <td>{{$email->email}}</td>
         <td>{{$get_parent->f_email}}</td>
         <td>{{$get_parent->m_email}}</td>
@@ -189,7 +189,7 @@ $i=1;
                 - {{$section}}
         </center></th>
         
-        @if(Auth::user()->accesslevel == env('EDUTECH'))
+        @if(Auth::user()->accesslevel == env('EDUTECH') or Auth::user()->accesslevel == env('OAA'))
         <th>Main Email</th>
         <th>Father's Email</th>
         <th>Mother's Email</th>
@@ -244,7 +244,7 @@ $i=1;
             @endif
         </td>
         @if(count($get_directory)>0)
-        @if(Auth::user()->accesslevel == env('EDUTECH'))
+        @if(Auth::user()->accesslevel == env('EDUTECH') or Auth::user()->accesslevel == env('OAA'))
         <td>{{$email->email}}</td>
         <td>{{$get_parent->f_email}}</td>
         <td>{{$get_parent->m_email}}</td>

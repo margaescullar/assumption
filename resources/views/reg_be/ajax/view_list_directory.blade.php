@@ -18,7 +18,7 @@ $i=1;
         <th>Student ID</th>
         <th>Student Name</th>
         <th>Section</th>
-        @if(Auth::user()->accesslevel == env('EDUTECH'))
+        @if(Auth::user()->accesslevel == env('EDUTECH') or Auth::user()->accesslevel == env('OAA'))
         <th>Main Email</th>
         <th>Father's Email</th>
         <th>Mother's Email</th>
@@ -63,7 +63,7 @@ $i=1;
         <td>{{get_name($name->idno)}}</td>
         <td>{{$name->section}}</td>
         @if(count($get_directory)>0)
-        @if(Auth::user()->accesslevel == env('EDUTECH'))
+        @if(Auth::user()->accesslevel == env('EDUTECH') or Auth::user()->accesslevel == env('OAA'))
         <td>{{$email->email}}</td>
         <td>{{$get_parent->f_email}}</td>
         <td>{{$get_parent->m_email}}</td>
@@ -141,7 +141,7 @@ $i=1;
         <th>#</th>
         <th>Student ID</th>
         <th>Student Name</th>
-        @if(Auth::user()->accesslevel == env('EDUTECH'))
+        @if(Auth::user()->accesslevel == env('EDUTECH') or Auth::user()->accesslevel == env('OAA'))
         <th>Main Email</th>
         <th>Father's Email</th>
         <th>Mother's Email</th>
@@ -185,7 +185,7 @@ $i=1;
         <td>{{$name->idno}}</td>
         <td>{{get_name($name->idno)}}</td>
         @if(count($get_directory)>0)
-        @if(Auth::user()->accesslevel == env('EDUTECH'))
+        @if(Auth::user()->accesslevel == env('EDUTECH') or Auth::user()->accesslevel == env('OAA'))
         <td>{{$email->email}}</td>
         <td>{{$get_parent->f_email}}</td>
         <td>{{$get_parent->m_email}}</td>
