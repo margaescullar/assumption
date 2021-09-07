@@ -103,7 +103,7 @@
                         <option value="23" @if ($user->accesslevel == 23) selected='' @endif>EduTech</option>
                         <option value="24" @if ($user->accesslevel == 24) selected='' @endif>BED Academic Director</option>
                         <option value="25" @if ($user->accesslevel == 25) selected='' @endif>BED Class Lead</option>
-                        <option value="25" @if ($user->accesslevel == 26) selected='' @endif>OAA</option>
+                        <option value="26" @if ($user->accesslevel == 26) selected='' @endif>OAA</option>
                         <option value="30" @if ($user->accesslevel == 30) selected='' @endif>Accounting Head</option>
                         <option value="31" @if ($user->accesslevel == 31) selected='' @endif>Accounting Staff</option>
                         <option value="40" @if ($user->accesslevel == 40) selected='' @endif>Cashier</option>
