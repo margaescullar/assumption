@@ -704,5 +704,8 @@ Route::post('update_class_leads_level','BedRegistrar\ClassLeadsController@update
 //Updating of Receipt
 Route::get('/cashier/view_receipt/update_receipt/{reference_id}','Cashier\UpdateReceiptController@index');
 Route::post('/update_receipt','Cashier\UpdateReceiptController@update');
+Route::post('/update_receipt_nonstudent','Cashier\UpdateReceiptController@update_nonstudent');
+
+
 
 

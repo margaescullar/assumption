@@ -45,7 +45,7 @@
 @section('header')
 <section class="content-header">
     <h1>
-        Request Form
+        ID Request
         <small></small>
     </h1>
     <ol class="breadcrumb">
@@ -62,7 +62,6 @@
             <li><a href="#tab_2" data-toggle="tab">Paid</a></li>
             <li><a href="#tab_3" data-toggle="tab">For Claiming</a></li>
             <li><a href="#tab_4" data-toggle="tab">Claimed</a></li>
-            <li class="pull-right"><a href="{{url('/bedregistrar',array('request_form','settings'))}}">Settings</a></li>
             <!--<li class="pull-right"><a href="{{url('/bedregistrar',array('request_form','reports'))}}">Reports</a></li>-->
         </ul>
         <div class="tab-content">
@@ -77,7 +76,8 @@
                                 <th>ID No</th>
                                 <th>Requested By</th>
                                 <th>Requests</th>
-                                <th>Purpose</th>
+                                <th>Uploaded Image</th>
+                                <th>Amount</th>
                                 <th>Date Claimed</th>
                             </tr>
                             @foreach($forms_request_pending as $form_requested)
@@ -86,15 +86,8 @@
                                 <td>{{$form_requested->created_at}}</td>
                                 <td>{{$form_requested->idno}}</td>
                                 <td>{{$form_requested->getFullNameAttribute()}}</td>
-                                <?php $request_lists = \App\RequestList::where('reference_id', $form_requested->reference_id)->get(); ?>
-                                <td>
-                                    @if(count($request_lists)>0)
-                                    @foreach($request_lists as $request_list)
-                                    {{$request_list->document_name}}-{{$request_list->cost}}<br>
-                                    @endforeach
-                                    @endif
-                                </td>
-                                <td>{{$form_requested->purpose}}</td>
+                                <td>Student ID x{{$form_requested->amount_pay/300}}</td>
+                                <td><a target="_blank" href="{{url("https://portal.assumption.edu.ph/images/id_uploads/$form_requested->idno.jpg")}}"> {{$form_requested->idno}}.jpg</a></td>
                                 <td>{{$form_requested->amount_pay}}</td>
                                 <td>@if($form_requested->status==0) Payment Pending @elseif($form_requested->status==1) Paid @elseif($form_requested->status==2) For Claiming  on {{$form_requested->claiming_date}} @elseif($form_requested->status==3) Claimed @endif</td>
                             </tr>
@@ -115,7 +108,7 @@
                                 <th>ID No</th>
                                 <th>Requested By</th>
                                 <th>Requests</th>
-                                <th>Purpose</th>
+                                <th>Uploaded Image</th>
                                 <th>Amount</th>
                                 <th>OR Number</th>
                                 <th>Status</th>
@@ -127,15 +120,8 @@
                                 <td>{{$form_requested->created_at}}</td>
                                 <td>{{$form_requested->idno}}</td>
                                 <td>{{$form_requested->getFullNameAttribute()}}</td>
-                                <?php $request_lists = \App\RequestList::where('reference_id', $form_requested->reference_id)->get(); ?>
-                                <td>
-                                    @if(count($request_lists)>0)
-                                    @foreach($request_lists as $request_list)
-                                    {{$request_list->document_name}}-{{$request_list->cost}}<br>
-                                    @endforeach
-                                    @endif
-                                </td>
-                                <td>{{$form_requested->purpose}}</td>
+                                <td>Student ID x{{$form_requested->amount_pay/300}}</td>
+                                <td><a target="_blank" href="{{url("https://portal.assumption.edu.ph/images/id_uploads/$form_requested->idno.jpg")}}"> {{$form_requested->idno}}.jpg</a></td>
                                 <td>{{$form_requested->amount_pay}}</td>
                                 <td>{{$form_requested->or_number}}</td>
                                 <td>@if($form_requested->status==0) Payment Pending @elseif($form_requested->status==1) Paid @elseif($form_requested->status==2) For Claiming  on {{$form_requested->claiming_date}} @elseif($form_requested->status==3) Claimed @endif</td>
@@ -143,14 +129,14 @@
                                     @if($form_requested->status==0)
                                     <!--<a href="javascript:void(0)" data-toggle="modal" data-target="#modal-view_form" onclick="getForm('{{$form_requested->reference_id}}')">Paid</a>-->
                                     @elseif($form_requested->status==1)
-                                    <form method="post" action="{{url('tag_as_for_claiming')}}">
+                                    <form method="post" action="{{url('tag_as_for_claiming_id')}}">
                                         {{csrf_field()}}
                                         <input type="date" name="date_for_claiming" required="">
                                         <input type="hidden" name="reference_id" value="{{$form_requested->reference_id}}">
                                         <button type="submit">For Claiming</button>
                                     </form>
                                     @elseif($form_requested->status==2)
-                                    <a href="{{url('tag_as_claimed',$form_requested->reference_id)}}">Claim</a>
+                                    <a href="{{url('tag_as_claimed_id',$form_requested->reference_id)}}">Claim</a>
                                     @else
                                     @endif
 
@@ -173,7 +159,7 @@
                                 <th>ID No</th>
                                 <th>Requested By</th>
                                 <th>Requests</th>
-                                <th>Purpose</th>
+                                <th>Uploaded Image</th>
                                 <th>Amount</th>
                                 <th>OR Number</th>
                                 <th>Status</th>
@@ -185,15 +171,8 @@
                                 <td>{{$form_requested->created_at}}</td>
                                 <td>{{$form_requested->idno}}</td>
                                 <td>{{$form_requested->getFullNameAttribute()}}</td>
-                                <?php $request_lists = \App\RequestList::where('reference_id', $form_requested->reference_id)->get(); ?>
-                                <td>
-                                    @if(count($request_lists)>0)
-                                    @foreach($request_lists as $request_list)
-                                    {{$request_list->document_name}}-{{$request_list->cost}}<br>
-                                    @endforeach
-                                    @endif
-                                </td>
-                                <td>{{$form_requested->purpose}}</td>
+                                <td>Student ID x{{$form_requested->amount_pay/300}}</td>
+                                <td><a target="_blank" href="{{url("https://portal.assumption.edu.ph/images/id_uploads/$form_requested->idno.jpg")}}"> {{$form_requested->idno}}.jpg</a></td>
                                 <td>{{$form_requested->amount_pay}}</td>
                                 <td>{{$form_requested->or_number}}</td>
                                 <td>@if($form_requested->status==0) Payment Pending @elseif($form_requested->status==1) Paid @elseif($form_requested->status==2) For Claiming  on {{$form_requested->claiming_date}} @elseif($form_requested->status==3) Claimed @endif</td>
@@ -201,14 +180,14 @@
                                     @if($form_requested->status==0)
                                     <!--<a href="javascript:void(0)" data-toggle="modal" data-target="#modal-view_form" onclick="getForm('{{$form_requested->reference_id}}')">Paid</a>-->
                                     @elseif($form_requested->status==1)
-                                    <form method="post" action="{{url('tag_as_for_claiming')}}">
+                                    <form method="post" action="{{url('tag_as_for_claiming_id')}}">
                                         {{csrf_field()}}
                                         <input type="date" name="date_for_claiming" required="">
                                         <input type="hidden" name="reference_id" value="{{$form_requested->reference_id}}">
                                         <button type="submit">For Claiming</button>
                                     </form>
                                     @elseif($form_requested->status==2)
-                                    <a href="{{url('tag_as_claimed',$form_requested->reference_id)}}">Claim</a>
+                                    <a href="{{url('tag_as_claimed_id',$form_requested->reference_id)}}">Claim</a>
                                     @else
                                     @endif
 
@@ -231,7 +210,7 @@
                                 <th>ID No</th>
                                 <th>Requested By</th>
                                 <th>Requests</th>
-                                <th>Purpose</th>
+                                <th>Uploaded Image</th>
                                 <th>Amount</th>
                                 <th>OR Number</th>
                                 <th>Date Claimed</th>
@@ -243,15 +222,8 @@
                                 <td>{{$form_requested->created_at}}</td>
                                 <td>{{$form_requested->idno}}</td>
                                 <td>{{$form_requested->getFullNameAttribute()}}</td>
-                                <?php $request_lists = \App\RequestList::where('reference_id', $form_requested->reference_id)->get(); ?>
-                                <td>
-                                    @if(count($request_lists)>0)
-                                    @foreach($request_lists as $request_list)
-                                    {{$request_list->document_name}}-{{$request_list->cost}}<br>
-                                    @endforeach
-                                    @endif
-                                </td>
-                                <td>{{$form_requested->purpose}}</td>
+                                <td>Student ID x{{$form_requested->amount_pay/300}}</td>
+                                <td><a target="_blank" href="{{url("https://portal.assumption.edu.ph/images/id_uploads/$form_requested->idno.jpg")}}"> {{$form_requested->idno}}.jpg</a></td>
                                 <td>{{$form_requested->amount_pay}}</td>
                                 <td>{{$form_requested->or_number}}</td>
                                 <td>{{$form_requested->claim_date}}</td>

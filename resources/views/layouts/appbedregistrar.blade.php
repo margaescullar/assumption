@@ -224,6 +224,7 @@ $school_year = \App\CtrEnrollmentSchoolYear::where('academic_type', 'BED')->firs
                             </ul>
                         </li>
                         <li><a href="{{url('/bedregistrar',array('request_form'))}}"><i class="fa fa-link"></i> <span>Credential Request</span></a></li>
+                        <li><a href="{{url('/bedregistrar',array('request_form_id'))}}"><i class="fa fa-link"></i> <span>ID Request</span></a></li>
                         <li><a href="{{url('/bedregistrar',array('external_form'))}}"><i class="fa fa-link"></i> <span>External Forms</span></a></li>
                         <li><a href="{{url('/bed_portal_notifications/records')}}"><i class="fa fa-link"></i> <span>Notifications</span></a></li>
 

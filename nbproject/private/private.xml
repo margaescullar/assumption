@@ -12,13 +12,18 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/sean/NetBeansProjects/assumption/app/Http/Controllers/Cashier/MainPayment.php</file>
-            <file>file:/home/sean/NetBeansProjects/assumption/app/IdRequest.php</file>
-            <file>file:/home/sean/NetBeansProjects/assumption/resources/views/reg_be/request_form_id/index.blade.php</file>
-            <file>file:/home/sean/NetBeansProjects/assumption/routes/web3.php</file>
-            <file>file:/home/sean/NetBeansProjects/assumption/app/Http/Controllers/BedRegistrar/RequestFormID.php</file>
-            <file>file:/home/sean/NetBeansProjects/assumption/resources/views/layouts/appbedregistrar.blade.php</file>
-            <file>file:/home/sean/NetBeansProjects/assumption/app/FormRequest.php</file>
+            <file>file:/home/sean/NetBeansProjects/assumption/.env</file>
+            <file>file:/home/sean/NetBeansProjects/assumption/resources/views/reg_be/directory.blade.php</file>
+            <file>file:/home/sean/NetBeansProjects/assumption/app/Http/Controllers/BedRegistrar/DirectoryController.php</file>
+            <file>file:/home/sean/NetBeansProjects/assumption/resources/views/layouts/appoaa.blade.php</file>
+            <file>file:/home/sean/NetBeansProjects/assumption/resources/views/reg_be/view_list_directory_export.blade.php</file>
+            <file>file:/home/sean/NetBeansProjects/assumption/app/Http/Controllers/BedRegistrar/Ajax/GetStudentListDirectory.php</file>
+            <file>file:/home/sean/NetBeansProjects/assumption/resources/views/reg_be/ajax/view_list_directory.blade.php</file>
+            <file>file:/home/sean/NetBeansProjects/assumption/resources/views/oaa/index.blade.php</file>
+            <file>file:/home/sean/NetBeansProjects/assumption/resources/views/auth/register.blade.php</file>
+            <file>file:/home/sean/NetBeansProjects/assumption/resources/views/admin/view_information/view_info.blade.php</file>
+            <file>file:/home/sean/NetBeansProjects/assumption/resources/views/admin/ajax/getstudentlist.blade.php</file>
+            <file>file:/home/sean/NetBeansProjects/assumption/app/Http/Controllers/HomeController.php</file>
         </group>
     </open-files>
 </project-private>

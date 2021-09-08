@@ -17,10 +17,15 @@ class UpdateReceiptController extends Controller {
     function index($reference_id) {
         if (Auth::user()->accesslevel == env("CASHIER") || Auth::user()->accesslevel == env("ACCTNG_HEAD") || Auth::user()->accesslevel == env("ACCTNG_STAFF")) {
             $payment = \App\Payment::where('reference_id', $reference_id)->first();
-            $ledger_particulars = \App\Ledger::where('idno', $payment->idno)->get();
-            $ledger_school_years = \App\Ledger::where('idno', $payment->idno)->groupBy('school_year')->get(['school_year']);
-
-            return view('cashier.update_receipt.index', compact('reference_id', 'payment', 'ledger_particulars', 'ledger_school_years'));
+            if($payment->idno != 999999){
+                $ledger_particulars = \App\Ledger::where('idno', $payment->idno)->get();
+                $ledger_school_years = \App\Ledger::where('idno', $payment->idno)->groupBy('school_year')->get(['school_year']);
+                return view('cashier.update_receipt.index', compact('reference_id', 'payment', 'ledger_particulars', 'ledger_school_years'));
+            }else{
+                $particulars = \App\OtherPayment::get();
+                $accounting_particulars = \App\Accounting::where('reference_id', $reference_id)->where('debit',0)->get();
+                return view('cashier.update_receipt.index_nonstudent', compact('reference_id', 'payment','accounting_particulars','particulars'));
+            }
         }
     }
 
@@ -74,37 +79,79 @@ class UpdateReceiptController extends Controller {
 
     function postAccounting($request) {
         $remove_accountings = \App\Accounting::where('reference_id', $request->reference_id)->where('accounting_type', env('CASH'))->get();
-        foreach ($remove_accountings as $remove_accounting) {
-            $remove_accounting->delete();
-        }
-        $this->processAccounting($request, env("CASH"));
+        
+        $this->processAccounting($request, env("CASH"),$remove_accountings);
     }
 
-    public static function processAccounting($request, $accounting_type) {
+    public static function processAccounting($request, $accounting_type,$remove_accountings) {
         $fiscal_year = \App\CtrFiscalYear::first()->fiscal_year;
 
-        foreach ($request->reference_number as $reference_number => $value) {
-            $ledger = \App\Ledger::where('id', $reference_number)->first();
-            $amount = $request->reference_number[$reference_number];
-            $ledger->payment = $ledger->payment + $amount;
-            $ledger->update();
-            if ($amount > 0) {
-                $addacct = new \App\Accounting;
-                $addacct->transaction_date = $request->transaction_date;
-                $addacct->reference_id = $request->reference_id;
-                $addacct->reference_number = $ledger->id;
-                $addacct->accounting_type = $accounting_type;
-                $addacct->category = $ledger->category;
-                $addacct->subsidiary = $ledger->subsidiary;
-                $addacct->receipt_details = $ledger->receipt_details;
-                $addacct->particular = $ledger->receipt_details;
-                $addacct->accounting_code = $ledger->accounting_code;
-                $addacct->accounting_name = $ledger->accounting_name;
-                $addacct->department = $ledger->department;
-                $addacct->fiscal_year = $fiscal_year;
-                $addacct->credit = $amount;
-                $addacct->posted_by = $request->posted_by;
-                $addacct->save();
+        if($request->reference_number != null){
+            //FOR MAIN PAYMENT
+            //
+            //remove accountings
+            foreach ($remove_accountings as $remove_accounting) {
+            $remove_accounting->delete();
+            }
+            //process accountings
+            foreach ($request->reference_number as $reference_number => $value) {
+                $ledger = \App\Ledger::where('id', $reference_number)->first();
+                $amount = $request->reference_number[$reference_number];
+                $ledger->payment = $ledger->payment + $amount;
+                $ledger->update();
+                if ($amount > 0) {
+                    $addacct = new \App\Accounting;
+                    $addacct->transaction_date = $request->transaction_date;
+                    $addacct->reference_id = $request->reference_id;
+                    $addacct->reference_number = $ledger->id;
+                    $addacct->accounting_type = $accounting_type;
+                    $addacct->category = $ledger->category;
+                    $addacct->subsidiary = $ledger->subsidiary;
+                    $addacct->receipt_details = $ledger->receipt_details;
+                    $addacct->particular = $ledger->receipt_details;
+                    $addacct->accounting_code = $ledger->accounting_code;
+                    $addacct->accounting_name = $ledger->accounting_name;
+                    $addacct->department = $ledger->department;
+                    $addacct->fiscal_year = $fiscal_year;
+                    $addacct->credit = $amount;
+                    $addacct->posted_by = $request->posted_by;
+                    $addacct->save();
+                }
+            }
+        }else{
+            //FOR NON STUDENT PAYMENT
+            $dept=\App\Status::where('idno',$request->idno)->first();
+            if(count($dept)>0){
+            $department = $dept->department;
+            } else {
+            $department="None";    
+            }
+            //remove accountings
+                if($request->particular[0] != "Select Particular"){
+                    foreach ($remove_accountings as $remove_accounting) {
+                        $remove_accounting->delete();
+                    }
+                }
+            if(count($request->particular)>0 and $request->particular[0] != "Select Particular"){
+                
+                //process accountings
+                for($i=0;$i<count($request->particular);$i++){
+                    $addaccounting = new \App\Accounting;
+                    $addaccounting->transaction_date=$request->transaction_date;
+                    $addaccounting->reference_id=$request->reference_id;
+                    $addaccounting->accounting_type=1;
+                    $addaccounting->category="Other Payment";
+                    $addaccounting->subsidiary=$request->particular[$i];
+                    $addaccounting->receipt_details=$request->particular[$i];
+                    $addaccounting->particular=$request->particular[$i];
+                    $addaccounting->accounting_code=self::getParticularAccounting($request->particular[$i])->accounting_code;
+                    $addaccounting->accounting_name=self::getParticularAccounting($request->particular[$i])->accounting_name;
+                    $addaccounting->department = $department;
+                    $addaccounting->fiscal_year=$fiscal_year;
+                    $addaccounting->credit=$request->other_amount[$i];
+                    $addaccounting->posted_by=$request->posted_by;
+                    $addaccounting->save();
+                }
             }
         }
     }
@@ -146,6 +193,22 @@ class UpdateReceiptController extends Controller {
         $addaccounting->posted_by=$request->posted_by;
         $addaccounting->save();
         
+    }
+
+    function update_nonstudent(Request $request) {
+//        return $request;
+        DB::beginTransaction();
+        $this->update_payment($request);
+        $this->postAccounting($request);
+        $this->postCashDebit($request);
+        DB::commit();
+        
+        \App\Http\Controllers\Admin\Logs::log("Update Receipt Details of $request->reference_id");
+        return redirect(url('/cashier',array('viewreceipt',$request->reference_id)));
+    }
+    
+    public static function getParticularAccounting($subsidiary){
+        return \App\OtherPayment::where('subsidiary',$subsidiary)->first();
     }
 
 }

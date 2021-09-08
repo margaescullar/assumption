@@ -340,6 +340,7 @@ class MainPayment extends Controller {
                 $ledgers = \App\Ledger::where('id', $key)->get();
                 $ledgers_check = \App\Ledger::where('id', $key)->first();
                 $this->checkCredentialRequest($ledgers_check,$reference_id);
+                $this->checkCredentialRequestID($ledgers_check,$reference_id);
                 $this->processAccounting($request, $reference_id, $totalpayment, $ledgers, env("CASH"));
             }
         }
@@ -358,9 +359,22 @@ class MainPayment extends Controller {
         if($ledgers_check->request_id != null){
             $getOR= \App\Payment::where('reference_id', $reference_id)->first()->receipt_no;
             $updateRequestForm = \App\FormRequest::where('reference_id', $ledgers_check->request_id)->first();
-            $updateRequestForm->or_number = $getOR;
-            $updateRequestForm->status=1;
-            $updateRequestForm->save();
+            if(isset($updateRequestForm)){
+                $updateRequestForm->or_number = $getOR;
+                $updateRequestForm->status=1;
+                $updateRequestForm->save();
+            }
+        }
+    }
+    function checkCredentialRequestID($ledgers_check,$reference_id){
+        if($ledgers_check->request_id != null){
+            $getOR= \App\Payment::where('reference_id', $reference_id)->first()->receipt_no;
+            $updateRequestForm = \App\IdRequest::where('reference_id', $ledgers_check->request_id)->first();
+            if(isset($updateRequestForm)){
+                $updateRequestForm->or_number = $getOR;
+                $updateRequestForm->status=1;
+                $updateRequestForm->save();
+            }
         }
     }
 

@@ -141,6 +141,11 @@ Route::get('/bedregistrar/request_form/reports','BedRegistrar\RequestForm@report
 Route::get('/get_form_details','BedRegistrar\RequestForm@AjaxGetFormDetails');
 Route::post('/update_form_details','BedRegistrar\RequestForm@UpdateFormDetails');
 
+//Request Form ID
+Route::get('/bedregistrar/request_form_id','BedRegistrar\RequestFormID@index');
+Route::post('/tag_as_for_claiming_id','BedRegistrar\RequestFormID@tag_as_for_claiming');
+Route::get('/tag_as_claimed_id/{reference_id}','BedRegistrar\RequestFormID@tag_as_claimed');
+
 //External Form
 Route::get('/bedregistrar/external_form','BedRegistrar\ExternalForm@index');
 Route::post('/add_external_form','BedRegistrar\ExternalForm@update');
