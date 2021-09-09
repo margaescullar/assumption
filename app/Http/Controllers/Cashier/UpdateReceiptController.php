@@ -18,10 +18,21 @@ class UpdateReceiptController extends Controller {
         if (Auth::user()->accesslevel == env("CASHIER") || Auth::user()->accesslevel == env("ACCTNG_HEAD") || Auth::user()->accesslevel == env("ACCTNG_STAFF")) {
             $payment = \App\Payment::where('reference_id', $reference_id)->first();
             if($payment->idno != 999999){
-                $ledger_particulars = \App\Ledger::where('idno', $payment->idno)->get();
-                $ledger_school_years = \App\Ledger::where('idno', $payment->idno)->groupBy('school_year')->get(['school_year']);
-                return view('cashier.update_receipt.index', compact('reference_id', 'payment', 'ledger_particulars', 'ledger_school_years'));
+                if(count($payment->accounting->where('reference_number',"!=",null))>0){
+                    //main payment
+                    $ledger_particulars = \App\Ledger::where('idno', $payment->idno)->get();
+                    $ledger_school_years = \App\Ledger::where('idno', $payment->idno)->groupBy('school_year')->get(['school_year']);
+                    return view('cashier.update_receipt.index', compact('reference_id', 'payment', 'ledger_particulars', 'ledger_school_years'));
+                }else{
+                    //other payment
+                    //same process as non student payment
+                    //no separate function
+                    $particulars = \App\OtherPayment::get();
+                    $accounting_particulars = \App\Accounting::where('reference_id', $reference_id)->where('debit',0)->get();
+                    return view('cashier.update_receipt.index_nonstudent', compact('reference_id', 'payment','accounting_particulars','particulars'));
+                }
             }else{
+                //non student payment
                 $particulars = \App\OtherPayment::get();
                 $accounting_particulars = \App\Accounting::where('reference_id', $reference_id)->where('debit',0)->get();
                 return view('cashier.update_receipt.index_nonstudent', compact('reference_id', 'payment','accounting_particulars','particulars'));
