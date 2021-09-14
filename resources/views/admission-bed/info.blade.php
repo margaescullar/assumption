@@ -1358,17 +1358,17 @@ $layout = "layouts.appadmission-shs";
                         @endif-->
                         @if($ctrrequirements->currentprevious_report_card >= 1)
                         <div class="col-sm-12">
-                            <input type='checkbox'  name='currentprevious_report_card' @if($bedrequirements->currentprevious_report_card == 1)checked=''@endif><label>&nbsp;Two (2) clear photocopies of PREVIOUS and CURRENT report cards</label>
+                            <input type='checkbox'  name='currentprevious_report_card' @if($bedrequirements->currentprevious_report_card == 1)checked=''@endif><label>&nbsp;One (1) clear photocopies of PREVIOUS and CURRENT report cards</label>
                         </div>
                         @endif
                         @if($ctrrequirements->narrative_assessment_report >= 1)
                         <div class="col-sm-12">
-                            <input type='checkbox'  name='narrative_assessment_report' @if($bedrequirements->narrative_assessment_report == 1)checked=''@endif><label>&nbsp;Two (2) clear photocopies of either Certificate of Attendance or Narrative Assessment Report.</label>
+                            <input type='checkbox'  name='narrative_assessment_report' @if($bedrequirements->narrative_assessment_report == 1)checked=''@endif><label>&nbsp;One (1) clear photocopies of either Certificate of Attendance or Narrative Assessment Report.</label>
                         </div>
                         @endif
                         @if($ctrrequirements->essay >= 1)
                         <div class="col-sm-12">
-                            <input type='checkbox'  name='essay' @if($bedrequirements->essay == 1)checked=''@endif><label>&nbsp;Essay</label>
+                            <input type='checkbox'  name='essay' @if($bedrequirements->essay == 1)checked=''@endif><label>&nbsp;Essay for Parents</label>
                         </div>
                         @endif
                         @if($ctrrequirements->question_parent >= 1)

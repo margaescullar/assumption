@@ -1246,16 +1246,16 @@ if (file_exists(public_path("images/PICTURES/" . $user->idno . ".jpg"))) {
                         @endif-->
                         @if($ctrrequirements->currentprevious_report_card >= 1)
                         <div class="col-sm-12">
-                            <input disabled='' type='checkbox' name='currentprevious_report_card'><label>&nbsp;Two (2) clear photocopies of PREVIOUS and CURRENT report cards</label>
+                            <input disabled='' type='checkbox' name='currentprevious_report_card'><label>&nbsp;One (1) clear photocopies of PREVIOUS and CURRENT report cards</label>
                         </div>
                         @endif
                         @if($ctrrequirements->narrative_assessment_report >= 1)
                         <div class="col-sm-12">
-                            <input disabled='' type='checkbox' name='narrative_assessment_report'><label>&nbsp;Two (2) clear photocopies of either Certificate of Attendance or Narrative Assessment Report.</label>
+                            <input disabled='' type='checkbox' name='narrative_assessment_report'><label>&nbsp;One (1) clear photocopies of either Certificate of Attendance or Narrative Assessment Report.</label>
                         </div>
                         @endif
                         @if($ctrrequirements->essay >= 1)
-                            <input disabled='' type='checkbox'  name='essay'><label>&nbsp;Essay</label>
+                            <input disabled='' type='checkbox'  name='essay'><label>&nbsp;Essay for Parents</label>
                         </div>
                         @endif
                         @if($ctrrequirements->question_parent >= 1)
