@@ -328,4 +328,25 @@ class GetStudentListDirectory extends Controller {
         }
     }
 
+    function export_not_yet_enrolled($department, $school_year, $period) {
+        if (Auth::user()->accesslevel == env("REG_BE") || Auth::user()->accesslevel == env("EDUTECH")) {
+
+            if ($department == "Senior High School") {
+                $status = \App\Status::where('school_year', $school_year)->where('period', $period)->where('status', 0)->where('academic_type', 'SHS')->orderBy('level','asc')->orderBy('strand','asc')->orderBy('section','asc')->get();
+            } else {
+                $status = \App\Status::where('school_year', $school_year)->where('status', 0)->where('academic_type', 'BED')->orderBy('level','asc')->orderBy('section','asc')->get();
+            }
+
+
+        ob_end_clean();
+        Excel::create('Not Yet Enrolled-' . $school_year, function($excel) use ($status, $school_year, $period, $department) {
+            $excel->setTitle("Not Yet Enrolled");
+
+            $excel->sheet("Not Yet Enrolled", function ($sheet) use ($status, $school_year, $period, $department) {
+                $sheet->loadView('reg_be.view_not_yet_enrolled', compact("status", 'school_year', 'period', 'department'));
+            });
+        })->download('xlsx');
+        }
+    }
+
 }

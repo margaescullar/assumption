@@ -18,7 +18,7 @@ $present_school_year = \App\CtrEnrollmentSchoolYear::where('academic_type', $aca
 
 </h4>
 <table border="1" class="table table-responsive table-striped">
-    <tr><th>#</th><th>Student ID</th><th>Student Name</th><th>Level</th><th>Strand</th><th>Section</th></tr>
+    <tr><th>#</th><th>Student ID</th><th>Student Name</th><th>Previous Level</th><th>Previous Strand</th><th>Section</th></tr>
     @if(count($status)>0)
     @foreach($status as $name)
     <tr><td>{{$i++}}</td><td>{{$name->idno}}</td><td>{{$name->getFullNameAttribute()}}</td><td>{{$name->level}}</td><td>{{$name->strand}}</td><td>{{$name->section}}</td></tr>

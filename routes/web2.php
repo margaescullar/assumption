@@ -110,6 +110,7 @@ Route::post('/bedregistrar/updateinfo/{idno}','BedRegistrar\Registration@updatei
 Route::get('/bedregistrar/print/student_list/{level}/{strand}/{section}/{school_year}/{period}/{value}','BedRegistrar\Ajax\GetStudentList2@print_student_list');
 Route::get('/bedregistrar/print/withdrawn_list/{department}/{school_year}/{period}','BedRegistrar\Ajax\GetStudentList2@print_withdrawn_list');
 Route::get('/bedregistrar/print/students_not_yet_enrolled/{department}/{school_year}/{period}','BedRegistrar\Ajax\GetStudentListDirectory@print_not_yet_enrolled');
+Route::get('/bedregistrar/export/students_not_yet_enrolled/{department}/{school_year}/{period}','BedRegistrar\Ajax\GetStudentListDirectory@export_not_yet_enrolled');
 Route::get('/bedregistrar/export/withdrawn_list/{department}/{school_year}/{period}','BedRegistrar\Ajax\GetStudentList2@export_withdrawn_list');
 Route::get('/bedregistrar/export/student_list/{level}/{strand}/{section}/{school_year}/{period}/{value}','BedRegistrar\Ajax\GetStudentList2@export_student_list');
 Route::get('/bedregistrar/export_student_now','BedRegistrar\Ajax\GetStudentList2@print_to_excel');

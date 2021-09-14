@@ -175,5 +175,9 @@ if(Auth::user()->accesslevel == env('REG_BE')){
     function print_student_list(){
         window.open("/bedregistrar/print/students_not_yet_enrolled/" +$("#department").val() + "/" + $("#school_year").val() + "/" + $("#period").val())
     }
+    
+    function export_student_list(){
+        window.open("/bedregistrar/export/students_not_yet_enrolled/" +$("#department").val() + "/" + $("#school_year").val() + "/" + $("#period").val())
+    }
 </script>    
 @endsection
