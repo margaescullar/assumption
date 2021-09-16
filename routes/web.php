@@ -479,6 +479,9 @@ Route::get('/accounting/print_exam_permit/{school_year}/{period}/{exam_period}/{
 Route::post('/accounting/examination_permit_hed/print_all','Accounting\ExamPermit@print_all');
 Route::get('/accounting/ajax/getstudentpermit','Accounting\Ajax\AjaxExamPermit@getstudentpermit');
 
+//Ledger Update logs
+Route::get('/accounting/ledger_update_logs/{start_date?}/{end_date?}','Accounting\EditLedgerLogs@index');
+
 
 //REPORTS BED ADMISSION
 Route::get('/bedadmission/reports/pre_registered/{date_start}/{date_end}','AdmissionBED\reportsController@pre_registered');
@@ -500,8 +503,11 @@ Route::get('/bedadmission/settings/pre_registration_email','AdmissionBED\PreRegi
 Route::post('/bedadmission/settings/pre_registration_email/post','AdmissionBED\PreRegistrationSettings@view_pre_registration_email_post');
 Route::get('/bedadmission/settings/application_result_email','AdmissionBED\PreRegistrationSettings@view_application_result_email');
 Route::post('/bedadmission/settings/application_result_email/post','AdmissionBED\PreRegistrationSettings@view_application_result_email_post');
+Route::post('/bedadmission/update_control_number', 'AdmissionBED\PreRegistrationSettings@update_control_number');
+
 
 //PRE-REGISTRATION SETTINGS COLLEGE
+Route::get('/admissions/settings/admission_sy','AdmissionHED\PreRegistrationSettings@admission_sy');
 Route::get('/admissions/settings/programs','AdmissionHED\PreRegistrationSettings@view');
 Route::get('/admissions/settings/update_programs/{program_code}','AdmissionHED\PreRegistrationSettings@update');
 

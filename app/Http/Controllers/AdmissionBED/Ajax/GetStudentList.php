@@ -226,13 +226,11 @@ class GetStudentList extends Controller {
     function update_admission_sy() {
        
         if (Request::ajax()) {
-            if (Auth::user()->accesslevel == env("ADMISSION_BED")) {
                 $applying_for = Input::get('applying_for');
                 $school_year = Input::get('school_year');
                 $update = \App\CtrAdmissionSchoolYear::where('applying_for',$applying_for)->first();
                 $update->school_year = $school_year;
                 $update->save();
-            }
         }
     }
     

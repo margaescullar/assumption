@@ -197,8 +197,9 @@ $date_end = date('Y-m-d');
                             </a>
                             <ul class="treeview-menu">
                                 <li><a href="{{url("/cashier",array('online_payment',date('Y-m-d'),date('Y-m-d')))}}">Online Payments</a></li>
-            <li><a href="{{url("/online_transactions",array(date('Y-m-d'),date('Y-m-d')))}}">Online Transactions</a></li>
+                                <li><a href="{{url("/online_transactions",array(date('Y-m-d'),date('Y-m-d')))}}">Online Transactions</a></li>
                                 <li><a href="{{url('/paypal_transactions')}}">Paypal Transactions </a></li>
+                                <li><a href="{{url('/online_payment_portal_instructions')}}">Online Payment Portal Instructions </a></li>
                             </ul>
                         </li>
 
@@ -268,6 +269,7 @@ $date_end = date('Y-m-d');
                                 <li><a href="{{url('/accounting',array('unused_reservations'))}}"><span>Reservations</span></a></li>
                                 <li><a href="{{url('/accounting',array('unused_deposits'))}}"><span>Student Deposits</span></a></li>
                                 <li><a href="{{url('/accounting',array('examination_permit_hed'))}}"><span>Examination Permit - HED</span></a></li>
+                                <li><a href="{{url('/accounting',array('ledger_update_logs'))}}"><span>Ledger Update Logs</span></a></li>
                             </ul>
                         </li>       
                         <li class="treeview">
@@ -292,7 +294,8 @@ $date_end = date('Y-m-d');
                                 <li><a href="{{url('/accounting', array('report', 'bed_scholarship_report'))}}"><span>List of Scholar Grants</span></a></li>
                             </ul>
                         </li>
-                        <!--<li><a href="{{url('/accounting/supplier')}}"><span><i class="fa fa-gears"></i> Set-up Suppliers</span></a></li>-->
+                        
+                        <!--<li><a href="{{url('/bed_portal_notifications/finance')}}"><i class="fa fa-link"></i> <span>Notifications</span></a></li>-->
                     </ul>
                 </section>
             </aside>

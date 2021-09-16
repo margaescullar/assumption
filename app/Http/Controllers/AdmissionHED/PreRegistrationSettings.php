@@ -82,4 +82,13 @@ class PreRegistrationSettings extends Controller
             return redirect(url('/admissions/settings/application_result_email'));
         }
     }
+
+    function admission_sy() {
+        if (Auth::user()->accesslevel == env("ADMISSION_HED")) {
+            
+            $groups = \App\CtrAdmissionSchoolYear::all();
+            
+            return view('admission-hed.settings.admission_sy', compact('groups'));
+        }
+    }
 }
