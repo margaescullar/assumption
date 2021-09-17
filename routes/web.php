@@ -503,6 +503,8 @@ Route::get('/bedadmission/settings/pre_registration_email','AdmissionBED\PreRegi
 Route::post('/bedadmission/settings/pre_registration_email/post','AdmissionBED\PreRegistrationSettings@view_pre_registration_email_post');
 Route::get('/bedadmission/settings/application_result_email','AdmissionBED\PreRegistrationSettings@view_application_result_email');
 Route::post('/bedadmission/settings/application_result_email/post','AdmissionBED\PreRegistrationSettings@view_application_result_email_post');
+Route::get('/bedadmission/settings/pre_registration_payment_email','AdmissionBED\PreRegistrationSettings@view_pre_registration_payment_email');
+Route::post('/bedadmission/settings/pre_registration_payment_email/post','AdmissionBED\PreRegistrationSettings@view_pre_registration_payment_email_post');
 Route::post('/bedadmission/update_control_number', 'AdmissionBED\PreRegistrationSettings@update_control_number');
 
 
