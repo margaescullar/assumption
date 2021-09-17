@@ -174,6 +174,7 @@ $school_year = \App\CtrEnrollmentSchoolYear::where('academic_type','BED')->first
             <li><a href="{{url('/bedadmission',array('settings','waive_payments'))}}">Waive Payments</a></li>
             <li><a href="{{url('/bedadmission',array('settings','pre_registration_email'))}}">Pre-Registration Email</a></li>
             <li><a href="{{url('/bedadmission',array('settings','application_result_email'))}}">Application Result Email</a></li>
+            <li><a href="{{url('/bedadmission',array('settings','pre_registration_payment_email'))}}">Pre-registration Payment Email</a></li>
           </ul>
         </li>
      

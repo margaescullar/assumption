@@ -64,50 +64,7 @@
                                     <td align='left' style='padding: 0 56px 28px 56px;' valign='top'>
                                         <div style='font-family: "lato", "Helvetica Neue", Helvetica, Arial, sans-serif; line-height: 28px;font-size: 18px; color: #333 !important;'>
                                             <span style="color: #333">
-
-                                            Greetings of Peace!<br><br>
-                                            
-                                            We have received your payment for your daughter's application & test fee. This serves as your acknowledgment receipt.<br><br>
-                                            
-                                                <?php $payment_details = \App\Payment::where('reference_id', $reference_id)->first(); ?>
-                                                <table border="1">
-                                                    <tr>
-                                                        <td><strong>Date</strong></td>
-                                                        <td>{{$payment_details->transaction_date}}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><strong>Receipt Number</strong></td>
-                                                        <td>{{$payment_details->receipt_no}}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><strong>Name</strong></td>
-                                                        <td>{{$payment_details->paid_by}}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><strong>Description</strong></td>
-                                                        <td>Application & Testing Fee</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><strong>Amount</strong></td>
-                                                        <td>{{$payment_details->check_amount+$payment_details->cash_amount+$payment_details->credit_card_amount+$payment_details->deposit_amount}}</td>
-                                                    </tr>
-                                                </table><br><br>
-                                                
-                                                To complete the application, you may now use the username and password assigned to you to access the <a href="https://portal.assumption.edu.ph/">Assumption College Student Portal.</a><br><br>
-                                                
-                                                <small>
-                                                    Username:&nbsp;<strong>{{$applicant_details->idno}}</strong><br>
-                                                    Password:&nbsp;<strong>{{$six_number}}</strong></small><br><br>
-                                                    <?php $date = strtotime($payment_details->transaction_date); ?>
-                                                    <?php $date = strtotime("+14 days", $date); ?>
-                                                   
-                                                    Kindly submit the complete requirement indicated on the page to the Admission's Office not later than {{date("F j, Y",$date)}}. You will be receiving an e-mail indicating your test and interview schedule.<br><br>
-                                                    
-                                                    <strong>Note:</strong> Failure to submit your requirements on the given date will temporarily end your access to the Assumption College Student Portal until the requirements are completed.<br><br>
-                                                    
-                                                    Thank you very much.<br><br>
-
-                                                If you have questions kindly call Admission's Office(8817-0757).
+                                            {!!$message_mail!!}
                                             </span>
                                         </div>
                                     </td>

@@ -113,45 +113,44 @@ if (Auth::user()->accesslevel == env('ADMISSION_BED')) {
 @section('header')
 <section class="content-header">
     <h1>
-        Pre-Registration Email
+        Pre-registration Result Email
         <small></small>
     </h1>
     <ol class="breadcrumb">
-        <li class="active"><a href="/"><i class="fa fa-home"></i> Pre-Registration Email</a></li>
+        <li class="active"><a href="/"><i class="fa fa-home"></i> Application Result Email</a></li>
     </ol>
 </section>
 @endsection
 @section('maincontent')
 <!-- search form (Optional) -->
-    <form action='{{url('/bedadmission/settings/pre_registration_email/post')}}' method='post'>
-        {{csrf_field()}}
-        <?php $regular = \App\CtrPreRegMessages::where('type','regular')->first(); ?>
-        <?php $waive = \App\CtrPreRegMessages::where('type','waive')->first(); ?>
-        
-        <div class="col-sm-8">
-            <div class="box box-default">
-                <div class="box-header with-border">
-                    <i class="fa fa-warning"></i>
+<div class="col-md-8">
+    <div class="box box-default">
+        <div class="box-header with-border">
+            <i class="fa fa-warning"></i>
 
-                    <h3 class="box-title">Regular Email</h3>
-                </div>
-                <!-- /.box-header -->
-                <div class="box-body">
-                    <div class="form-group" style="margin-top:15px;">
-
-                        <textarea id="editor1" name="message_regular" rows="5" cols="59">
-{{$regular->message}}
-                        </textarea>
-                    </div>
-
-                    <div class="form-group" style="margin-top:15px;">
-
-                        <button class="btn btn-primary btn-flat btn-block" value="regular" name="submit">Update Regular Email</button>
-                    </div>
-                </div>
-            </div>
+            <h3 class="box-title">Pre-registration Payment Email</h3>
         </div>
-        <div class="col-sm-4">
+        <!-- /.box-header -->
+        <div class="box-body">
+            <form action='{{url('/bedadmission/settings/pre_registration_payment_email/post')}}' method='post'>
+                {{csrf_field()}}
+                <?php $pre_reg = \App\CtrPreRegMessages::where('type', 'Payment')->first(); ?>
+                <div class="form-group" style="margin-top:15px;">
+
+                    <textarea id="editor1" name="message_approved" rows="5" cols="59">
+{{$pre_reg->message}}
+                    </textarea>
+                </div>
+
+                <div class="form-group" style="margin-top:15px;">
+
+                    <button class="btn btn-primary btn-flat btn-block" value="Payment" name="submit">Update Pre Registration Payment Email</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="col-sm-4">
     <div class="box box-default">
         <div class="box-header with-border">
             <i class="fa fa-warning"></i>
@@ -166,8 +165,36 @@ if (Auth::user()->accesslevel == env('ADMISSION_BED')) {
                     <th>Description</th>
                 </tr>
                 <tr>
-                    <td>#referenceid#</td>
-                    <td>Username/Temporary ID</td>
+                    <td>#transaction_date#</td>
+                    <td>Date of Payment</td>
+                </tr>
+                <tr>
+                    <td>#receipt_no#</td>
+                    <td>OR Number</td>
+                </tr>
+                <tr>
+                    <td>#description#</td>
+                    <td>Payment description</td>
+                </tr>
+                <tr>
+                    <td>#amount_paid#</td>
+                    <td>Total amount paid</td>
+                </tr>
+                <tr>
+                    <td>#username#</td>
+                    <td>Portal Username</td>
+                </tr>
+                <tr>
+                    <td>#password#</td>
+                    <td>Default Password</td>
+                </tr>
+                <tr>
+                    <td>#submission_date#</td>
+                    <td>Due date for submission of documents</td>
+                </tr>
+                <tr>
+                    <td>#level_applied#</td>
+                    <td>Level applied</td>
                 </tr>
                 <tr>
                     <td>#firstname#</td>
@@ -181,41 +208,10 @@ if (Auth::user()->accesslevel == env('ADMISSION_BED')) {
                     <td>#middlename#</td>
                     <td>Applicant's middle name</td>
                 </tr>
-                <tr>
-                    <td>#extensionname#</td>
-                    <td>Applicant's extension name</td>
-                </tr>
             </table>
         </div>
     </div>
 </div>
-        
-        
-        <div class="col-sm-8">
-            <div class="box box-default">
-                <div class="box-header with-border">
-                    <i class="fa fa-warning"></i>
-
-                    <h3 class="box-title">Waive Email</h3>
-                </div>
-                <!-- /.box-header -->
-                <div class="box-body">
-                    <div class="form-group" style="margin-top:15px;">
-
-                        <textarea id="editor2" name="message_waive" rows="5" cols="59">
-{{$waive->message}}
-                        </textarea>
-                    </div>
-
-                    <div class="form-group" style="margin-top:15px;">
-
-                        <button class="btn btn-primary btn-flat btn-block" value="waive" name="submit">Update Waive Email</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-    </form>
 
 <!-- /.search form -->
 
@@ -226,7 +222,6 @@ if (Auth::user()->accesslevel == env('ADMISSION_BED')) {
 <script>
 $(function () {
     CKEDITOR.replace('editor1')
-    CKEDITOR.replace('editor2')
 })
 </script>
 @endsection

@@ -135,4 +135,21 @@ class PreRegistrationSettings extends Controller {
         }
     }
 
+    function view_pre_registration_payment_email() {
+        if (Auth::user()->accesslevel == env("ADMISSION_BED")) {
+            return view('admission-bed.pre_registration_payment_email');
+        }
+    }
+
+    function view_pre_registration_payment_email_post(Request $request) {
+        if (Auth::user()->accesslevel == env("ADMISSION_BED")) {
+            if ($request->submit == "Payment") {
+                $update = \App\CtrPreRegMessages::where('type', $request->submit)->first();
+                $update->message = $request->message_approved;
+                $update->save();
+            }
+            return redirect(url('/bedadmission/settings/pre_registration_payment_email'));
+        }
+    }
+
 }

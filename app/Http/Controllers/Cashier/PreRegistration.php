@@ -62,14 +62,15 @@ class PreRegistration extends Controller {
                 $this->addPromotions($request,$reference_id, $applicant_details, $academic_type);//not yet added in the old registration
             }else{
             //for college
-                $academic_type = "College";
-                $this->addUser($request,$reference_id, $applicant_details, $academic_type,$six_digit_random_number);
-                $this->addStudentInfo($request,$reference_id, $applicant_details, $academic_type);
-                $this->addHEDStatus($request,$reference_id, $applicant_details, $academic_type);
-                $this->addHEDAdmission($request,$reference_id, $applicant_details, $academic_type);
-                $this->addAdmission_heds($request,$reference_id, $applicant_details, $academic_type);
-                $this->addAdmission_hed_requirements($request,$reference_id, $applicant_details, $academic_type);
-                $this->addScholarship($request,$reference_id, $applicant_details, $academic_type);
+            return "error 404.";
+//                $academic_type = "College";
+//                $this->addUser($request,$reference_id, $applicant_details, $academic_type,$six_digit_random_number);
+//                $this->addStudentInfo($request,$reference_id, $applicant_details, $academic_type);
+//                $this->addHEDStatus($request,$reference_id, $applicant_details, $academic_type);
+//                $this->addHEDAdmission($request,$reference_id, $applicant_details, $academic_type);
+//                $this->addAdmission_heds($request,$reference_id, $applicant_details, $academic_type);
+//                $this->addAdmission_hed_requirements($request,$reference_id, $applicant_details, $academic_type);
+//                $this->addScholarship($request,$reference_id, $applicant_details, $academic_type);
             }
             
             $this->postPayment($request,$reference_id, $applicant_details);
@@ -101,8 +102,29 @@ class PreRegistration extends Controller {
                 ]);
     }
     function sendPaymentEmail($request,$reference_id, $applicant_details, $six_number){
+        
+            $payment_details = \App\Payment::where('reference_id', $reference_id)->first();
+            $submission_date = strtotime($payment_details->transaction_date);
+            $submission_date = strtotime("+14 days", $submission_date);
+            $submission_date = date("F j, Y",$submission_date);
+            
+            $message = \App\CtrPreRegMessages::where('type', 'Payment')->first();
+                $message_mail = $message->message;
+                $message_mail = str_replace("#transaction_date#",$payment_details->transaction_date,$message_mail);
+                $message_mail = str_replace("#receipt_no#",$payment_details->receipt_no,$message_mail);
+                $message_mail = str_replace("#description#","Application & Testing Fee",$message_mail);
+                $message_mail = str_replace("#amount_paid#",$payment_details->check_amount+$payment_details->cash_amount+$payment_details->credit_card_amount+$payment_details->deposit_amount,$message_mail);
+                $message_mail = str_replace("#username#",$applicant_details->idno,$message_mail);
+                $message_mail = str_replace("#password#",$six_number,$message_mail);
+                $message_mail = str_replace("#lastname#",$applicant_details->lastname,$message_mail);
+                $message_mail = str_replace("#firstname#",$applicant_details->firstname,$message_mail);
+                $message_mail = str_replace("#middlename#",$applicant_details->middlename,$message_mail);
+                $message_mail = str_replace("#submission_date#",$submission_date,$message_mail);
+                $message_mail = str_replace("#level_applied#",$applicant_details->level,$message_mail);
+        
+        
         $data=array('name'=>$applicant_details->firstname." ".$applicant_details->lastname, 'email'=>$applicant_details->email);
-        Mail::send('cashier.pre_registration.mail',compact('request','reference_id','applicant_details','six_number'), function($message) use($applicant_details) {
+        Mail::send('cashier.pre_registration.mail',compact('request','reference_id','applicant_details','six_number','message_mail'), function($message) use($applicant_details) {
          $message->to($applicant_details->email, $applicant_details->firstname." ".$applicant_details->lastname)
                  ->subject('AC Payment Confirmation');
          $message->from(env('MAIL_FROM_ADDRESS'),env('MAIL_FROM_NAME'));
