@@ -92,17 +92,17 @@ if (Auth::user()->accesslevel == env("ACCTNG_STAFF")) {
                                 <tr>
                                     <td>{{$ledger->subsidiary}}</td>
                                     <td><input class="form form-control" type="text" name="amount" value="{{$ledger->amount}}" placeholder="Amount"></td>
-                                    <td>{{number_format($ledger->discount,2)}}</td>
-                                    <td>{{number_format($ledger->debit_memo,2)}}</td>
-                                    <td><span class="payment">{{number_format($ledger->payment,2)}}</span></td>
+                                    <td><input class="form form-control" type="text" name="discount" value="{{$ledger->discount}}" placeholder="Discount"></td>
+                                    <td><input class="form form-control" type="text" name="debit_memo" value="{{$ledger->debit_memo}}" placeholder="Debit Memo"></td>
+                                    <td><input class="form form-control" type="text" name="payment" value="{{$ledger->payment}}" placeholder="Payment"></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    <div class="form-group col-sm-6 col-sm-offset-6">
+<!--                    <div class="form-group col-sm-6 col-sm-offset-6">
                         <label>Enter Passcode:</label>
                         <input class="form form-control" type="text" name="passcode" placeholder="Requested passcode from Accounting Head">
-                    </div>
+                    </div>-->
                     <div class="form-group col-sm-12">
                         <input type="submit" value="Update Ledger" name="submit" class="col-sm-4 btn btn-success">
                     </div>
