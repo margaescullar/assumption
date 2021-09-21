@@ -35,11 +35,10 @@ class ViewInfoController extends Controller {
             $status->save();
 
             $bedlevel = \App\CollegeLevel::where('idno', $idno)->where('school_year', $status->school_year)->where('period', $status->period)->first();
-            $status = \App\Status::where('idno', $idno)->first();
             if ($value == "w") {
-                $status->date_dropped = $date_today;
+                $bedlevel->date_dropped = $date_today;
             } else if ($value == "e") {
-                $status->date_dropped = NULL;
+                $bedlevel->date_dropped = NULL;
             }
             $bedlevel->status = $v;
             $bedlevel->save();
@@ -271,6 +270,7 @@ class ViewInfoController extends Controller {
         $updateInfo = \App\StudentInfo::where('idno', $request->idno)->first();
         $updateInfo->street = $request->street;
         $updateInfo->barangay = $request->barangay;
+        $updateInfo->region = $request->region;
         $updateInfo->municipality = $request->municipality;
         $updateInfo->province = $request->province;
         $updateInfo->zip = $request->zip;
