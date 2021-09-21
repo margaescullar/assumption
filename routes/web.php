@@ -204,6 +204,9 @@ Route::post('/registrar_college/instructor/modify_old_instructor', 'RegistrarCol
 
 //Registrar Grade Management
 Route::get('/registrar_college/print_grade_list/{school_year}/{period}/{schedule_id}/{course_code}', 'CollegeInstructor\Grades\GradesController@print_grade');
+//Change Grading Period
+Route::get('/registrar_college/grade_management/grading_sy', 'RegistrarCollege\GradeManagement\GradingSY@read');
+Route::post('/registrar_college/grade_management/grading_sy/{id}', 'RegistrarCollege\GradeManagement\GradingSY@update');
 //Close/Open Grade Module
 Route::get('/registrar_college/grade_management/open_close', 'RegistrarCollege\GradeManagement\OpenCloseController@setup');
 Route::post('/registrar_college/grade_management/open_close/submit', 'RegistrarCollege\GradeManagement\OpenCloseController@submit');
