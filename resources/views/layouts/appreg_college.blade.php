@@ -192,7 +192,7 @@ if (file_exists(public_path("images/" . Auth::user()->idno . ".jpg"))) {
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="{{url('/registrar_college', array('grade_management','grading_sy'))}}"><i class="fa fa-circle-o"></i> <span>Change Grading Period</span></a></li>
+                                <li><a href="{{url('/registrar_college', array('grade_management','grading_sy'))}}"><i class="fa fa-circle-o"></i> <span>Changed Grading Period</span></a></li>
                                 <li><a href="{{url('/registrar_college', array('grade_management','open_close'))}}"><i class="fa fa-circle-o"></i> <span>Open/Close Grade Module</span></a></li>
                                 <li><a href="{{url('/registrar_college', array('grade_management','view_grades', $school_year, $period))}}"><i class="fa fa-circle-o"></i> <span>View Grades</span></a></li>
                                 <li><a href="{{url('/registrar_college', array('grade_management','inc_ng', $school_year, $period,'finals'))}}"><i class="fa fa-circle-o"></i> <span>INC/NG Grades</span></a></li>
