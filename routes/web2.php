@@ -204,7 +204,7 @@ Route::get('/accounting/report/bed_scholarship_report', 'Accounting\BenefitSchol
 Route::get('/accounting/report/print_list_of_bed_scholars/{scholarship}/{school_year}', 'Accounting\BenefitScholar@print_scholarship_report');
 Route::get('/ajax/accounting/report/get_bed_scholarship_report', 'Accounting\Ajax\AjaxStudentList@get_scholarship_report');
 
-Route::get('/reservation/tag_as_used/{school_year}/{reference_id}', 'Accounting\Reservations@tag_as_used');
+Route::get('/reservation/tag_as_used/{school_year}/{id}', 'Accounting\Reservations@tag_as_used');
 
 Route::get('/journal_entry','Accounting\JournalEntry@jv_index');
 Route::get('ajax/get_journal_voucher_note','Accounting\Ajax\AjaxJournalEntry@get_vouchers');
