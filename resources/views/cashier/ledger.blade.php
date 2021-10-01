@@ -1046,7 +1046,7 @@ $ledger_list_additional = \App\Ledger::where('idno',$user->idno)->where('categor
                 <td>
                     @if($reservation->is_reverse=="1" || $reservation->is_consumed=="1"  || $reservation->is_consumed=="2")
                     @else
-                    <a href="{{url('reservation',array('tag_as_used',$school_year,$reservation->reference_id))}}">Tag as Used</a>
+                    <a href="{{url('reservation',array('tag_as_used',$school_year,$reservation->id))}}">Tag as Used</a>
                     @endif
                 </td>
                 </tr>
@@ -1094,7 +1094,7 @@ $ledger_list_additional = \App\Ledger::where('idno',$user->idno)->where('categor
                     <td>
                         @if($reservation->is_reverse=="1" || $reservation->is_consumed=="1"  || $reservation->is_consumed=="2")
                         @else
-                        <a href="{{url('reservation',array('tag_as_used',$school_year,$reservation->reference_id))}}">Tag as Used</a>
+                        <a href="{{url('reservation',array('tag_as_used',$school_year,$reservation->id))}}">Tag as Used</a>
                         @endif
                     </td>
                 </tr>
