@@ -716,6 +716,8 @@ class ViewInfoController extends Controller {
         $updaterank->security = $this->checkValue($request->security);
         $updaterank->assumption_career = $this->checkValue($request->assumption_career);
         $updaterank->newspaper = $this->checkValue($request->newspaper);
+        $updaterank->social_media = $this->checkValue($request->social_media);
+        $updaterank->open_house = $this->checkValue($request->open_house);
         $updaterank->values_formation = $this->checkValue($request->values_formation);
         $updaterank->college_fair = $this->checkValue($request->college_fair);
         $updaterank->parents_choice = $this->checkValue($request->parents_choice);
@@ -726,6 +728,8 @@ class ViewInfoController extends Controller {
         $updaterank->ac_graduate = $this->checkValue($request->ac_graduate);
         $updaterank->location = $this->checkValue($request->location);
         $updaterank->prestige = $this->checkValue($request->prestige);
+        $updaterank->others = $this->checkValue($request->others);
+        $updaterank->others_field = $request->others_field;
         $updaterank->save();
     }
 

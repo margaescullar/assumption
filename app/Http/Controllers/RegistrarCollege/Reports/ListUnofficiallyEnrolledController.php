@@ -14,13 +14,13 @@ class ListUnofficiallyEnrolledController extends Controller
     }
     
     function index(){
-        if(Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel==env('DEAN')){
+        if (Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel==env('ADMISSION_HED') || Auth::user()->accesslevel==env('DEAN')) {
             $programs = \App\CtrAcademicProgram::distinct()->where('academic_type', 'College')->orderBy('program_name')->get(['program_name','program_code']);
             return view('reg_college.reports.list_unofficially_enrolled', compact('programs'));
         }
     }    
     function print_unofficial(Request $request){
-        if(Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel==env('DEAN')){
+        if (Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel==env('ADMISSION_HED') || Auth::user()->accesslevel==env('DEAN')) {
             $this->validate($request,[
                 'school_year'=> 'required',
                 'period' => 'required'

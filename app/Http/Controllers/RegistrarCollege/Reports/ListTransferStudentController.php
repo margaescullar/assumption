@@ -14,13 +14,13 @@ class ListTransferStudentController extends Controller
     }
     
     function index(){
-        if (Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel==env('DEAN')){ 
+        if (Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel==env('ADMISSION_HED') || Auth::user()->accesslevel==env('DEAN')) {
         return view('reg_college.reports.list_transfer_student');
         }
     }
     
     function print_transfer_student(Request $request){
-        if (Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel==env('DEAN')){ 
+        if (Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel==env('ADMISSION_HED') || Auth::user()->accesslevel==env('DEAN')) {
             $this->validate($request,[
                'school_year'=>'required',
                 'period'=>'required'

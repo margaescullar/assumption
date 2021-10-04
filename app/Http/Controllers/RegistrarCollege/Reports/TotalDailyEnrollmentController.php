@@ -14,7 +14,7 @@ class TotalDailyEnrollmentController extends Controller
     }
 
     function index($date_start, $date_end){
-        if(Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel==env('DEAN')){
+        if (Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel==env('ADMISSION_HED') || Auth::user()->accesslevel==env('DEAN')) {
 
             $academic_programs = \App\CtrAcademicProgram::distinct()->where('academic_type','College')->get(['program_code','program_name']);
             
@@ -23,7 +23,7 @@ class TotalDailyEnrollmentController extends Controller
     }
     
     function print_daily_enrollment($date_start, $date_end){
-        if (Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel==env('DEAN')) {
+        if (Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel==env('ADMISSION_HED') || Auth::user()->accesslevel==env('DEAN')) {
             //$school_year = \App\CtrAcademicSchoolYear::where('academic_type', 'College')->first()->school_year;
             //$period = \App\CtrAcademicSchoolYear::where('academic_type', 'College')->first()->period;
             $academic_programs = \App\CtrAcademicProgram::distinct()->where('academic_type', 'College')->get(['program_code', 'program_name']);

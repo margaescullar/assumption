@@ -1,3 +1,4 @@
+<?php $regions = \App\CtrRegion::all(); ?>
 <?php
 $file_exist = 0;
 if (file_exists(public_path("images/PICTURES/" . $user->idno . ".jpg"))) {
@@ -193,27 +194,48 @@ $layout = "layouts.appreg_college";
             <div class="tab-content">
                 <div class="tab-pane active" id="tab_1">
                     <label style="background-color: gray">PERSONAL INFORMATION</label>
-                    <div class="form-group">
-                        <div class="col-sm-8">
-                            <label>Address</label>
-                            <input class="form form-control" name='street' placeholder='Street Address' value="{{old('street',$info->street)}}" type="text">
-                        </div>
-                        <div class="col-sm-4">
-                            <label>&nbsp;</label>
-                            <input class="form form-control" name='barangay' placeholder='Barangay' value="{{old('barangay',$info->barangay)}}" type="text">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-5">
-                            <input class="form form-control" name='municipality' placeholder='Municipality/City*' value="{{old('municipality',$info->municipality)}}" type="text">
-                        </div>
-                        <div class="col-sm-5">
-                            <input class="form form-control" name='province' placeholder='Province/Metro Manila*' value="{{old('province',$info->province)}}" type="text">
-                        </div>
-                        <div class="col-sm-2">
-                            <input class="form form-control" name='zip' placeholder='ZIP Code' value="{{old('zip',$info->zip)}}" type="text">
-                        </div>
-                    </div>
+                    <div class='form-group'>
+    <div class="col-sm-4">
+            <label class="text-navy">Street Address</label>
+            <input type="text" class="form-control upper" id="street" placeholder="Street" name="street" value="{{old('street',$info->street)}}">
+    </div>
+    <div class='col-sm-4'>
+            <label class="text-navy">Region</label>
+            <select class='form-control select2' id='region' name="region" onchange='getProvince(this.value)'>
+                <option value="{{old('region',$info->region)}}">{{$info->region}}</option>
+                @foreach($regions as $region)
+                <option value='{{$region->region}}'>{{$region->region}}</option>
+                @endforeach
+            </select>
+    </div>
+    <div class='col-sm-4'>
+            <label class="text-navy">Province</label>
+            <select class='form-control select2' name="province" id='province' onchange="getMunicipality(region.value)">
+                <option value="{{old('province',$info->province)}}">{{$info->province}}</option>
+                <option value=''>Please Select..</option>
+            </select>
+    </div>
+</div>
+<div class="form-group">
+    <div class='col-sm-4'>
+            <label class="text-navy">City/Municipality</label>
+            <select class='form-control select2' name="municipality" id="municipality" onchange="getBarangay(this.value)">
+                <option value="{{old('municipality',$info->municipality)}}">{{$info->municipality}}</option>
+                <option value=''>Please Select..</option>
+            </select>
+    </div>
+    <div class='col-sm-4'>
+            <label class="text-navy">Barangay</label>
+            <select class='form-control select2' name="barangay" id='barangay'>
+                <option value="{{old('barangay',$info->barangay)}}">{{$info->barangay}}</option>
+                <option value=''>Please Select..</option>
+            </select>
+    </div>
+    <div class="col-sm-4">
+            <label class="text-navy">Zip Code</label>
+            <input class="form form-control" name='zip' placeholder='ZIP Code' value="{{old('zip',$info->zip)}}" type="text">
+    </div>
+</div>
                     <div class="form-group">
                         <div class="col-sm-4">
                             <label>Contact Numbers</label>
@@ -1595,6 +1617,27 @@ $layout = "layouts.appreg_college";
                                 <div class="col-sm-2">
                                     <label>Newspaper ad</label>
                                 </div>
+                                
+                                <div class="col-sm-1">
+                                    <input type=number max="5" min="0" class="form-control" name='open_house' value='{{old('open_house',$rank->open_house)}}'>
+                                </div>
+                                <div class="col-sm-2">
+                                    <label>Assumption Open House</label>
+                                </div>
+                                
+                                <div class="col-sm-1">
+                                    <input type=number max="5" min="0" class="form-control" name='social_media' value='{{old('social_media',$rank->social_media)}}'>
+                                </div>
+                                <div class="col-sm-2">
+                                    <label>Social Media(FB, Twitter, Instagram, Youtube)</label>
+                                </div>
+                                
+                                <div class="col-sm-1">
+                                    <input type=number max="5" min="0" class="form-control" name='others' value='{{old('others',$rank->others)}}'>
+                                </div>
+                                <div class="col-sm-2">
+                                    <label>Others</label><input type=text class="form-control" name='others_field' value='{{old('others_field',$rank->others_field)}}'>
+                                </div>
                             </div>
                         <?php $course_rank = \App\StudentInfoCoursesRank::where('idno', $user->idno)->first(); ?>
                             <label>Please rank in numerical order the top 3 course preferences offered by Assumption College</label>
@@ -1868,5 +1911,49 @@ $('#cell_no').mask('(0000)000-0000');
     k--;
     });
     })
+    
+    
+
+ function getProvince(region){
+     var array = {};
+     array['region'] = region;
+     $.ajax({
+         type: "GET",
+         url: "/ajax/get_province",
+         data: array,
+         success: function(data){
+             $('#province').html(data).fadeIn();
+         }
+     })
+     getMunicipality(region);
+ }
+ 
+ function getMunicipality(region){
+    province = $('#province').val();
+    var array = {};
+    array['region'] = region;
+    array['province'] = province;
+    $.ajax({
+        type: "GET",
+        url: "/ajax/get_municipality",
+        data: array,
+        success: function(data){
+            $('#municipality').html(data).fadeIn();
+        }
+    })
+}
+
+function getBarangay(municipality){
+    var array = {};
+    array['municipality'] = municipality;
+    $.ajax({
+        type: "GET",
+        url: "/ajax/get_brgy",
+        data: array,
+        success: function(data){
+            $('#barangay').html(data).fadeIn();
+        }
+    })
+}
 </script>
 @endsection

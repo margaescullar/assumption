@@ -100,6 +100,7 @@ class ViewInfoAdmissionHedController extends Controller {
 
         $updatePersonalInfo = \App\StudentInfo::where('idno', $request->idno)->first();
         $updatePersonalInfo->street = $request->street;
+        $updatePersonalInfo->region = $request->region;
         $updatePersonalInfo->barangay = $request->barangay;
         $updatePersonalInfo->municipality = $request->municipality;
         $updatePersonalInfo->province = $request->province;
@@ -193,6 +194,7 @@ class ViewInfoAdmissionHedController extends Controller {
             
             try{
             $this->sendEmail($idno);
+            $this->sendEmailtoRegistrar($idno);
             
             $admission = \App\AdmissionHed::where('idno', $idno)->first();
             $admission->is_first_enrollment = 1;
@@ -221,13 +223,24 @@ class ViewInfoAdmissionHedController extends Controller {
         $applicant_details->status = 1;
         $applicant_details->save();
         
-        $data = array('name' => $applicant_details->firstname . " " . $applicant_details->lastname, 'email' => $applicant_details->email);
         Mail::send('admin.mail', compact('applicant_details'), function($message) use($applicant_details) {
             $message->to($applicant_details->email, $applicant_details->firstname . " " . $applicant_details->lastname)
                     ->subject('AC Portal Access');
             $message->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'));
         });
     }
+
+    function sendEmailtoRegistrar($idno) {
+        $applicant_details = \App\User::where('idno', $idno)->first();
+        
+        $data = array('name' => "HED Registrar", 'email' => env("HED_REGISTRAR_EMAIL"));
+        Mail::send('admin.mailtoRegistrar', compact('applicant_details'), function($message) use($data) {
+            $message->to($data['email'], $data['name'])
+                    ->subject('New Student for Advising');
+            $message->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'));
+        });
+    }
+    
     
     function print_pre_application_form($idno){
         if (Auth::user()->accesslevel == env('ADMISSION_HED')) {

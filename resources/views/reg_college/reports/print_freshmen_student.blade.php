@@ -33,6 +33,10 @@
             <th><strong>Program</strong></th>
             <th><strong>Period</strong></th>
             <th><strong>Last School Attended</strong></th>
+            <th><strong>Email</strong></th>
+            <th><strong>Contact Number</strong></th>
+            <th><strong>Parent Mobile Number</strong></th>
+            <th><strong>Parent Email</strong></th>
         </tr>
     </thead>
     <tbody>
@@ -49,6 +53,13 @@
             <td>{{$list->program_code}}</td>
             <td>{{$level->period}}</td>
             <td>{{$student_info->last_school_attended}}</td>
+            <td>{{$user->email}}</td>
+            <td>{{$student_info->cell_no}}</td>
+            <td>F:{{optional($student_info->studentInfoParentInfo)->f_personal_phone}}<br>
+                M:{{optional($student_info->studentInfoParentInfo)->m_personal_phone}}
+            </td>
+            <td>F:{{optional($student_info->studentInfoParentInfo)->f_email}}<br>
+                M:{{optional($student_info->studentInfoParentInfo)->m_email}}</td>
         </tr>
         @endforeach
     </tbody>

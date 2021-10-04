@@ -104,7 +104,7 @@ class AjaxBatchRanking extends Controller {
         }
     }
 
-    function get_gpa_bed($idno, $school_year, $period) {
+    public static function get_gpa_bed($idno, $school_year, $period) {
 
         $get_regular_subjects = \App\GradeBasicEd::where('idno', $idno)->where('school_year', $school_year)->where('subject_type', 0)->where('is_alpha', 0)->where('is_display_card', 1)->orderBy('sort_to', 'asc')->get();
         $get_regular_alpha_subjects = \App\GradeBasicEd::where('idno', $idno)->where('school_year', $school_year)->where('subject_type', 0)->whereRaw('is_alpha between 1 and 2 ')->where('is_display_card', 1)->orderBy('sort_to', 'asc')->get();

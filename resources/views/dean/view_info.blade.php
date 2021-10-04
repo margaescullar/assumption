@@ -1,3 +1,4 @@
+<?php $regions = \App\CtrRegion::all(); ?>
 <?php
 $file_exist = 0;
 if (file_exists(public_path("images/PICTURES/" . $user->idno . ".jpg"))) {
@@ -140,27 +141,42 @@ $layout = "layouts.appdean_college";
             </ul>
             <div class="tab-content">
                 <div class="tab-pane active" id="tab_1">
-                    <div class="form-group">
-                        <div class="col-sm-8">
-                            <label>Address</label>
-                            <input class="form form-control" name='street' placeholder='Street Address' value="{{old('street',$info->street)}}" type="text">
-                        </div>
-                        <div class="col-sm-4">
-                            <label>&nbsp;</label>
-                            <input class="form form-control" name='barangay' placeholder='Barangay' value="{{old('barangay',$info->barangay)}}" type="text">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-5">
-                            <input class="form form-control" name='municipality' placeholder='Municipality/City*' value="{{old('municipality',$info->municipality)}}" type="text">
-                        </div>
-                        <div class="col-sm-5">
-                            <input class="form form-control" name='province' placeholder='Province*' value="{{old('province',$info->province)}}" type="text">
-                        </div>
-                        <div class="col-sm-2">
-                            <input class="form form-control" name='zip' placeholder='ZIP Code' value="{{old('zip',$info->zip)}}" type="text">
-                        </div>
-                    </div>
+                    <div class='form-group'>
+    <div class="col-sm-4">
+            <label class="text-navy">Street Address</label>
+            <input type="text" class="form-control upper" id="street" placeholder="Street" name="street" value="{{old('street',$info->street)}}">
+    </div>
+    <div class='col-sm-4'>
+            <label class="text-navy">Region</label>
+            <select class='form-control select2' id='region' name="region" onchange='getProvince(this.value)'>
+                <option value="{{old('region',$info->region)}}">{{$info->region}}</option>
+            </select>
+    </div>
+    <div class='col-sm-4'>
+            <label class="text-navy">Province</label>
+            <select class='form-control select2' name="province" id='province' onchange="getMunicipality(region.value)">
+                <option value="{{old('province',$info->province)}}">{{$info->province}}</option>
+            </select>
+    </div>
+</div>
+<div class="form-group">
+    <div class='col-sm-4'>
+            <label class="text-navy">City/Municipality</label>
+            <select class='form-control select2' name="municipality" id="municipality" onchange="getBarangay(this.value)">
+                <option value="{{old('municipality',$info->municipality)}}">{{$info->municipality}}</option>
+            </select>
+    </div>
+    <div class='col-sm-4'>
+            <label class="text-navy">Barangay</label>
+            <select class='form-control select2' name="barangay" id='barangay'>
+                <option value="{{old('barangay',$info->barangay)}}">{{$info->barangay}}</option>
+            </select>
+    </div>
+    <div class="col-sm-4">
+            <label class="text-navy">Zip Code</label>
+            <input class="form form-control" name='zip' placeholder='ZIP Code' value="{{old('zip',$info->zip)}}" type="text">
+    </div>
+</div>
                     <div class="form-group">
                         <div class="col-sm-4">
                             <label>Contact Numbers</label>

@@ -15,7 +15,7 @@ class ChedEnrollmentReportsController extends Controller
     }
     
     function index(){
-        if(Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel==env('DEAN')){
+        if (Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel==env('ADMISSION_HED') || Auth::user()->accesslevel==env('DEAN')) {
            $programs = \App\CtrAcademicProgram::distinct()->where('academic_type', 'College')->orderBy('program_name')->get(['program_name','program_code']);
 //           $levels= \App\CollegeLevel::distinct()->where('academic_type', 'College')->orderBy('level')->get(['level']);
 //           $periods= \App\CollegeLevel::distinct()->where('academic_type', 'College')->orderBy('period')->get(['period']);
@@ -24,7 +24,7 @@ class ChedEnrollmentReportsController extends Controller
     }
     
     function print_report(Request $request) {
-        if (Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel==env('DEAN')) {           
+        if (Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel==env('ADMISSION_HED') || Auth::user()->accesslevel==env('DEAN')) {         
             $this->validate($request, [
                 'program_code'=>'required',
                 'level' => 'required',

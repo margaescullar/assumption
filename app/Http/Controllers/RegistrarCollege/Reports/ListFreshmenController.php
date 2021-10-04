@@ -16,7 +16,7 @@ class ListFreshmenController extends Controller
     }
     
     function index(){
-        if (Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel==env('DEAN')){ 
+        if (Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel==env('ADMISSION_HED') || Auth::user()->accesslevel==env('DEAN')) {
         return view('reg_college.reports.list_freshmen_student');
         }
     }    
@@ -30,7 +30,7 @@ class ListFreshmenController extends Controller
     }
 
     function print_freshmen($school_year){
-        if(Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel==env('DEAN')){
+        if (Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel==env('ADMISSION_HED') || Auth::user()->accesslevel==env('DEAN')) {
             $lists = \App\CollegeLevel::distinct()->where('college_levels.school_year', $school_year)->where('college_levels.status', 3)->where('college_levels.level', "1st Year")->get(['idno', 'level', 'program_code']); 
 //            $list =  new \App\FreshmenStudentList($school_year);
 //            dd($list);

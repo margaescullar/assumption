@@ -42,7 +42,7 @@ class EnrollmentStatisticsController extends Controller {
     }
 
     function print_official($school_year, $period) {
-        if (Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel==env('DEAN')) {
+        if (Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel==env('ADMISSION_HED') || Auth::user()->accesslevel==env('DEAN')) {
             //$school_year = \App\CtrAcademicSchoolYear::where('academic_type', 'College')->first()->school_year;
             //$period = \App\CtrAcademicSchoolYear::where('academic_type', 'College')->first()->period;
             $academic_programs = \App\CtrAcademicProgram::distinct()->where('academic_type', 'College')->get(['program_code', 'program_name']);
@@ -55,7 +55,7 @@ class EnrollmentStatisticsController extends Controller {
     }
     
     function update_display($program_code,$school_year,$period){
-        if (Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel==env('DEAN')) {
+        if (Auth::user()->accesslevel == env('REG_COLLEGE')) {
             $update_programs = \App\CtrAcademicProgram::where('program_code',$program_code)->get();
             foreach($update_programs as $update_program){
                 if($update_program->is_display == 1){

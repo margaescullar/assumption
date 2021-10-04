@@ -1,4 +1,4 @@
-
+<?php $regions = \App\CtrRegion::all(); ?>
 <?php
 if (Auth::user()->accesslevel == env('ADMISSION_HED')) {
     $layout = "layouts.appadmission-hed";
@@ -271,21 +271,48 @@ if ($adhedinfo->applying_for == "Senior High School") {
                                     <input class="form form-control" name='lastname' placeholder='Last Name*' value="{{old('lastname', $users->lastname)}}" type="text">
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <div class="col-sm-8">
-                                    <label>Address</label>
-                                    <input class="form form-control" name='street' placeholder='Street Address' value="{{old('street', $studentinfos->street)}}" type="text">
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-sm-4">
-                                        <label>&nbsp;</label>
-                                        <input class="form form-control" name='municipality' placeholder='Municipality/City*' value="{{old('municipality', $studentinfos->municipality)}}" type="text">
-                                    </div>                        
-                                </div>
-                                <div class="col-sm-5">
-                                    <input class="form form-control" name='province' placeholder='Province/Metro Manila*' value="{{old('province',$studentinfos->province)}}" type="text">
-                                </div>
-                            </div>
+                            <div class='form-group'>
+    <div class="col-sm-4">
+            <label class="text-navy">Street Address</label>
+            <input type="text" class="form-control upper" id="street" placeholder="Street" name="street" value="{{old('street',$info->street)}}">
+    </div>
+    <div class='col-sm-4'>
+            <label class="text-navy">Region</label>
+            <select class='form-control select2' id='region' name="region" onchange='getProvince(this.value)'>
+                <option value="{{old('region',$info->region)}}">{{$info->region}}</option>
+                @foreach($regions as $region)
+                <option value='{{$region->region}}'>{{$region->region}}</option>
+                @endforeach
+            </select>
+    </div>
+    <div class='col-sm-4'>
+            <label class="text-navy">Province</label>
+            <select class='form-control select2' name="province" id='province' onchange="getMunicipality(region.value)">
+                <option value="{{old('province',$info->province)}}">{{$info->province}}</option>
+                <option value=''>Please Select..</option>
+            </select>
+    </div>
+</div>
+<div class="form-group">
+    <div class='col-sm-4'>
+            <label class="text-navy">City/Municipality</label>
+            <select class='form-control select2' name="municipality" id="municipality" onchange="getBarangay(this.value)">
+                <option value="{{old('municipality',$info->municipality)}}">{{$info->municipality}}</option>
+                <option value=''>Please Select..</option>
+            </select>
+    </div>
+    <div class='col-sm-4'>
+            <label class="text-navy">Barangay</label>
+            <select class='form-control select2' name="barangay" id='barangay'>
+                <option value="{{old('barangay',$info->barangay)}}">{{$info->barangay}}</option>
+                <option value=''>Please Select..</option>
+            </select>
+    </div>
+    <div class="col-sm-4">
+            <label class="text-navy">Zip Code</label>
+            <input class="form form-control" name='zip' placeholder='ZIP Code' value="{{old('zip',$info->zip)}}" type="text">
+    </div>
+</div>
                             <div class="form-group">
                                 <div class="col-sm-4">
                                     <label>Contact Numbers</label>
@@ -580,6 +607,49 @@ $('#cell_no').mask('(0000)000-0000');
         }
 
     });
+}
+
+
+ function getProvince(region){
+     var array = {};
+     array['region'] = region;
+     $.ajax({
+         type: "GET",
+         url: "/ajax/get_province",
+         data: array,
+         success: function(data){
+             $('#province').html(data).fadeIn();
+         }
+     })
+     getMunicipality(region);
+ }
+ 
+ function getMunicipality(region){
+    province = $('#province').val();
+    var array = {};
+    array['region'] = region;
+    array['province'] = province;
+    $.ajax({
+        type: "GET",
+        url: "/ajax/get_municipality",
+        data: array,
+        success: function(data){
+            $('#municipality').html(data).fadeIn();
+        }
+    })
+}
+
+function getBarangay(municipality){
+    var array = {};
+    array['municipality'] = municipality;
+    $.ajax({
+        type: "GET",
+        url: "/ajax/get_brgy",
+        data: array,
+        success: function(data){
+            $('#barangay').html(data).fadeIn();
+        }
+    })
 }
 </script>   
 

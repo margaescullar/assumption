@@ -18,6 +18,7 @@ Route::get('/', function () {
 
 include_once 'web2.php';
 include_once 'web3.php';
+include_once 'TOR.php';
 
 
 Route::get('/password/reset/{token}/{idno}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
