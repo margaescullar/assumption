@@ -222,13 +222,13 @@ class Reservations extends Controller {
         }
     }
     
-    function tag_as_used($school_year,$reference_id){
+    function tag_as_used($school_year,$id){
         if (Auth::user()->accesslevel == env("ACCTNG_STAFF") || Auth::user()->accesslevel == env("ACCTNG_HEAD")) {            
-            $reservation = \App\Reservation::where('reference_id', $reference_id)->first();
+            $reservation = \App\Reservation::find($id);
             if($reservation->is_consumed == 0){
                 $reservation->is_consumed = 2;
                 $reservation->save();
-            \App\Http\Controllers\Admin\Logs::log("Reservation/Student Deposit: $reference_id tagged as used.");
+            \App\Http\Controllers\Admin\Logs::log("Reservation/Student Deposit: $id tagged as used.");
             }
         }
         return redirect('cashier/viewledger/'.$school_year.'/'. $reservation->idno);
