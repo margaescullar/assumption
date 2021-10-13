@@ -65,6 +65,7 @@
                     <td>Name</td>
                     <td>Price</td>
                     <td>Requirements</td>
+                    <td>Processing Period</td>
                     <td></td>
                 </tr>
                 @foreach($forms as $form)
@@ -73,6 +74,7 @@
                     <td>{{$form->document_name}}</td>
                     <td>{{$form->cost}}</td>
                     <td>{{$form->requirements}}</td>
+                    <td>{{$form->processing_day}} day/s</td>
                     <td><a href="javascript:void()" onclick="getFormDetails('{{$form->id}}')">Edit</a></td>
                 </tr>
                 @endforeach
@@ -101,6 +103,10 @@
                 <div class="form-group">
                     <label>Requirements</label>
                     <input class="form-control" name="requirements">
+                </div>
+                <div class="form-group">
+                    <label>Processing Period</label>
+                    <input class="form-control" type='number' min='0' name="processing_day">
                 </div>
                 <div class="form-group">
                     <input type="submit" name="button" value="Add" class="pull-right btn btn-primary">

@@ -84,6 +84,7 @@ class RequestForm extends Controller {
             $update->document_name = $request->document_name;
             $update->cost = $request->cost;
             $update->requirements = $request->requirements;
+            $update->processing_day = $request->processing_day;
             $update->save();
         } elseif($request->button=="Delete") {
             $update->delete();
@@ -93,6 +94,7 @@ class RequestForm extends Controller {
             $addform->document_name = $request->document_name;
             $addform->cost = $request->cost;
             $addform->requirements = $request->requirements;
+            $addform->processing_day = $request->processing_day;
             $addform->save();
         }
 

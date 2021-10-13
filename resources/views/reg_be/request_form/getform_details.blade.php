@@ -21,6 +21,10 @@
                 <input class="form-control" name="requirements" value="{{$form_details->requirements}}">
             </div>
             <div class="form-group">
+                <label>Processing Period</label>
+                <input class="form-control" name="processing_day" type='number' min='0' value="{{$form_details->processing_day}}">
+            </div>
+            <div class="form-group">
                 <input type="submit" name="button" value="Delete" class="btn btn-danger">
                 <input type="submit" name="button" value="Submit" class="pull-right btn btn-primary">
             </div>

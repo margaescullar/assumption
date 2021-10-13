@@ -70,7 +70,8 @@
                 @if(count($forms_request_pending)>0)
                 <div class="box box-body">
                     <div class="table-responsive">
-                        <table class="table table-condensed table-responsive">
+                        <table id="example1" class="table table-condensed table-responsive">
+                            <thead>
                             <tr>
                                 <th>Reference No</th>
                                 <th>Date Requested</th>
@@ -78,8 +79,11 @@
                                 <th>Requested By</th>
                                 <th>Requests</th>
                                 <th>Purpose</th>
-                                <th>Date Claimed</th>
+                                <th>Amount</th>
+                                <th>Status</th>
                             </tr>
+                            </thead>
+                        </tbody>
                             @foreach($forms_request_pending as $form_requested)
                             <tr>
                                 <td>{{$form_requested->reference_id}}</td>
@@ -99,6 +103,7 @@
                                 <td>@if($form_requested->status==0) Payment Pending @elseif($form_requested->status==1) Paid @elseif($form_requested->status==2) For Claiming  on {{$form_requested->claiming_date}} @elseif($form_requested->status==3) Claimed @endif</td>
                             </tr>
                             @endforeach
+                        </tbody>
                         </table>
                     </div>
                 </div>
@@ -108,7 +113,8 @@
                 @if(count($forms_request_paid)>0)
                 <div class="box box-body">
                     <div class="table-responsive">
-                        <table class="table table-condensed table-responsive">
+                        <table id="example2" class="table table-condensed table-responsive">
+                            <thead>
                             <tr>
                                 <th>Reference No</th>
                                 <th>Date Requested</th>
@@ -121,6 +127,8 @@
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
+                            </thead>
+                            <tbody>
                             @foreach($forms_request_paid as $form_requested)
                             <tr>
                                 <td>{{$form_requested->reference_id}}</td>
@@ -145,9 +153,9 @@
                                     @elseif($form_requested->status==1)
                                     <form method="post" action="{{url('tag_as_for_claiming')}}">
                                         {{csrf_field()}}
-                                        <input type="date" name="date_for_claiming" required="">
+                                        <input type="date" name="date_for_claiming" required="" value="{{$form_requested->claiming_date}}">
                                         <input type="hidden" name="reference_id" value="{{$form_requested->reference_id}}">
-                                        <button type="submit">For Claiming</button>
+                                        <button type="submit">Finalize Date of Claiming</button>
                                     </form>
                                     @elseif($form_requested->status==2)
                                     <a href="{{url('tag_as_claimed',$form_requested->reference_id)}}">Claim</a>
@@ -157,6 +165,7 @@
                                 </td>
                             </tr>
                             @endforeach
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -166,7 +175,8 @@
                 @if(count($forms_request_for_claiming)>0)
                 <div class="box box-body">
                     <div class="table-responsive">
-                        <table class="table table-condensed table-responsive">
+                        <table id="example3" class="table table-condensed table-responsive">
+                            <thead>
                             <tr>
                                 <th>Reference No</th>
                                 <th>Date Requested</th>
@@ -179,6 +189,8 @@
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
+                            </thead>
+                            <tbody>
                             @foreach($forms_request_for_claiming as $form_requested)
                             <tr>
                                 <td>{{$form_requested->reference_id}}</td>
@@ -215,6 +227,7 @@
                                 </td>
                             </tr>
                             @endforeach
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -224,7 +237,8 @@
                 @if(count($forms_request_claimed)>0)
                 <div class="box box-body">
                     <div class="table-responsive">
-                        <table class="table table-condensed table-responsive">
+                        <table id="example4" class="table table-condensed table-responsive">
+                            <thead>
                             <tr>
                                 <th>Reference No</th>
                                 <th>Date Requested</th>
@@ -237,6 +251,8 @@
                                 <th>Date Claimed</th>
                                 <th>Status</th>
                             </tr>
+                            </thead>
+                            <tbody>
                             @foreach($forms_request_claimed as $form_requested)
                             <tr>
                                 <td>{{$form_requested->reference_id}}</td>
@@ -258,6 +274,7 @@
                                 <td>@if($form_requested->status==0) Payment Pending @elseif($form_requested->status==1) Paid @elseif($form_requested->status==2) For Claiming  on {{$form_requested->claiming_date}} @elseif($form_requested->status==3) Claimed @endif</td>
                             </tr>
                             @endforeach
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -288,6 +305,17 @@
             }
         })
     }
+</script>
+<!-- DataTables -->
+<script src="{{url('bower_components/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+<script src="{{url('bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
+<script>
+  $(function () {
+    $('#example1').DataTable()
+    $('#example2').DataTable()
+    $('#example3').DataTable()
+    $('#example4').DataTable()
+  })
 </script>
 
 @endsection

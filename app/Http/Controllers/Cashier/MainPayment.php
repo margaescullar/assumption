@@ -358,13 +358,19 @@ class MainPayment extends Controller {
     function checkCredentialRequest($ledgers_check,$reference_id){
         if($ledgers_check->request_id != null){
             $getOR= \App\Payment::where('reference_id', $reference_id)->first()->receipt_no;
+            $transaction_date= \App\Payment::where('reference_id', $reference_id)->first()->transaction_date;
             $updateRequestForm = \App\FormRequest::where('reference_id', $ledgers_check->request_id)->first();
             if(isset($updateRequestForm)){
+                ($updateRequestForm->claiming_date != null) ? $updateRequestForm->claiming_date = $this->addBizDays($transaction_date,$updateRequestForm->claiming_date) : null;                
                 $updateRequestForm->or_number = $getOR;
                 $updateRequestForm->status=1;
                 $updateRequestForm->save();
             }
         }
+    }
+
+    function addBizDays($start,$number){ 
+        return (new \DateTime($start))->modify("+{$number} weekdays")->format('Y-m-d');
     }
     function checkCredentialRequestID($ledgers_check,$reference_id){
         if($ledgers_check->request_id != null){
