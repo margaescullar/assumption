@@ -115,7 +115,14 @@ $previousarray = json_encode($previousarray);
                         <table class="table table-bordered fees">
                             <tr><td width="33%" align="right">School Year</td><td width="33%" align="right">Balance</td><td align="right">Amount</td></tr>
                             @foreach($previous_total as $previous_fee)
-                            <tr><td align="right">{{$previous_fee->school_year}}</td><td align="right">{{number_format($previous_fee->balance,2)}}</td><td><input onkeypress="do_previous(event,{{$previous_fee->balance}},this.value,this)" type="text" name="previous_sy[{{$previous_fee->school_year}}]" id="previous{{$previous_fee->school_year}}" class="form form-control number previous"></tr>
+                            <tr><td align="right">
+                                    @if($previous_fee->school_year == "2020-2021 - 2nd Semester")
+                                    {{$previous_fee->school_year}}
+                                    @else
+                                    {{$previous_fee->school_year}} - {{$previous_fee->school_year+1}}
+                                    @endif
+                                </td>
+                                <td align="right">{{number_format($previous_fee->balance,2)}}</td><td><input onkeypress="do_previous(event,{{$previous_fee->balance}},this.value,this)" type="text" name="previous_sy[{{$previous_fee->school_year}}]" id="previous{{$previous_fee->school_year}}" class="form form-control number previous"></tr>
                             @endforeach
                         </table>        
                     </div>
