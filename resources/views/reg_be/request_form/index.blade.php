@@ -76,6 +76,7 @@
                                 <th>Reference No</th>
                                 <th>Date Requested</th>
                                 <th>ID No</th>
+                                <th>Contact No</th>
                                 <th>Requested By</th>
                                 <th>Requests</th>
                                 <th>Purpose</th>
@@ -89,6 +90,7 @@
                                 <td>{{$form_requested->reference_id}}</td>
                                 <td>{{$form_requested->created_at}}</td>
                                 <td>{{$form_requested->idno}}</td>
+                                <td>{{$form_requested->contact_no}}</td>
                                 <td>{{$form_requested->getFullNameAttribute()}}</td>
                                 <?php $request_lists = \App\RequestList::where('reference_id', $form_requested->reference_id)->get(); ?>
                                 <td>
@@ -119,6 +121,7 @@
                                 <th>Reference No</th>
                                 <th>Date Requested</th>
                                 <th>ID No</th>
+                                <th>Contact No</th>
                                 <th>Requested By</th>
                                 <th>Requests</th>
                                 <th>Purpose</th>
@@ -134,6 +137,7 @@
                                 <td>{{$form_requested->reference_id}}</td>
                                 <td>{{$form_requested->created_at}}</td>
                                 <td>{{$form_requested->idno}}</td>
+                                <td>{{$form_requested->contact_no}}</td>
                                 <td>{{$form_requested->getFullNameAttribute()}}</td>
                                 <?php $request_lists = \App\RequestList::where('reference_id', $form_requested->reference_id)->get(); ?>
                                 <td>
@@ -181,6 +185,7 @@
                                 <th>Reference No</th>
                                 <th>Date Requested</th>
                                 <th>ID No</th>
+                                <th>Contact No</th>
                                 <th>Requested By</th>
                                 <th>Requests</th>
                                 <th>Purpose</th>
@@ -196,6 +201,7 @@
                                 <td>{{$form_requested->reference_id}}</td>
                                 <td>{{$form_requested->created_at}}</td>
                                 <td>{{$form_requested->idno}}</td>
+                                <td>{{$form_requested->contact_no}}</td>
                                 <td>{{$form_requested->getFullNameAttribute()}}</td>
                                 <?php $request_lists = \App\RequestList::where('reference_id', $form_requested->reference_id)->get(); ?>
                                 <td>
@@ -243,6 +249,7 @@
                                 <th>Reference No</th>
                                 <th>Date Requested</th>
                                 <th>ID No</th>
+                                <th>Contact No</th>
                                 <th>Requested By</th>
                                 <th>Requests</th>
                                 <th>Purpose</th>
@@ -258,6 +265,7 @@
                                 <td>{{$form_requested->reference_id}}</td>
                                 <td>{{$form_requested->created_at}}</td>
                                 <td>{{$form_requested->idno}}</td>
+                                <td>{{$form_requested->contact_no}}</td>
                                 <td>{{$form_requested->getFullNameAttribute()}}</td>
                                 <?php $request_lists = \App\RequestList::where('reference_id', $form_requested->reference_id)->get(); ?>
                                 <td>
