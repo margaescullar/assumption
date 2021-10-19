@@ -7,6 +7,9 @@
     }
 </style>
 <?php
+
+use App\Http\Controllers\BedRegistrar\Records\indexController as indexController;
+
 $previous_group = "";
 $skip = 0;
 
@@ -393,6 +396,9 @@ function getPromotion($level) {
     @endforeach
 
     @foreach($get_all_subjects->where('subject_code', $get_all_subject->subject_code)->where('subject_type', 0)->where('is_alpha','!=',0) as $subject)
+    <?php
+    indexController::fetch_grades($idno,$subject);
+    ?>
     <?php $total_units += $subject->units; ?>
     <tr>
         <td>{{$subject->display_subject_code}}</td>

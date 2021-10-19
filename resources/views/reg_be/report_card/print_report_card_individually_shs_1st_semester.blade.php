@@ -11,6 +11,7 @@
     }
 </style>
 <?php
+use App\Http\Controllers\BedRegistrar\Records\indexController as indexController;
 
 function getAttendances($month, $school_year, $idno, $type) {
     if ($type == 'absences') {
@@ -141,6 +142,9 @@ function getPromotion($level) {
         
         @if(count($get_subjects)>0)
             @foreach($get_subjects as $subject)
+            <?php
+            indexController::fetch_grades($idno,$subject);
+            ?>
             <tr>
                 <td>{{$subject->display_subject_code}}</td>
 <!--1st Quarter-->
@@ -185,6 +189,9 @@ function getPromotion($level) {
         
             @if(count($get_pe_1st)>0)
             @foreach($get_pe_1st as $subject)
+            <?php
+            indexController::fetch_grades($idno,$subject);
+            ?>
             <tr>
                 <td>{{$subject->display_subject_code}}</td>
                 <!--first grading-->
@@ -230,6 +237,9 @@ function getPromotion($level) {
         
         @if(count($get_sa)>0)
             @foreach($get_sa as $subject)
+            <?php
+            indexController::fetch_grades($idno,$subject);
+            ?>
             <tr>
                 <td>{{$subject->display_subject_code}}</td>
                 <td align="center">
@@ -245,6 +255,9 @@ function getPromotion($level) {
         
         @if(count($get_conduct)>0)
             @foreach($get_conduct as $subject)
+            <?php
+            indexController::fetch_grades($idno,$subject);
+            ?>
             <tr>
                 <td>{{$subject->display_subject_code}}</td>
                 <td align="center">{{$subject->first_grading_letter}}</td>
@@ -354,4 +367,16 @@ function getPromotion($level) {
     <strong>Sr. Mary Ignatius G. Vedua, r.a.</strong><br>
     Principal<br><br>
 </div>
-
+<?php
+$gwa_records = new App\TorGwa;
+$gwa_records->level = $status->level;
+$gwa_records->strand = $status->strand;
+$gwa_records->school_year = $school_year;
+$gwa_records->period = "1st Semester";
+$gwa_records->gwa_letter = $get_first_sem_final_ave->final_letter_grade;
+$gwa_records->gwa = round($get_first_sem_final_ave->final_grade,3);
+$gwa_records->days_of_school = $school_days;
+//$gwa_records->days_present = $school_days-$total_absent;
+$gwa_records->days_present = "N/A";
+indexController::fetch_gwa($idno,$gwa_records);
+?>

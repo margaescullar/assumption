@@ -7,6 +7,7 @@
     }
 </style>
 <?php
+use App\Http\Controllers\BedRegistrar\Records\indexController as indexController;
 
 function getAttendances($month, $school_year, $idno, $type) {
     if ($type == 'absences') {
@@ -65,6 +66,15 @@ function getUnits($subject, $idno, $school_year) {
     $getsubjects = \App\GradeBasicEd::selectRaw('sum(units) as units')->where('idno', $idno)->where('school_year', $school_year)->where('report_card_grouping', $subject->subject_name)->first();
     
     return $getsubjects->units;
+}
+
+//for tor
+function getFinalRatingLetter($grade, $letter_grade_type) {
+    $round = round($grade);
+    $round2 = round($grade, 2);
+    $final_letter_grade = \App\CtrTransmuLetter::where('grade', $round)->where('letter_grade_type', $letter_grade_type)->first();
+    $letter = $final_letter_grade['letter_grade'];
+    return "$letter";
 }
 
 //get final rating for grouping
@@ -165,6 +175,9 @@ function getPromotion($level) {
     ?>
     @if(count($get_regular_subjects)>0)
     @foreach($get_regular_subjects as $subject)
+    <?php
+    indexController::fetch_grades($idno,$subject);
+    ?>
     <tr>
         <td>{{$subject->display_subject_code}}</td>
         <td align="center">@if($subject->is_alpha == 0){{$subject->first_remarks}}@else{{$subject->first_grading_letter}}@endif</td>
@@ -195,6 +208,9 @@ function getPromotion($level) {
 
     @if(count($get_group_subjects)>0)
     @foreach($get_group_subjects as $subject)
+    <?php
+    indexController::fetch_grades($idno,$subject);
+    ?>
     <tr>
         <td>{{$subject->display_subject_code}}</td>
         <td align="center">@if($subject->is_alpha == 0){{$subject->first_remarks}}@else{{$subject->first_grading_letter}}@endif</td>
@@ -220,6 +236,9 @@ function getPromotion($level) {
 
     @if(count($get_split_subjects)>0)
     @foreach($get_split_subjects as $subject)
+    <?php
+    indexController::fetch_grades($idno,$subject);
+    ?>
     <tr>
         <td>{{$subject->display_subject_code}}</td>
         <td align="center">@if($subject->is_alpha == 0){{$subject->first_remarks}}@else{{$subject->first_grading_letter}}@endif</td>
@@ -264,19 +283,32 @@ function getPromotion($level) {
     <?php $total_units += getUnits($subject,$idno,$school_year); ?>
     <tr>
         <td>{{$subject->subject_name}}</td>
-        <td align="center">{{getLetterGrade($grade1=getGrades($subject,$idno,$school_year,'1'),$subject->letter_grade_type)}}</td>
-        <td align="center">{{getLetterGrade($grade2=getGrades($subject,$idno,$school_year,'2'),$subject->letter_grade_type)}}</td>
-        <td align="center">{{getLetterGrade($grade3=getGrades($subject,$idno,$school_year,'3'),$subject->letter_grade_type)}}</td>
-        <!--<td align="center">{{getGrades($subject,$idno,$school_year,'4')}}</td>-->
+        <td align="center">{{$first=getLetterGrade($grade1=getGrades($subject,$idno,$school_year,'1'),$subject->letter_grade_type)}}</td>
+        <td align="center">{{$second=getLetterGrade($grade2=getGrades($subject,$idno,$school_year,'2'),$subject->letter_grade_type)}}</td>
+        <td align="center">{{$third=getLetterGrade($grade3=getGrades($subject,$idno,$school_year,'3'),$subject->letter_grade_type)}}</td>
+        <!--<td align="center">{{$first=getGrades($subject,$idno,$school_year,'4')}}</td>-->
         <td align="center" style="font:10pt">Pass</td>
-        
-
-
+      
 @if($idno == 1920295 or $idno == 1920294)        
 <?php $grade = ($grade2 + $grade3) / 2; ?>
 @else
 <?php $grade = ($grade1 + $grade2 + $grade3) / 3; ?>
 @endif
+
+    <?php
+    $subject->subject_code = $subject->subject_name;
+    $subject->display_subject_code = $subject->subject_name;
+    $subject->level = $status->level;
+    $subject->units = 1;
+    $subject->school_year = $school_year;
+    $subject->first_remarks = $first;
+    $subject->second_remarks = $second;
+    $subject->third_remarks = $third;
+    $subject->fourth_remarks = "Pass";
+    $subject->final_grade = $grade;
+    $subject->final_remarks = getFinalRatingLetter($grade, $subject->letter_grade_type);
+    indexController::fetch_grades($idno,$subject);
+    ?>
         
         
         <td align="center">{{getFinalRating($grade, $subject->letter_grade_type)}}</td>
@@ -319,6 +351,9 @@ function getPromotion($level) {
 
     @if(count($get_sa_subjects)>0)
     @foreach($get_sa_subjects as $subject)
+    <?php
+    indexController::fetch_grades($idno,$subject);
+    ?>
     <tr>
         <td>{{$subject->display_subject_code}}</td>
         <td align="center">@if($subject->is_alpha == 0){{$subject->first_remarks}}@else{{$subject->first_grading_letter}}@endif</td>
@@ -356,6 +391,10 @@ function getPromotion($level) {
 
     @if(count($get_regular_alpha_subjects)>0)
     @foreach($get_regular_alpha_subjects as $subject)
+    <?php
+    $subject->final_remarks = $subject->final_grade_letter;
+    indexController::fetch_grades($idno,$subject);
+    ?>
     <tr>
         <td>{{$subject->display_subject_code}}</td>
         <td align="center">@if($subject->is_alpha == 0){{$subject->first_remarks}}@else{{$subject->first_grading_letter}}@endif</td>
@@ -510,4 +549,16 @@ function getPromotion($level) {
     June 8, 2020<br>
     Date
 </div>
+
+<?php
+$gwa_records = new App\TorGwa;
+$gwa_records->level = $status->level;
+$gwa_records->school_year = $school_year;
+//$gwa_records->period = $period;
+$gwa_records->gwa_letter = $get_final_grade->final_letter_grade;
+$gwa_records->gwa = round($get_final_grade->final_ave,3);
+$gwa_records->days_of_school = $school_days;
+$gwa_records->days_present = $school_days-$total_absent;
+indexController::fetch_gwa($idno,$gwa_records);
+?>
 

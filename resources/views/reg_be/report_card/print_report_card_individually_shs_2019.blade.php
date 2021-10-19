@@ -7,6 +7,7 @@
     }
 </style>
 <?php
+use App\Http\Controllers\BedRegistrar\Records\indexController as indexController;
 
 function getAttendances($month, $school_year, $idno, $type) {
     if ($type == 'absences') {
@@ -139,6 +140,9 @@ function getPromotion($level) {
         
         @if(count($get_subjects)>0)
             @foreach($get_subjects as $subject)
+            <?php
+            indexController::fetch_grades($idno,$subject);
+            ?>
             <?php $total_units += $subject->units; ?>
             <tr>
                 <td>{{$subject->display_subject_code}}</td>
@@ -178,6 +182,9 @@ function getPromotion($level) {
         
         @if(count($get_pe_2nd)>0)
             @foreach($get_pe_2nd as $subject)
+            <?php
+            indexController::fetch_grades($idno,$subject);
+            ?>
             @if(count($get_pe_1st)>0)
                 <?php $pe_average = ($subject->third_grading+$get_pe_1st->first_grading+$get_pe_1st->second_grading)/3; ?>
             @else
@@ -222,6 +229,9 @@ function getPromotion($level) {
         
         @if(count($get_sa)>0)
             @foreach($get_sa as $subject)
+            <?php
+            indexController::fetch_grades($idno,$subject);
+            ?>
             <?php $total_units += $subject->units; ?>
             <tr>
                 <td>{{$subject->display_subject_code}}</td>
@@ -241,6 +251,9 @@ function getPromotion($level) {
         
         @if(count($get_conduct)>0)
             @foreach($get_conduct as $subject)
+            <?php
+            indexController::fetch_grades($idno,$subject);
+            ?>
             <?php $total_units += $subject->units; ?>
             <tr>
                 <td>{{$subject->display_subject_code}}</td>
@@ -368,3 +381,18 @@ function getPromotion($level) {
     Date
 </div>
 
+<?php
+$gwa_records = new App\TorGwa;
+$gwa_records->level = $status->level;
+$gwa_records->strand = $status->strand;
+$gwa_records->school_year = $school_year;
+$gwa_records->period = "2nd Semester";
+$gwa_records->gwa_letter = getLetterGrade(round($total_final_grade/$total_units,2),"SHS",$school_year);
+$gwa_records->gwa = round($total_final_grade/$total_units,3);
+$gwa_records->days_of_school = $school_days;
+$gwa_records->final_gwa_letter = getLetterGrade(round(($get_first_sem_final_ave->final_grade+$gwa_records->gwa)/2,3),'SHS',$school_year);
+$gwa_records->final_gwa = round(($get_first_sem_final_ave->final_grade+$gwa_records->gwa)/2,3);
+$gwa_records->days_present = $school_days-$total_absent;
+//$gwa_records->days_present = "N/A";
+indexController::fetch_gwa($idno,$gwa_records);
+?>
