@@ -78,6 +78,7 @@ $checkstatus_finals3 = \App\GradeCollege::whereRaw('('.$raw.')')->join('college_
                                     <option @if ($student->midterm == 3.00) selected='' @endif>3.00</option>
                                     <option @if ($student->midterm == 3.50) selected='' @endif>3.50</option>
                                     <option @if ($student->midterm == 4.00) selected='' @endif>4.00</option>
+                                    <option @if ($student->midterm == "FAILED") selected='' @endif>FAILED</option>
                                     <option @if ($student->midterm == "FA") selected='' @endif>FA</option>
                                     <option @if ($student->midterm == "INC") selected='' @endif>INC</option>
                                     <option @if ($student->midterm == "NA") selected='' @endif>NA</option>
@@ -134,6 +135,7 @@ $checkstatus_finals3 = \App\GradeCollege::whereRaw('('.$raw.')')->join('college_
                                         <option @if ($student->finals == 3.00) selected='' @endif>3.00</option>
                                         <option @if ($student->finals == 3.50) selected='' @endif>3.50</option>
                                         <option @if ($student->finals == 4.00) selected='' @endif>4.00</option>
+                                        <option @if ($student->finals == "FAILED") selected='' @endif>FAILED</option>
                                         <option @if ($student->finals == "FA") selected='' @endif>FA</option>
                                         <option @if ($student->finals == "INC") selected='' @endif>INC</option>
                                         <option @if ($student->finals == "NA") selected='' @endif>NA</option>
