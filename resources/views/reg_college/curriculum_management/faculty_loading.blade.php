@@ -5,6 +5,8 @@ $faculties = \App\User::where('accesslevel', 1)->where('status',1)->orderBy('las
 <?php
 if(Auth::user()->accesslevel == env('DEAN')){
 $layout = "layouts.appdean_college";
+}else if(Auth::user()->accesslevel == env('AA')){
+$layout = "layouts.appaa";
 } else {
 $layout = "layouts.appreg_college";
 }

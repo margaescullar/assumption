@@ -12,7 +12,7 @@ $date_end = date('Y-m-d');
     <head class="no-print">
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Assumption College - Accounting</title>
+        <title>Assumption College - Club Moderator</title>
         <link rel="shortcut icon" type="image/jpg" href="{{url('/images','assumption-logo.png')}}">
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <link rel="stylesheet" href="{{ asset ('bower_components/bootstrap/dist/css/bootstrap.min.css')}}">
@@ -30,7 +30,7 @@ $date_end = date('Y-m-d');
             <header class="main-header">
                 <a href="{{url('/')}}" class="logo">
                     <span class="logo-mini"><b>A</b>CS</span>
-                    <span class="logo-lg"><b>Accounting</b>HEAD</span>
+                    <span class="logo-lg"><b>Club</b>MODERATOR</span>
                 </a>
                 <nav class="navbar navbar-static-top" role="navigation">
                     <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">

@@ -1,9 +1,13 @@
 <?php
-if (Auth::user()->accesslevel == env('DEAN')) {
-    $layout = "layouts.appdean_college";
-} else {
+    if(Auth::user()->accesslevel == env('REG_COLLEGE')){
     $layout = "layouts.appreg_college";
-}
+    } else if (Auth::user()->accesslevel == env('DEAN')){
+    $layout = "layouts.appreg_college";
+    } else if (Auth::user()->accesslevel == env('AA')){
+    $layout = "layouts.appaa";
+    } else {
+    $layout = "layouts.appadmission-hed";
+    }
 ?>
 
 @extends($layout)

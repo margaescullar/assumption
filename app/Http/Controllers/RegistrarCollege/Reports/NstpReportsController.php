@@ -16,21 +16,21 @@ class NstpReportsController extends Controller {
     }
 
     function index() {
-        if (Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel==env('ADMISSION_HED') || Auth::user()->accesslevel==env('DEAN')) {
+        if (Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel==env('ADMISSION_HED') || Auth::user()->accesslevel==env('DEAN') || Auth::user()->accesslevel==env('AA')) {
             $programs = \App\Curriculum::distinct()->where('course_code', 'like', '%NSTP%')->get(['course_code', 'course_name']);
             return view('reg_college.reports.nstp_reports', compact('programs'));
         }
     }
 
     function index_graduates() {
-        if (Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel==env('ADMISSION_HED') || Auth::user()->accesslevel==env('DEAN')) {
+        if (Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel==env('ADMISSION_HED') || Auth::user()->accesslevel==env('DEAN') || Auth::user()->accesslevel==env('AA')) {
             $programs = \App\Curriculum::distinct()->where('course_code', 'like', '%NSTP%')->get(['course_code', 'course_name']);
             return view('reg_college.reports.nstp_graduates', compact('programs'));
         }
     }
 
     function print_nstp(Request $request) {
-        if (Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel==env('ADMISSION_HED') || Auth::user()->accesslevel==env('DEAN')) {
+        if (Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel==env('ADMISSION_HED') || Auth::user()->accesslevel==env('DEAN') || Auth::user()->accesslevel==env('AA')) {
             $students = \App\GradeCollege::
                     join('college_levels', 'college_levels.idno', '=', 'grade_colleges.idno')
                     ->where('college_levels.status', '3')
@@ -62,7 +62,7 @@ class NstpReportsController extends Controller {
     }
 
     function print_nstp_graduates(Request $request) {
-        if (Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel == env('DEAN')) {
+        if (Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel == env('DEAN') || Auth::user()->accesslevel==env('AA')) {
             
             $students = DB::select("select grade_colleges.idno, count(*) from `grade_colleges` inner join `college_levels` on `college_levels`.`idno` = `grade_colleges`.`idno` inner join `users` on `users`.`idno` = `grade_colleges`.`idno` where `college_levels`.`status` = 3 and `college_levels`.`school_year` = $request->school_year and `college_levels`.`period` = '$request->period' and (`grade_colleges`.`course_code` like 'NSTP1%' or `grade_colleges`.`course_code` like 'NSTP2%') and `grade_colleges`.`finals` like 'PASSED' and `grade_colleges`.`deleted_at` is null group BY `grade_colleges`.`idno` order by users.lastname");
             $programs = \App\CtrAcademicProgram::distinct()->where('academic_type', 'College')->get(['program_code', 'program_name']);

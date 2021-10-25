@@ -46,6 +46,9 @@ class HomeController extends Controller {
             case 12:
                 return view('msbmw.index');
                 break;
+            case 13:
+                return view('aa.index');
+                break;
             case 20:
                 return view('reg_college.index');
                 break;

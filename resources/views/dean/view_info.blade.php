@@ -8,6 +8,8 @@ if (file_exists(public_path("images/PICTURES/" . $user->idno . ".jpg"))) {
 <?php
 if(Auth::user()->accesslevel == env('SCHOLARSHIP_HED')){
 $layout = "layouts.appscholarship_college";
+}else if(Auth::user()->accesslevel == env('AA')){
+$layout = "layouts.appaa";
 } else {
 $layout = "layouts.appdean_college";
 }

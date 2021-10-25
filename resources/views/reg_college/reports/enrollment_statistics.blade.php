@@ -4,7 +4,9 @@
     } else if(Auth::user()->accesslevel == env('ADMISSION_HED')){
     $layout = "layouts.appadmission-hed";    
     } else if (Auth::user()->accesslevel == env('DEAN')){
-    $layout = "layouts.appdean_college";
+    $layout = "layouts.appadmission-hed";    
+    } else if (Auth::user()->accesslevel == env('AA')){
+    $layout = "layouts.appaa";
     } else if (Auth::user()->accesslevel==env("ACCTNG_STAFF")){
         $layout = "layouts.appaccountingstaff";    
     } else if (Auth::user()->accesslevel==env("ACCTNG_HEAD")){

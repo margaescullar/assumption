@@ -17,7 +17,7 @@ class EnrollmentStatisticsController extends Controller {
     }
 
     function index($school_year, $period) {
-        if (Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel == env('ACCTNG_HEAD')|| Auth::user()->accesslevel == env('ACCTNG_STAFF') || Auth::user()->accesslevel == env('ADMISSION_HED') || Auth::user()->accesslevel==env('DEAN')){
+        if (Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel == env('ACCTNG_HEAD')|| Auth::user()->accesslevel == env('ACCTNG_STAFF') || Auth::user()->accesslevel == env('ADMISSION_HED') || Auth::user()->accesslevel==env('DEAN') || Auth::user()->accesslevel==env('AA')){
             //$school_year = \App\CtrAcademicSchoolYear::where('academic_type', 'College')->first()->school_year;
             //$period = \App\CtrAcademicSchoolYear::where('academic_type', 'College')->first()->period;
             $academic_programs = \App\CtrAcademicProgram::distinct()->where('academic_type', 'College')->where('is_display',1)->get(['program_code', 'program_name','is_display']);
@@ -29,7 +29,7 @@ class EnrollmentStatisticsController extends Controller {
     }
 
     function print_statistics($school_year, $period) {
-        if (Auth::user()->accesslevel == env('REG_COLLEGE')|| Auth::user()->accesslevel == env('ADMISSION_HED') || Auth::user()->accesslevel==env('DEAN')) {
+        if (Auth::user()->accesslevel == env('REG_COLLEGE')|| Auth::user()->accesslevel == env('ADMISSION_HED') || Auth::user()->accesslevel==env('DEAN') || Auth::user()->accesslevel==env('AA')) {
             //$school_year = \App\CtrAcademicSchoolYear::where('academic_type', 'College')->first()->school_year;
             //$period = \App\CtrAcademicSchoolYear::where('academic_type', 'College')->first()->period;
             $academic_programs = \App\CtrAcademicProgram::distinct()->where('academic_type', 'College')->where('is_display',1)->get(['program_code', 'program_name','is_display']);
@@ -42,7 +42,7 @@ class EnrollmentStatisticsController extends Controller {
     }
 
     function print_official($school_year, $period) {
-        if (Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel==env('ADMISSION_HED') || Auth::user()->accesslevel==env('DEAN')) {
+        if (Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel==env('ADMISSION_HED')) {
             //$school_year = \App\CtrAcademicSchoolYear::where('academic_type', 'College')->first()->school_year;
             //$period = \App\CtrAcademicSchoolYear::where('academic_type', 'College')->first()->period;
             $academic_programs = \App\CtrAcademicProgram::distinct()->where('academic_type', 'College')->get(['program_code', 'program_name']);

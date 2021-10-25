@@ -28,7 +28,7 @@ if (file_exists(public_path("images/" . Auth::user()->idno . ".jpg"))) {
             <header class="main-header">
                 <a href="{{url('/')}}" class="logo">
                     <span class="logo-mini"><b>A</b>CS</span>
-                    <span class="logo-lg"><b>Acad</b>COLLEGE</span>
+                    <span class="logo-lg"><b>Academic</b>ASSISTANT</span>
                 </a>
                 <nav class="navbar navbar-static-top" role="navigation">
                     <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
@@ -142,7 +142,7 @@ if (file_exists(public_path("images/" . Auth::user()->idno . ".jpg"))) {
                             </ul>
                         </li>
                         
-                        <li class="treeview">
+<!--                        <li class="treeview">
                             <a href="#"><i class="fa fa-male"></i> <span>Instructor</span>
                                 <span class="pull-right-container">
                                     <i class="fa fa-angle-left pull-right"></i>
@@ -150,9 +150,9 @@ if (file_exists(public_path("images/" . Auth::user()->idno . ".jpg"))) {
                             </a>
                             <ul class="treeview-menu">
                                 <li><a href="{{url('/registrar_college', array('instructor','view_instructor'))}}"><i class="fa fa-circle-o"></i> <span>View Instructors</span></a></li>
-                                <!--<li><a href="{{url('/registrar_college', array('instructor','add_instructor'))}}"><i class="fa fa-circle-o"></i> <span>Add Instructor</span></a></li>-->
+                                <li><a href="{{url('/registrar_college', array('instructor','add_instructor'))}}"><i class="fa fa-circle-o"></i> <span>Add Instructor</span></a></li>
                             </ul>
-                        </li>
+                        </li>-->
                         <?php 
                         $school_year = \App\CtrGradeSchoolYear::where('academic_type', 'College')->first()->school_year;
                         $period = \App\CtrGradeSchoolYear::where('academic_type', 'College')->first()->period;

@@ -16,13 +16,13 @@ class FacultyLoadingController extends Controller {
     }
 
     function index() {
-        if (Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel == env('DEAN')) {
+        if (Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel == env('DEAN') || Auth::user()->accesslevel == env('AA')) {
             return view('reg_college.curriculum_management.faculty_loading');
         }
     }
 
     function edit_faculty_loading($idno) {
-        if (Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel == env('DEAN')) {
+        if (Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel == env('DEAN') || Auth::user()->accesslevel == env('AA')) {
             return view('reg_college.curriculum_management.edit_faculty_loading', compact('idno'));
         }
     }
@@ -84,7 +84,7 @@ class FacultyLoadingController extends Controller {
         }
     }
     function print_faculty_loading($idno){
-        if (Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel == env('DEAN')) {
+        if (Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel == env('DEAN') || Auth::user()->accesslevel == env('AA')) {
             $school_year = \App\CtrEnrollmentSchoolYear::where('academic_type', 'College')->first();
             $faculty = \App\User::where('idno', $idno)->first();
             

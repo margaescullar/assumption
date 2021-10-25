@@ -6,6 +6,8 @@
 <?php
 if(Auth::user()->accesslevel == env('DEAN')){
 $layout = "layouts.appdean_college";
+}else if(Auth::user()->accesslevel == env('AA')){
+$layout = "layouts.appaa";
 } else {
 $layout = "layouts.appreg_college";
 }
@@ -84,7 +86,7 @@ $layout = "layouts.appreg_college";
             
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label>Select Course</label>
+                    <label>Select Courses</label>
                     <select class="form form-control select2" onchange="selectSchedule(this.value)" id="course_code">
                         <option value="">Select Course</option>
                         @foreach($courses as $course)

@@ -4,6 +4,8 @@ $programs = \App\CtrAcademicProgram::distinct()->where('academic_type', 'College
 <?php
 if(Auth::user()->accesslevel == env('DEAN')){
 $layout = "layouts.appdean_college";
+}else if(Auth::user()->accesslevel == env('AA')){
+$layout = "layouts.appaa";
 } else {
 $layout = "layouts.appreg_college";
 }

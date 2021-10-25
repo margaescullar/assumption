@@ -15,7 +15,7 @@ class Record extends Controller
     }
 
     function view_info($idno) {
-        if (Auth::user()->accesslevel == env('DEAN') || Auth::user()->accesslevel == env('SCHOLARSHIP_HED')) {
+        if (Auth::user()->accesslevel == env('DEAN') || Auth::user()->accesslevel == env('SCHOLARSHIP_HED') || Auth::user()->accesslevel == env('AA')) {
             $user = \App\User::where('idno', $idno)->first();
             $info = \App\StudentInfo::where('idno', $idno)->first();
             return view('dean.view_info', compact('idno', 'user', 'info'));

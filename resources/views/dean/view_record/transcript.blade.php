@@ -7,7 +7,9 @@ if (file_exists(public_path("images/PICTURES/" . $user->idno . ".jpg"))) {
     if(Auth::user()->accesslevel == env('DEAN')){
     $layout = "layouts.appdean_college";
     } else if(Auth::user()->accesslevel == env('SCHOLARSHIP_HED')){
-    $layout = "layouts.appscholarship_college";
+    $layout = "layouts.appdean_college";
+    } else if(Auth::user()->accesslevel == env('AA')){
+    $layout = "layouts.appaa";
     }
 ?>
 
@@ -98,9 +100,11 @@ if (file_exists(public_path("images/PICTURES/" . $user->idno . ".jpg"))) {
             <div class="col-sm-3">
                 <a href="{{url('college', array('view_transcript', $user->idno))}}" class="btn btn-success col-sm-12">Transcript of Records</a>
             </div>
+        @if(Auth::user()->accesslevel == "DEAN")
             <div class="col-sm-3">
                 <a target="_blank" href="{{url('college', array('true_copy_of_grades', $user->idno))}}" class="btn btn-success col-sm-12">Print Grade File</a>
             </div>
+        @endif
         @endif
         <div class="col-sm-12">
             

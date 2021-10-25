@@ -25,7 +25,7 @@ $checkstatus_finals = \App\GradeCollege::whereRaw('('.$raw.')')->join('college_l
 $checkstatus_finals3 = \App\GradeCollege::whereRaw('('.$raw.')')->join('college_levels', 'college_levels.idno', '=', 'grade_colleges.idno')->join('users', 'users.idno', '=', 'grade_colleges.idno')->where('college_levels.status', 3)->where('college_levels.school_year', $school_year)->where('college_levels.period', $period)->select('users.idno', 'users.firstname', 'users.lastname', 'grade_colleges.id', 'grade_colleges.midterm', 'grade_colleges.finals', 'grade_colleges.midterm_absences', 'grade_colleges.finals_absences', 'grade_colleges.grade_point', 'grade_colleges.is_lock', 'grade_colleges.midterm_status', 'grade_colleges.finals_status', 'grade_colleges.grade_point_status')->where('grade_colleges.finals_status', 3)->get();
 ?>
 @if (count($students)>0)
-<div class='col-sm-12'><div class='pull-right'><a target='_blank' href="{{url('registrar_college',array('print_grade_list', $school_year,$period,$schedule_id,$course_code))}}"><button class='btn btn-primary'>Print Grade</button></a></div></div>
+@if(Auth::user()->accesslevel != env('AA'))<div class='col-sm-12'><div class='pull-right'><a target='_blank' href="{{url('registrar_college',array('print_grade_list', $school_year,$period,$schedule_id,$course_code))}}"><button class='btn btn-primary'>Print Grade</button></a></div></div>@endif
 <form class="form form-horizontal" method="post" action="{{url('college_instructor', array('grades','save_submit'))}}">
     {{csrf_field()}}
     <input type="hidden" name="schedule_id" value="{{$schedule_id}}">
@@ -59,6 +59,8 @@ $checkstatus_finals3 = \App\GradeCollege::whereRaw('('.$raw.')')->join('college_
                             <td>{{$student->idno}}</td>
                             <td>{{$student->lastname}}, {{$student->firstname}} {{$student->middlename}} @if($student->is_audit==1)(Audit-Special Learning Needs) @elseif($student->is_audit==2) (Audit-Special Interest) @elseif($student->is_audit==3) (Exchange Student) @endif</td>
                             <td><input class='grade' type="text" value="{{$student->midterm_absences}}" size=3 readonly=""></td>
+                            
+                            @if(auth::user()->accesslevel == env('REG_COLLEGE'))
                             <td>
                                 @if($student->midterm_status<=2)
                                 <select class="grade" name="midterm[{{$student->id}}]" id="midterm" onchange="change_midterm(this.value, {{$student->id}}, '{{$student->idno}}')">
@@ -88,7 +90,9 @@ $checkstatus_finals3 = \App\GradeCollege::whereRaw('('.$raw.')')->join('college_
                                     <option @if ($student->midterm == "AUDIT") selected='' @endif>AUDIT</option>
                                 </select>
                             </td>
-                            <!--<td><input class='grade' type="text" name="midterm[{{$student->id}}]" id="midterm" value="{{$student->midterm}}" size=3 readonly=""></td>-->
+                            @else
+                            <td><input class='grade' type="text" name="midterm[{{$student->id}}]" id="midterm" value="{{$student->midterm}}" size=3 readonly=""></td>
+                            @endif
                             @if(auth::user()->accesslevel == env('DEAN'))
                             <td>
                                 @if($student->midterm_status == 0)
@@ -116,6 +120,7 @@ $checkstatus_finals3 = \App\GradeCollege::whereRaw('('.$raw.')')->join('college_
                             </td>
                             @endif
                             <td><input class='grade' type="text" value="{{$student->finals_absences}}" size=3 readonly=""></td>
+                                @if(auth::user()->accesslevel == env('REG_COLLEGE'))
                             <td>
                                 @if($student->finals_status<=2)
                                 <select class="grade" name="finals[{{$student->id}}]" id="finals" onchange="change_finals(this.value, {{$student->id}}, '{{$student->idno}}')">
@@ -145,7 +150,9 @@ $checkstatus_finals3 = \App\GradeCollege::whereRaw('('.$raw.')')->join('college_
                                         <option @if ($student->finals == "AUDIT") selected='' @endif>AUDIT</option>
                                     </select>
                             </td>
-                            <!--<td><input class='grade' type="text" name="finals[{{$student->id}}]" id="finals" value="{{$student->finals}}" size=3 readonly=""></td>-->
+                            @else
+                            <td><input class='grade' type="text" name="finals[{{$student->id}}]" id="finals" value="{{$student->finals}}" size=3 readonly=""></td>
+                            @endif
                             @if(auth::user()->accesslevel == env('DEAN'))
                             <td>
                                 @if($student->finals_status == 0)

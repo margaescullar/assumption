@@ -16,14 +16,14 @@ class srf extends Controller
     }
 
     function index() {
-        if (Auth::user()->accesslevel == env('DEAN') || Auth::user()->accesslevel == env('REG_COLLEGE')) {
+        if (Auth::user()->accesslevel == env('DEAN') || Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel == env('AA')) {
             $programs = \App\Curriculum::distinct()->get(['program_code', 'program_name']);
             return view('dean.srf.view_srf', compact('programs'));
         }
     }
     
     function modify_srf($period,$course_code){
-        if (Auth::user()->accesslevel == env('DEAN') || Auth::user()->accesslevel == env('REG_COLLEGE')) {
+        if (Auth::user()->accesslevel == env('DEAN') || Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel == env('AA')) {
             $course_name = \App\Curriculum::where('course_code', $course_code)->where('period', $period)->first()->course_name;
             $srf = \App\Curriculum::where('course_code', $course_code)->where('period', $period)->first()->srf;
             $lab_fee = \App\Curriculum::where('course_code', $course_code)->where('period', $period)->first()->lab_fee;
@@ -34,7 +34,7 @@ class srf extends Controller
     }
     
     function set_srf(Request $request){
-        if (Auth::user()->accesslevel == env('DEAN') || Auth::user()->accesslevel == env('REG_COLLEGE')) {
+        if (Auth::user()->accesslevel == env('DEAN') || Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel == env('AA')) {
             $course_code = $request->course_code;
             $sets = \App\Curriculum::where('course_code', $course_code)->where('period', $request->period)->get();
             $elects = \App\CtrElective::where('course_code', $course_code)->get();
@@ -60,7 +60,7 @@ class srf extends Controller
     }
     
     function print_index(){
-        if (Auth::user()->accesslevel == env('DEAN') || Auth::user()->accesslevel == env('REG_COLLEGE')) {
+        if (Auth::user()->accesslevel == env('DEAN') || Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel == env('AA')) {
             $programs = \App\Curriculum::distinct()->get(['program_code', 'program_name']);
             $curriculum_years = \App\Curriculum::distinct()->get(['curriculum_year']);
             return view('dean.srf.print_index', compact('curriculum_years', 'programs'));
@@ -68,7 +68,7 @@ class srf extends Controller
     }
     
     function print_srf_now($program_code, $level, $period, $curriculum_year){
-        if (Auth::user()->accesslevel == env('DEAN') || Auth::user()->accesslevel == env('REG_COLLEGE')) {
+        if (Auth::user()->accesslevel == env('DEAN') || Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel == env('AA')) {
             $programs = \App\Curriculum::where('program_code', $program_code)->where('level', $level)->where('period', $period)->where('curriculum_year', $curriculum_year)->get();
             $program_name = \App\CtrAcademicProgram::where('program_code', $program_code)->first()->program_name;
 
@@ -80,14 +80,14 @@ class srf extends Controller
     }
     
     function student_list(){
-        if (Auth::user()->accesslevel == env('DEAN') || Auth::user()->accesslevel == env('REG_COLLEGE')) {
+        if (Auth::user()->accesslevel == env('DEAN') || Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel == env('AA')) {
             $programs = \App\Curriculum::distinct()->get(['program_code', 'program_name']);
             return view('dean.srf.view_student_srf', compact('programs'));
         }
     }
     
     function print_srf_list_now($school_year, $period, $course_code){
-        if (Auth::user()->accesslevel == env('DEAN') || Auth::user()->accesslevel == env('REG_COLLEGE')) {
+        if (Auth::user()->accesslevel == env('DEAN') || Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel == env('AA')) {
             
             $lists = \App\GradeCollege::where('grade_colleges.school_year', $school_year)->where('grade_colleges.period', $period)->where('grade_colleges.course_code', $course_code)->join('users', 'users.idno','=','grade_colleges.idno')->join('statuses', 'statuses.idno','=','grade_colleges.idno')->orderBy('users.lastname', 'asc')->get();
             $course_name = \App\Curriculum::where('course_code', $course_code)->first();
@@ -104,7 +104,7 @@ class srf extends Controller
     }
     
     function srf_balances(){
-        if (Auth::user()->accesslevel == env('DEAN') || Auth::user()->accesslevel == env('REG_COLLEGE')) {
+        if (Auth::user()->accesslevel == env('DEAN') || Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel == env('AA')) {
             $programs = \App\Curriculum::distinct()->get(['program_code', 'program_name']);
             return view('dean.srf.srf_balances', compact('programs'));
         }
@@ -113,7 +113,7 @@ class srf extends Controller
     
     
     function print_srf_balances($school_year, $period,$program_code){
-        if (Auth::user()->accesslevel == env('DEAN') || Auth::user()->accesslevel == env('REG_COLLEGE')) {
+        if (Auth::user()->accesslevel == env('DEAN') || Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel == env('AA')) {
             
             $number=1;
             $lists = \App\Ledger::distinct('ledgers.idno', 'users.lastname', 'users.firstname', 'users.middlename')

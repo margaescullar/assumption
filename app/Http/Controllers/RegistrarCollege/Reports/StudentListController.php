@@ -17,7 +17,7 @@ class StudentListController extends Controller {
     }
 
     function search() {
-        if (Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel==env('ADMISSION_HED') || Auth::user()->accesslevel==env('DEAN')) {
+        if (Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel==env('ADMISSION_HED') || Auth::user()->accesslevel==env('DEAN') || Auth::user()->accesslevel==env('AA')) {
             $school_years = \App\CourseOffering::distinct()->get(['school_year']);
             $programs = \App\CtrAcademicProgram::distinct()->where('academic_type', 'College')->get(['program_code', 'program_name']);
             return view('reg_college.reports.student_list.search', compact('school_years', 'programs'));
@@ -25,7 +25,7 @@ class StudentListController extends Controller {
     }
 
     function print_search($school_years, $periods, $levels, $program_codes) {
-        if (Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel == env('ADMISSION_HED') || Auth::user()->accesslevel==env('DEAN')) {
+        if (Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel == env('ADMISSION_HED') || Auth::user()->accesslevel==env('DEAN') || Auth::user()->accesslevel==env('AA')) {
 
             $school_year = $school_years;
             $period = $periods;
@@ -65,7 +65,7 @@ class StudentListController extends Controller {
     }
 
     function per_course() {
-        if (Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel==env('ADMISSION_HED') || Auth::user()->accesslevel==env('DEAN')) {
+        if (Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel==env('ADMISSION_HED') || Auth::user()->accesslevel==env('DEAN') || Auth::user()->accesslevel==env('AA')) {
             $school_years = \App\CourseOffering::distinct()->get(['school_year']);
             $programs = \App\CtrAcademicProgram::distinct()->where('academic_type', 'College')->get(['program_code', 'program_name']);
             return view('reg_college.reports.student_list.per_course', compact('school_years', 'programs'));
@@ -73,7 +73,7 @@ class StudentListController extends Controller {
     }
 
     function print_per_course($course_codes, $schedule_ids, $school_years, $periods, $levels, $program_codes) {
-        if (Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel==env('ADMISSION_HED') || Auth::user()->accesslevel==env('DEAN')) {
+        if (Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel==env('ADMISSION_HED') || Auth::user()->accesslevel==env('DEAN') || Auth::user()->accesslevel==env('AA')) {
             $course_code = $course_codes;
             $schedule_id = $schedule_ids;
             $school_year = $school_years;
@@ -132,7 +132,7 @@ class StudentListController extends Controller {
     }
 
     function per_instructor() {
-        if (Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel==env('ADMISSION_HED') || Auth::user()->accesslevel==env('DEAN')) {
+        if (Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel==env('ADMISSION_HED') || Auth::user()->accesslevel==env('DEAN') || Auth::user()->accesslevel==env('AA')) {
             $instructors = \App\User::where('accesslevel', env('INSTRUCTOR'))->get();
             return view('reg_college.reports.student_list.per_instructor', compact('instructors'));
         }
