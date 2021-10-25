@@ -40,6 +40,9 @@
                 @case (26)
                     OAA
                 @break
+                @case (27)
+                    Club Moderator
+                @break
                 @case (30)
                     Accounting Head
                 @break

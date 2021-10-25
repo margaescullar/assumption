@@ -6,6 +6,8 @@ $school_years = DB::Select("Select distinct school_year from bed_levels");
 <?php
 if (Auth::user()->accesslevel == env("ACCTNG_STAFF")) {
     $layout = "layouts.appaccountingstaff";
+} else if (Auth::user()->accesslevel == env('CLUB_MODERATOR')){
+    $layout = "layouts.appclubmoderator";
 } else if (Auth::user()->accesslevel == env("ACCTNG_HEAD")) {
     $layout = "layouts.appaccountinghead";
 }

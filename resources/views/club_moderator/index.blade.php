@@ -1,0 +1,9 @@
+@extends("layouts.appclubmoderator")
+@section('messagemenu')
+@endsection
+@section('header')
+@endsection
+@section('maincontent')
+@endsection
+@section('footerscript') 
+@endsection
