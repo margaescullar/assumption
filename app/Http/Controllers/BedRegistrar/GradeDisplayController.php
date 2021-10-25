@@ -33,7 +33,8 @@ class GradeDisplayController extends Controller
         }
         
         $view_grades = \App\CtrBedDisplayGrade::all();
-        return view('reg_be.grade_display.portal',compact('view_grades'));
+        $period_setting = \App\CtrReportCardSyDisplay::first();
+        return view('reg_be.grade_display.portal',compact('view_grades','period_setting'));
     }
     
     function updatePeriod(Request $request){
