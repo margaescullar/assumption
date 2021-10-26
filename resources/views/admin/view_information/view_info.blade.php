@@ -97,6 +97,7 @@
                         <option value="10" @if ($user->accesslevel == 10) selected='' @endif>Dean</option>
                         <option value="11" @if ($user->accesslevel == 11) selected='' @endif>MESIL</option>
                         <option value="12" @if ($user->accesslevel == 12) selected='' @endif>MSBMW</option>
+                        <option value="12" @if ($user->accesslevel == 13) selected='' @endif>AA</option>
                         <option value="20" @if ($user->accesslevel == 20) selected='' @endif>Registrar College</option>
                         <option value="21" @if ($user->accesslevel == 21) selected='' @endif>Registrar Basic Education</option>
                         <option value="22" @if ($user->accesslevel == 22) selected='' @endif>Office of Student Affairs</option>
