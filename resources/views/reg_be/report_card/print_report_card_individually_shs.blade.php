@@ -118,8 +118,8 @@ function getPromotion($level) {
         <td rowspan="2" align="center">REMARKS</td>
     </tr>
     <tr style = "font:bold">
-        <td align="center">Quadmester <br>1</td>
-        <td align="center">Quadmester <br>2</td>
+        <td align="center">Module <br>1</td>
+        <td align="center">Module <br>2</td>
     </tr>
     <?php
     $total_units = 0;
