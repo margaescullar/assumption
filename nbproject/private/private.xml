@@ -12,8 +12,20 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/sean/NetBeansProjects/assumption/app/Http/Controllers/BedRegistrar/GradeDisplayController.php</file>
-            <file>file:/home/sean/NetBeansProjects/assumption/resources/views/reg_be/grade_display/portal.blade.php</file>
+            <file>file:/home/sean/NetBeansProjects/assumption/app/Http/Controllers/RegistrarCollege/CurriculumManagement/UpdateRooms.php</file>
+            <file>file:/home/sean/NetBeansProjects/assumption/app/Http/Controllers/Dean/SRF/srf.php</file>
+            <file>file:/home/sean/NetBeansProjects/assumption/resources/views/reg_college/advising/print_schedule.blade.php</file>
+            <file>file:/home/sean/NetBeansProjects/assumption/resources/views/cashier/ledger.blade.php</file>
+            <file>file:/home/sean/NetBeansProjects/assumption/app/Http/Controllers/RegistrarCollege/CurriculumManagement/ViewCourseOfferingController.php</file>
+            <file>file:/home/sean/NetBeansProjects/assumption/app/Http/Controllers/BedRegistrar/ReportCardController.php</file>
+            <file>file:/home/sean/NetBeansProjects/assumption/resources/views/reg_college/view_record/print_transcript.blade.php</file>
+            <file>file:/home/sean/NetBeansProjects/assumption/app/Http/Controllers/RegistrarCollege/CurriculumManagement/Ajax/coursescheduling_ajax.php</file>
+            <file>file:/home/sean/NetBeansProjects/assumption/app/Http/Controllers/Cashier/StudentLedger.php</file>
+            <file>file:/home/sean/NetBeansProjects/assumption/.env</file>
+            <file>file:/home/sean/NetBeansProjects/assumption/app/Http/Controllers/RegistrarCollege/Advising/AssigningOfSchedules.php</file>
+            <file>file:/home/sean/NetBeansProjects/assumption/routes/web.php</file>
+            <file>file:/home/sean/NetBeansProjects/assumption/app/Http/Controllers/RegistrarCollege/CurriculumManagement/CourseOfferingController.php</file>
+            <file>file:/home/sean/NetBeansProjects/assumption/resources/views/cashier/ledger.blade_1.php</file>
         </group>
     </open-files>
 </project-private>

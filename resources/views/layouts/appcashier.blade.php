@@ -148,6 +148,7 @@ if(file_exists(public_path("images/".Auth::user()->idno.".jpg"))){
             <li><a href="{{url('cashier',array('list_of_checks',date('Y-m-d'),date('Y-m-d')))}}">Check </a></li>
             <li><a href="{{url('cashier',array('credit_cards',date('Y-m-d'),date('Y-m-d')))}}">Credit Card </a></li>
             <li><a href="{{url('cashier',array('bank_deposits',date('Y-m-d'),date('Y-m-d')))}}">Bank Deposit </a></li>
+            <li><a href="{{url('cashier',array('cancelled_or',date('Y-m-d'),date('Y-m-d'),Auth::user()->idno))}}">Cancelled OR</a></li>
           </ul>
         </li>
       </ul>

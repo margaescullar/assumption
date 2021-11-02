@@ -150,4 +150,52 @@ class CollectionReport extends Controller {
         return redirect(url('/cashier', array('deposit_slip', date('Y-m-d'))));
     }
 
+    function cancelled_or($date_from, $date_to, $posted_by) {
+        if (Auth::user()->accesslevel == env("CASHIER")) {
+            $payments = \App\Payment::whereBetween('transaction_date', array($date_from, $date_to))->where('is_reverse', 1)
+                            ->where('posted_by', Auth::user()->idno)->get();
+            $credits = \App\Accounting::selectRaw('sum(credit) as credit, receipt_details')->whereBetween('transaction_date', array($date_from, $date_to))->where('is_reverse', 1)
+                            ->where('posted_by', Auth::user()->idno)->where('credit', '>', '0')->where('accounting_type', '1')->groupBy('receipt_details')->get();
+            $debits = \App\Accounting::selectRaw('sum(debit) as debit, receipt_details')->whereBetween('transaction_date', array($date_from, $date_to))->where('is_reverse', 1)
+                            ->where('posted_by', Auth::user()->idno)->where('debit', '>', '0')->where('accounting_type', '1')->groupBy('receipt_details')->get();
+            $credits_summary = \App\Accounting::selectRaw('sum(credit) as credit, receipt_details')->whereBetween('transaction_date', array($date_from, $date_to))->where('is_reverse', 1)
+                            ->where('posted_by', Auth::user()->idno)->where('credit', '>', '0')->where('accounting_type', '1')->groupBy('receipt_details')->get();
+            $debits_summary = \App\Accounting::selectRaw('sum(debit) as debit, receipt_details')->whereBetween('transaction_date', array($date_from, $date_to))->where('is_reverse', 1)
+                            ->where('posted_by', Auth::user()->idno)->where('debit', '>', '0')->where('accounting_type', '1')->groupBy('receipt_details')->get();
+            $debits_summary_less = \App\Accounting::selectRaw('sum(debit) as debit, receipt_details')->whereBetween('transaction_date', array($date_from, $date_to))->where('is_reverse', 1)
+                            ->where("receipt_details",'!=','Cash')->where('debit', '>', '0')->where('accounting_type', '1')->groupBy('receipt_details')->get();
+        }
+
+        if (Auth::user()->accesslevel == env("ACCTNG_STAFF") || Auth::user()->accesslevel == env("ACCTNG_HEAD")) {
+            if ($posted_by == "all") {
+                $payments = \App\Payment::whereBetween('transaction_date', array($date_from, $date_to))->where('is_reverse', 1)
+                                ->orderBy('posted_by')->get();
+                $credits = \App\Accounting::selectRaw('sum(credit) as credit, receipt_details')->whereBetween('transaction_date', array($date_from, $date_to))->where('is_reverse', 1)
+                                ->where('credit', '>', '0')->where('accounting_type', '1')->groupBy('receipt_details')->get();
+                $debits = \App\Accounting::selectRaw('sum(debit) as debit, receipt_details')->whereBetween('transaction_date', array($date_from, $date_to))->where('is_reverse', 1)
+                                ->where('debit', '>', '0')->where('accounting_type', '1')->groupBy('receipt_details')->get();
+                $credits_summary = \App\Accounting::selectRaw('sum(credit) as credit, receipt_details')->whereBetween('transaction_date', array($date_from, $date_to))->where('is_reverse', 1)
+                                ->where('credit', '>', '0')->where('accounting_type', '1')->groupBy('receipt_details')->get();
+                $debits_summary = \App\Accounting::selectRaw('sum(debit) as debit, receipt_details')->whereBetween('transaction_date', array($date_from, $date_to))->where('is_reverse', 1)
+                                ->where("receipt_details",'Cash')->where('debit', '>', '0')->where('accounting_type', '1')->groupBy('receipt_details')->get();
+                $debits_summary_less = \App\Accounting::selectRaw('sum(debit) as debit, receipt_details')->whereBetween('transaction_date', array($date_from, $date_to))->where('is_reverse', 1)
+                                ->where("receipt_details",'!=','Cash')->where('debit', '>', '0')->where('accounting_type', '1')->groupBy('receipt_details')->get();
+            } else {
+                $payments = \App\Payment::whereBetween('transaction_date', array($date_from, $date_to))->where('is_reverse', 1)
+                                ->where('posted_by', $posted_by)->get();
+                $credits = \App\Accounting::selectRaw('sum(credit) as credit, receipt_details')->whereBetween('transaction_date', array($date_from, $date_to))->where('is_reverse', 1)
+                                ->where('posted_by', $posted_by)->where('credit', '>', '0')->where('accounting_type', '1')->groupBy('receipt_details')->get();
+                $debits = \App\Accounting::selectRaw('sum(debit) as debit, receipt_details')->whereBetween('transaction_date', array($date_from, $date_to))->where('is_reverse', 1)
+                                ->where('posted_by', $posted_by)->where('debit', '>', '0')->where('accounting_type', '1')->groupBy('receipt_details')->get();
+                $credits_summary = \App\Accounting::selectRaw('sum(credit) as credit, receipt_details')->whereBetween('transaction_date', array($date_from, $date_to))->where('is_reverse', 1)
+                                ->where('credit', '>', '0')->where('accounting_type', '1')->groupBy('receipt_details')->get();
+                $debits_summary = \App\Accounting::selectRaw('sum(debit) as debit, receipt_details')->whereBetween('transaction_date', array($date_from, $date_to))->where('is_reverse', 1)
+                                ->where('debit', '>', '0')->where('accounting_type', '1')->groupBy('receipt_details')->get();
+                $debits_summary_less = \App\Accounting::selectRaw('sum(debit) as debit, receipt_details')->whereBetween('transaction_date', array($date_from, $date_to))->where('is_reverse', 1)
+                                ->where("receipt_details",'!=','Cash')->where('debit', '>', '0')->where('accounting_type', '1')->groupBy('receipt_details')->get();
+            }
+        }
+        return view('cashier.cancelled_or', compact('payments', 'date_from', 'date_to', 'debits', 'credits', 'posted_by', 'debits_summary', 'credits_summary','debits_summary_less'));
+    }
+
 }
