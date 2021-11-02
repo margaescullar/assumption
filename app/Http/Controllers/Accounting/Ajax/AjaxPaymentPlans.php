@@ -23,4 +23,14 @@ class AjaxPaymentPlans extends Controller {
         }
     }
 
+    function getstudentslist() {
+        if (Request::ajax()) {
+            $school_year = Input::get('school_year');
+            $period = Input::get('period');
+            $level = Input::get('level');
+
+            return view('accounting.payment_plans.payment_plans_student_list',compact('school_year','period','level'));
+        }
+    }
+
 }

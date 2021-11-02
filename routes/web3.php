@@ -115,6 +115,11 @@ Route::post('/accounting/payment_plans_pdf','Accounting\PaymentPlans@payment_pla
 Route::post('/accounting/payment_plans_excel','Accounting\PaymentPlans@payment_plans_excel');
 Route::get('/accounting/ajax/get_paymentplans','Accounting\Ajax\AjaxPaymentPlans@getstudents');
 
+//Accounting Payment Student
+Route::get('/accounting/payment_plans_student','Accounting\PaymentPlans@payment_plans_student');
+Route::post('/accounting/payment_plans_student_pdf','Accounting\PaymentPlans@payment_plans_student_pdf');
+Route::post('/accounting/payment_plans_student_excel','Accounting\PaymentPlans@payment_plans_student_excel');
+Route::get('/accounting/ajax/get_paymentplans_student','Accounting\Ajax\AjaxPaymentPlans@getstudentslist');
 
 //Disbursement
 Route::get('/disbursement','Accounting\Disbursement@disbursement_index');
