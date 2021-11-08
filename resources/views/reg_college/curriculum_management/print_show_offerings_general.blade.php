@@ -48,7 +48,7 @@
         <table class="table table-condensed" width="100%" border="0">
             <tbody>        
                 <div>    
-                    <div style='float: left; margin-left: 275px;'><img src="{{public_path('/images/assumption-logo.png')}}"></div>
+                    <div style='float: left; margin-left: 275px;'><img src="../images/assumption-logo.png"></div>
                     <div style='float: left; margin-top:12px; margin-left: 10px' align='center'><span id="schoolname">Assumption College</span> <br>San Lorenzo Drive, San Lorenzo Village<br> Makati City<br><br><b>GENERAL SCHEDULE</b><br><b>A.Y. {{$request->school_year}} - {{$request->school_year + 1}}, {{$request->period}}</b></div>
                 </div>
             </tbody>
