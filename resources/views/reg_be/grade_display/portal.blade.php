@@ -78,10 +78,10 @@
 <div class="col-md-6">  
     <div class="box">
         <div class="box-header">
-            <div class="box-title">School Year and Period</div>
+            <div class="box-title">Report Card</div>
         </div>
         <div class="box-body">
-            <i>Note: This settings is for the displaying of Grades in the Student Portal for both Report Card and View Grades.</i>
+            <i>Note: This settings is for the displaying of Grades in the Student Portal for Report Card only.</i>
             <table class="table table-condensed">
                 <form method='post' action='{{url('/update_report_card_sy_display')}}'>
                     {{csrf_field()}}
@@ -94,7 +94,16 @@
                     <td><input type='text' class='form-control' name='period' value='{{$period_setting->period}}'></td>
                 </tr>
                 <tr>
-                    <td colspan="2"><input type='submit' value='Update Period' class='btn btn-success col-sm-12'></td>
+                    <td>Is Open?</td>
+                    <td>
+                        <select name="is_open" class="form-control">
+                            <option value="1" @if($period_setting->is_open == 1) selected=selected @endif>Yes</option>
+                            <option value="0" @if($period_setting->is_open == 0) selected=selected @endif>No</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type='submit' value='Update Report Card Settings' class='btn btn-success col-sm-12'></td>
                 </tr>
                 </form>
             </table>

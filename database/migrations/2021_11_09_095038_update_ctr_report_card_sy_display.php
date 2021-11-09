@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateCtrForms extends Migration
+class UpdateCtrReportCardSyDisplay extends Migration
 {
     /**
      * Run the migrations.
@@ -14,9 +14,10 @@ class UpdateCtrForms extends Migration
     public function up()
     {
         //
-        Schema::table('ctr_forms', function(Blueprint $table) {
-            $table->integer('processing_day')->default(0);
+        Schema::table('ctr_report_card_sy_displays', function(Blueprint $table) {
+            $table->integer('is_open')->default(0);
         });
+        
     }
 
     /**
@@ -27,8 +28,8 @@ class UpdateCtrForms extends Migration
     public function down()
     {
         //
-        Schema::table('ctr_forms', function(Blueprint $table) {
-            $table->dropColumn('processing_day');
+        Schema::table('ctr_report_card_sy_displays', function(Blueprint $table) {
+            $table->dropColumn('is_open');
         });
     }
 }

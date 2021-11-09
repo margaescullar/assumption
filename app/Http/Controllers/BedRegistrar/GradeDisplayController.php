@@ -41,6 +41,7 @@ class GradeDisplayController extends Controller
         $period_setting = \App\CtrReportCardSyDisplay::first();
         $period_setting->school_year = $request->school_year;
         $period_setting->period = $request->period;
+        $period_setting->is_open = $request->is_open;
         $period_setting->save();
         \App\Http\Controllers\Admin\Logs::log("Update CtrReporCardSyDisplay school_year: $request->school_year; period: $request->period.");
         
