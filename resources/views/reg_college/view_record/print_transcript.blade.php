@@ -98,6 +98,7 @@ $count = 0;
         <tr>
             <td valign='top' width='24%'>STUDENT NUMBER:</td>
             <td>{{$user->idno}}</td>
+            
             <td width='10%' valign='top' align='center' rowspan="16">
                 <img src="{{public_path('images/PICTURES/'.$user->idno.'.jpg')}}" alt=' '>
             </td>
