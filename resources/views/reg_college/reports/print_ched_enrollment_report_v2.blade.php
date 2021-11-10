@@ -97,6 +97,11 @@
     <table width="100%">
         <tbody>
             <tr>
+                <td><b>Prepared By:<br><br><br><br></b>
+                    <b>{{strtoupper(Auth::user()->lastname)}}, {{strtoupper(Auth::user()->firstname)}}</b><br>
+<!--                    Registrar<br>-->
+
+                    <div align="right">Date Printed: {{ date('Y-m-d H:i:s') }}</div></td>
                 <td><b>Certified Correct:<br><br><br><br></b>
                     <b>{{strtoupper(env("HED_REGISTRAR"))}}</b><br>
                     Registrar<br>
