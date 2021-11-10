@@ -143,7 +143,7 @@ $records = \App\TranscriptOfRecord::where('idno', $idno)->where('level', "Grade 
 @endif
 @endfor
 
-@for($x=11; $x<=11; $x++)
+@for($x=11; $x<=12; $x++)
 <?php 
 $first_letter = "";
 $first_gwa = 0;

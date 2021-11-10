@@ -62,6 +62,15 @@ if(Auth::user()->accesslevel == env("CASHIER")){
             <a href='{{url('/view_previous_next_receipt',array("previous",$payment->reference_id))}}'><button class='btn btn-success'>Previous</button></a>
             <a href='{{url('/view_previous_next_receipt',array("next",$payment->reference_id))}}'><button class='btn btn-success pull-right'>Next</button></a>
         </div>
+            <form method="post" action="{{url('search_or')}}">
+                <div class="col-md-4">
+                    {{csrf_field()}}
+                    <input type="text" id="search" class="form-control" name="or_number" required="" placeholder="Search OR Number...">
+                </div>
+                <div class="col-md-2">
+                    <input type="submit" value="Search" class="btn btn-success">
+                </div>
+            </form>
         <hr>
     <div class="col-md-6 official_receipt">
         

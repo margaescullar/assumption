@@ -7,7 +7,7 @@ use App\Http\Controllers\BedRegistrar\Ajax\AjaxBatchRanking;
 <div class="col-md-12"> 
     <div class="box">
         <div class="box-header">
-            <div class="box-title">GRADES SEVEN TO ELEVEN
+            <div class="box-title">GRADES SEVEN TO TWELVE
             </div>
             <div class="pull-right"><a target="_blank" href="{{url('/print_secondary_record',$idno)}}"><button class="btn btn-success">Print TOR</button></a></div>
         </div>
@@ -92,7 +92,7 @@ use App\Http\Controllers\BedRegistrar\Ajax\AjaxBatchRanking;
             @endif
             @endfor
 
-            @for($x=11; $x<=11; $x++)
+            @for($x=11; $x<=12; $x++)
             <?php
             $first_letter = "";
             $first_gwa = 0;

@@ -59,4 +59,15 @@ class SetReceiptController extends Controller
         return view('accounting.search_or');
         }
     }
+    
+    function search_or_view_receipt(Request $request){
+        if (Auth::user()->accesslevel == env('ACCTNG_STAFF') || Auth::user()->accesslevel == env('ACCTNG_HEAD')) {
+            $details = \App\Payment::where('receipt_no',$request->or_number)->first();
+            if(count($details)>0){
+            return redirect(url("/cashier/viewreceipt/$details->reference_id"));
+            }else{
+                return "Official Receipt not found.";
+            }
+        }
+    }
 }

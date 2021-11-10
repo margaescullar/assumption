@@ -409,6 +409,7 @@ Route::post('/accounting/view_schedule_of_fees', 'Accounting\ScheduleOfFees@view
 Route::get('/accounting/set_or', 'Accounting\SetReceiptController@index');
 Route::post('/accounting/update_or', 'Accounting\SetReceiptController@update_or');
 //Search OR
+Route::post('/search_or', 'Accounting\SetReceiptController@search_or_view_receipt');
 Route::get('/accounting/search_or', 'Accounting\SetReceiptController@search_or');
 Route::get('/accounting/ajax/getsearch_or', 'Accounting\Ajax\AjaxSetReceipt@getsearch_or');
 Route::get('/accounting/ajax/getrange_or', 'Accounting\Ajax\AjaxSetReceipt@getrange_or');
