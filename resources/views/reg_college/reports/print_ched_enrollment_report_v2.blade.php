@@ -119,6 +119,7 @@
                 <th style="text-align: center;border-top: 1pt dotted black;border-bottom: 1pt dotted black">Code</th>
                 <th style="text-align: center;border-top: 1pt dotted black;border-bottom: 1pt dotted black">Description</th>
                 <th style="text-align: center;border-top: 1pt dotted black;border-bottom: 1pt dotted black">Units</th>
+                <th style="text-align: center;border-top: 1pt dotted black;border-bottom: 1pt dotted black">Remarks</th>
             </tr>
         </thead>
         <tbody>
@@ -141,6 +142,7 @@
                         <td>{{$grade->course_code}}</td>
                         <td>{{$grade->course_name}}</td>
                         <td>{{$units = $grade->lec + $grade->lab}}</td>
+                        <td></td>
                     </tr>
                     @else
                     <tr>
@@ -148,17 +150,19 @@
                         <td>{{$grade->course_code}}</td>
                         <td>{{$grade->course_name}}</td>
                         <td>{{$units = $grade->lec + $grade->lab}}</td>
+                        <td></td>
                     </tr>
                     @endif
                     <?php $totalunits = $totalunits + $units; ?>
                     @if ($loop->last)
                     <tr>
-                        <td colspan="6"></td>
+                        <td colspan="7"></td>
                         <td style="border-top: 1pt double dotted black" colspan="2" align="right">TOTAL UNITS:</td>
                         <td style="border-top: 1pt double dotted black"><b>{{$totalunits}}</b></td>
                     </tr>
                     @endif   
                     @endforeach
+                <td></td>
             </tr>    
             @endforeach
         </tbody>
