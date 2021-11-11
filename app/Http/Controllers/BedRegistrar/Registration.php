@@ -287,7 +287,7 @@ class Registration extends Controller {
     }
 
     function withdrawn_students() {
-        if (Auth::user()->accesslevel == env("REG_BE") || Auth::user()->accesslevel == env("EDUTECH")) {
+        if (Auth::user()->accesslevel == env("REG_BE") || Auth::user()->accesslevel == env("EDUTECH") || Auth::user()->accesslevel == env("ACCTNG_HEAD") || Auth::user()->accesslevel == env("ACCTNG_STAFF")) {
             $students = \App\Status::where('academic_type', "BED")->where('status', env("WITHDRAWN"))->get();
             return view("reg_be.withdrawn_students", compact('students'));
         }

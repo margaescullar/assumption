@@ -270,6 +270,7 @@ $date_end = date('Y-m-d');
                                 <li><a href="{{url('/accounting',array('unused_deposits'))}}"><span>Student Deposits</span></a></li>
                                 <li><a href="{{url('/accounting',array('examination_permit_hed'))}}"><span>Examination Permit - HED</span></a></li>
                                 <li><a href="{{url('/accounting',array('ledger_update_logs'))}}"><span>Ledger Update Logs</span></a></li>
+                                <li><a href="{{url('/bedregistrar',array('withdrawn_students'))}}"><span>Withdrawn Student - BED</span></a></li>
                             </ul>
                         </li>       
                         <li class="treeview">

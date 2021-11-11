@@ -7,7 +7,11 @@ $school_years = DB::Select("Select distinct school_year from bed_levels");
 if(Auth::user()->accesslevel == env('REG_BE')){
     $layout = "layouts.appbedregistrar";
 }else if (Auth::user()->accesslevel==env("EDUTECH")){
-    $layout = "layouts.appedutech";    
+    $layout = "layouts.appedutech";   
+}else if (Auth::user()->accesslevel==env("ACCTNG_HEAD")){
+    $layout = "layouts.appaccountinghead";   
+}else if (Auth::user()->accesslevel==env("ACCTNG_STAFF")){
+    $layout = "layouts.appaccountingstaff";    
 }else{
     $layout = "layouts.appadmission-bed";
 }
