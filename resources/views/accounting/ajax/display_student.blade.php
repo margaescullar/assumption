@@ -5,6 +5,7 @@
             <th width="10%">ID Number</th>
             <th width="60%">Name</th>
             <th width="10%">Plan</th>
+            <th width="10%">Level</th>
             <th width="10%" style="text-align: right">Due Amount</th>
             <th width="10%" style="text-align: center">Print</th>
         </tr>
@@ -30,7 +31,7 @@
           ->selectRaw('category, sum(amount) as amount, sum(discount) as discount, sum(debit_memo)as debit_memo, sum(payment) as payment')->orderBy('category_switch')->get();
         ?>
         <?php
-        $final_date = date('Y-m-31',strtotime($due_date));
+        $final_date = date('Y-m-30',strtotime($due_date));
         $ledger_due_dates = \App\LedgerDueDate::where('idno', $student->idno)->where('school_year', $status->school_year)->where('period', $status->period)->whereRaw("due_date <= '$final_date'")->get();
         $due_dates = \App\LedgerDueDate::where('idno', $student->idno)->where('school_year', $status->school_year)->where('period', $status->period)->orderBy('due_switch')->orderBy('due_date')->get();
         ?>
@@ -100,6 +101,7 @@
             <td>{{$student->idno}}</td>
             <td>{{$student->lastname}}, {{$student->firstname}}</td>
             <td>{{$student->type_of_plan}}</td>
+            <td>{{$student->level}}</td>
             <td style="color:red; font-weight: bold" align="right">{{number_format(($ledger_amount-$less)+$others+$previous,2)}}</td>
             <td align="center"><a href="javascript:void(0)" onclick='print_soa_student(due_date.value, remarks.value,"{{$student->idno}}")'>Print</a></td>
         </tr>

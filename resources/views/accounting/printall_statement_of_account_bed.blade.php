@@ -41,6 +41,7 @@ $tdcounter=1;
                 <th style="border-bottom: 1px solid black">ID Number</th>
                 <th style="border-bottom: 1px solid black">Name</th>
                 <th style="border-bottom: 1px solid black">Plan</th>
+                <th style="border-bottom: 1px solid black">Level</th>
                 <th style="border-bottom: 1px solid black; text-align: right">Due Amount</th>
             </tr>
         </thead>
@@ -136,6 +137,7 @@ $tdcounter=1;
                 <td style="border-bottom: 1px solid black">{{$student->idno}}</td>
                 <td style="border-bottom: 1px solid black">{{$student->lastname}}, {{$student->firstname}}</td>
                 <td style="border-bottom: 1px solid black">{{$student->type_of_plan}}</td>
+                <td style="border-bottom: 1px solid black">{{$student->level}}</td>
                 <td style="border-bottom: 1px solid black" style="color:red; font-weight: bold" align="right">{{number_format(($ledger_amount-($less-$less_return))+$others+$previous,2)}}</td>
             </tr>
             @endif

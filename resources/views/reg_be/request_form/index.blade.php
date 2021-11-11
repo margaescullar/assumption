@@ -82,6 +82,7 @@
                                 <th>Purpose</th>
                                 <th>Amount</th>
                                 <th>Status</th>
+                                <th>Remarks</th>
                             </tr>
                             </thead>
                         </tbody>
@@ -103,6 +104,7 @@
                                 <td>{{$form_requested->purpose}}</td>
                                 <td>{{$form_requested->amount_pay}}</td>
                                 <td>@if($form_requested->status==0) Payment Pending @elseif($form_requested->status==1) Paid @elseif($form_requested->status==2) For Claiming  on {{$form_requested->claiming_date}} @elseif($form_requested->status==3) Claimed @endif</td>
+                                <td><input type="text" value="{{$form_requested->remarks}}" onkeyup="update_remarks(this.value,'{{$form_requested->reference_id}}')"></td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -129,6 +131,7 @@
                                 <th>OR Number</th>
                                 <th>Status</th>
                                 <th>Action</th>
+                                <th>Remarks</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -149,8 +152,18 @@
                                 </td>
                                 <td>{{$form_requested->purpose}}</td>
                                 <td>{{$form_requested->amount_pay}}</td>
-                                <td>{{$form_requested->or_number}}</td>
-                                <td>@if($form_requested->status==0) Payment Pending @elseif($form_requested->status==1) Paid @elseif($form_requested->status==2) For Claiming  on {{$form_requested->claiming_date}} @elseif($form_requested->status==3) Claimed @endif</td>
+                                <td>{{$form_requested->or_number}}
+                                <?php
+                                $ordetails = \App\Payment::where('receipt_no',$form_requested->or_number)->where('receipt_no',"!=",null)->first();
+                                ?>
+                                </td>
+                                <td>@if($form_requested->status==0) Payment Pending @elseif($form_requested->status==1)
+                                    Paid
+                                    @if(count($ordetails)>0)
+                                    -{{$ordetails->transaction_date}}
+                                    @endif
+                                    
+                                    @elseif($form_requested->status==2) For Claiming  on {{$form_requested->claiming_date}} @elseif($form_requested->status==3) Claimed @endif</td>
                                 <td>
                                     @if($form_requested->status==0)
                                     <!--<a href="javascript:void(0)" data-toggle="modal" data-target="#modal-view_form" onclick="getForm('{{$form_requested->reference_id}}')">Paid</a>-->
@@ -167,6 +180,7 @@
                                     @endif
 
                                 </td>
+                                <td><input type="text" value="{{$form_requested->remarks}}" onkeyup="update_remarks(this.value,'{{$form_requested->reference_id}}')"></td>
                             </tr>
                             @endforeach
                             </tbody>
@@ -193,6 +207,7 @@
                                 <th>OR Number</th>
                                 <th>Status</th>
                                 <th>Action</th>
+                                <th>Remarks</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -231,6 +246,7 @@
                                     @endif
 
                                 </td>
+                                <td><input type="text" value="{{$form_requested->remarks}}" onkeyup="update_remarks(this.value,'{{$form_requested->reference_id}}')"></td>
                             </tr>
                             @endforeach
                             </tbody>
@@ -257,6 +273,7 @@
                                 <th>OR Number</th>
                                 <th>Date Claimed</th>
                                 <th>Status</th>
+                                <th>Remarks</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -280,6 +297,7 @@
                                 <td>{{$form_requested->or_number}}</td>
                                 <td>{{$form_requested->claim_date}}</td>
                                 <td>@if($form_requested->status==0) Payment Pending @elseif($form_requested->status==1) Paid @elseif($form_requested->status==2) For Claiming  on {{$form_requested->claiming_date}} @elseif($form_requested->status==3) Claimed @endif</td>
+                                <td><input type="text" value="{{$form_requested->remarks}}" onkeyup="update_remarks(this.value,'{{$form_requested->reference_id}}')"></td>
                             </tr>
                             @endforeach
                             </tbody>
@@ -324,6 +342,21 @@
     $('#example3').DataTable()
     $('#example4').DataTable()
   })
+</script>
+<script>
+function update_remarks(remarks,reference_id){
+    array = {}
+    array['remarks'] = remarks;
+    array['reference_id'] = reference_id;
+    $.ajax({
+        type: "GET",
+        url: "/ajax/bedregistrar/update_remarks_request/",
+        data: array,
+        success: function (data) {
+        }
+
+    });
+}
 </script>
 
 @endsection

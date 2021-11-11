@@ -145,6 +145,7 @@ Route::get('/bedregistrar/request_form/settings','BedRegistrar\RequestForm@setti
 Route::get('/bedregistrar/request_form/reports','BedRegistrar\RequestForm@reports');
 Route::get('/get_form_details','BedRegistrar\RequestForm@AjaxGetFormDetails');
 Route::post('/update_form_details','BedRegistrar\RequestForm@UpdateFormDetails');
+Route::get('/ajax/bedregistrar/update_remarks_request/','BedRegistrar\Ajax\AjaxRequestForm@update_remarks');
 
 //Request Form ID
 Route::get('/bedregistrar/request_form_id','BedRegistrar\RequestFormID@index');
