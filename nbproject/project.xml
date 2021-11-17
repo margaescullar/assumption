@@ -11,6 +11,7 @@
             <word>endif</word>
             <word>footerscript</word>
             <word>foreach</word>
+            <word>ielse</word>
         </spellchecker-wordlist>
     </configuration>
 </project>

@@ -225,12 +225,23 @@ function getPromotion($level) {
         <td id="td1"></td>
     </tr>
     @foreach($groups as $group)
+    @if($group->school_year >= '2021')
+    <tr>
+        
+        <td id="td1">{{$group->subject_name}}</td>
+        <td id="td1" align='center'>@if($group->status1==3){{$group->qtr1}}@endif</td>
+        <td id="td1" align='center'>@if($group->status2==3){{$group->qtr2}}@endif</td>
+        <td id="td1" align='center'>@if($group->status3==3){{$group->qtr3}}@endif</td>
+        
+    </tr>
+    @else
     <tr>
         <td id="td1">{{$group->subject_name}}</td>
         <td id="td1" align='center'>@if($group->status2==3){{$group->qtr2}}@endif</td>
         <td id="td1" align='center'>@if($group->status3==3){{$group->qtr3}}@endif</td>
         <td id="td1" align='center'>@if($group->status4==3){{$group->qtr4}}@endif</td>
     </tr>
+    @endif
     @endforeach
     @endforeach
 </table>

@@ -11,12 +11,6 @@
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/home/sean/NetBeansProjects/assumption/database/migrations/2021_11_09_095038_update_ctr_report_card_sy_display.php</file>
-            <file>file:/home/sean/NetBeansProjects/assumption/app/Http/Controllers/BedRegistrar/Ajax/AjaxRequestForm.php</file>
-            <file>file:/home/sean/NetBeansProjects/assumption/resources/views/reg_be/request_form/index.blade.php</file>
-            <file>file:/home/sean/NetBeansProjects/assumption/routes/web3.php</file>
-            <file>file:/home/sean/NetBeansProjects/assumption/database/migrations/2021_11_11_145144_update_form_request.php</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
