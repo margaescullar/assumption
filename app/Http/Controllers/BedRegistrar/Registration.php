@@ -477,6 +477,7 @@ class Registration extends Controller {
         $updateUser->is_foreign = $request->is_foreign;
         $updateUser->email = $request->email;
         $updateUser->status = $request->user_status;
+        $updateUser->lrn = $request->lrn;
         $updateUser->save();
     }
 

@@ -140,11 +140,11 @@ if (file_exists(public_path("images/PICTURES/" . $user->idno . ".jpg"))) {
                                 <label>ID Number</label>
                                 <input type="text" name="idno" class="form-control" value="{{old('idno',$user->idno)}}" readonly="">
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-2">
                                 <label>Last Name</label>
                                 <input type="text" name="lastname" class="form-control" value="{{old('lastname',$user->lastname)}}">
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-2">
                                 <label>First Name</label>
                                 <input type="text" name="firstname" class="form-control" value="{{old('firstname',$user->firstname)}}">
                             </div>
@@ -155,6 +155,10 @@ if (file_exists(public_path("images/PICTURES/" . $user->idno . ".jpg"))) {
                             <div class="col-sm-2">
                                 <label>Extension Name</label>
                                 <input type="text" name="extensionname" class="form-control" value="{{old('extensionname',$user->extensionname)}}">
+                            </div>
+                             <div class="col-sm-2">
+                                <label>LRN</label>
+                                <input type="text" name="lrn" class="form-control" value="{{old('lrn',$user->lrn)}}">
                             </div>
                         </div>
                     </li>
