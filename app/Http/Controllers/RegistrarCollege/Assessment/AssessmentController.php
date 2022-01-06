@@ -181,7 +181,7 @@ class AssessmentController extends Controller {
         //poppulate other fee with discount////
         $course_assessed = \App\GradeCollege::where('idno', $idno)->where('school_year', $school_year)->where('period', $period)->get();
         if (count($course_assessed) > 1) {
-            $this->getOtherFee($idno, $school_year, $period, $level, $program_code, $discountof, $discount_code, $request,$discountnondiscounted);
+            $this->getOtherFee($idno, $school_year, $period, $level, $program_code, $discountof, $discountmf, $discountdf, $discount_code, $request,$discountnondiscounted);
         } else {
             $check_practicum = \App\GradeCollege::where('idno', $idno)->where('school_year', $school_year)->where('period', $period)
                     ->where(function($q) {
