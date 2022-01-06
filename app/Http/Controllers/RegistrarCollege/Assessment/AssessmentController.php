@@ -162,6 +162,8 @@ class AssessmentController extends Controller {
             if ($discounttype == 0) {
                 $discounttf = $this->getdiscountrate('tf', $discount_code, $idno);
                 $discountof = $this->getdiscountrate('of', $discount_code, $idno);
+                $discountmf = $this->getdiscountrate('mf', $discount_code, $idno);
+                $discountdf = $this->getdiscountrate('df', $discount_code, $idno);
                 $discountnondiscounted = $this->getdiscountrate('non_discounted', $discount_code, $idno);
                 $discountsrf = $this->getdiscountrate('srf', $discount_code, $idno);
             } else if ($discounttype == 1) {
@@ -324,6 +326,10 @@ class AssessmentController extends Controller {
             return \App\CollegeScholarship::where('idno', $idno)->where('discount_code', $discount_code)->first()->non_discounted;
         } elseif ($type == 'srf') {
             return \App\CollegeScholarship::where('idno', $idno)->where('discount_code', $discount_code)->first()->srf;
+         } elseif ($type == 'mf'){
+            return \App\CollegeScholarship::where('idno', $idno)->where('discount_code', $discount_code)->first()->misc_fee;
+         } elseif ($type == 'df') {
+            return \App\CollegeScholarship::where('idno', $idno)->where('discount_code', $discount_code)->first()->depository_fee;
         }
     }
 
@@ -436,7 +442,13 @@ class AssessmentController extends Controller {
                     $addledger->accounting_name = $this->getAccountingName($otherfee->accounting_code);
                     $addledger->category_switch = $otherfee->category_switch;
                     $addledger->amount = $otherfee->amount;
-                    $addledger->discount = $otherfee->amount * ($discountof / 100);
+                    if($otherfee->category_switch==1){
+                        $addledger->discount = $otherfee->amount * ($discountmf / 100);
+                    } else if($otherfee->category_switch==3){
+                        $addledger->discount = $otherfee->amount * ($discountdf / 100);
+                    } else {
+                        $addledger->discount = $otherfee->amount * ($discountof / 100);
+                    }
                     $addledger->discount_code = $discount_code;
                     $addledger->save();
                     }
