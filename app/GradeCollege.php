@@ -19,4 +19,7 @@ class GradeCollege extends Model
         
         return $name->lastname.", ".$name->firstname." ".$name->middlename." ".$name->extensionname;
     }
+     public function user(){
+         return $this->hasOne(User::class,'idno','idno');
+     }
 }

@@ -97,6 +97,7 @@ $checkstatus_finals3 = \App\GradeCollege::whereRaw('('.$raw.')')->join('college_
                             <th width="3%">#</th>
                             <th width="8%">ID number</th>
                             <th>Name</th>
+                            <th>Email</th>
                             <th width="5%">Midterm Absences</th>
                             <th width="5%">Midterm</th>
                             <th width="5%">Finals Absences</th>
@@ -112,6 +113,7 @@ $checkstatus_finals3 = \App\GradeCollege::whereRaw('('.$raw.')')->join('college_
                             <td>
                                 <input @if($close->midterm == 1) readonly="" @endif value="{{$student->midterm_absences}}" name="midterm_absences[{{$student->id}}]" id="midterm_absences" onchange="change_midterm_absences(this.value, {{$student->id}}, '{{$student->idno}}')"
                             </td>
+                            <td>{{$student->user->email}}</td>
                             <td>
                                 <select class="grade" name="midterm[{{$student->id}}]" id="midterm" onchange="change_midterm(this.value, {{$student->id}}, '{{$student->idno}}')"
                                 @if($student->midterm_status == 3)
