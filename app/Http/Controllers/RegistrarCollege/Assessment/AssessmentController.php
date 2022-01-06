@@ -195,7 +195,7 @@ class AssessmentController extends Controller {
             if (count($check_practicum) == 1) {
                 $this->getPracticumOtherFee($idno, $school_year, $period, $level, $program_code, $discountof, $discount_code,$request,$discountnondiscounted);
             } else {
-                $this->getOtherFee($idno, $school_year, $period, $level, $program_code, $discountof, $discount_code,$request,$discountnondiscounted);
+                $this->getOtherFee($idno, $school_year, $period, $level, $program_code, $discountof,$discountmf,$discountdf, $discount_code,$request,$discountnondiscounted);
             }
         }
         //check enrollment cut off
@@ -421,7 +421,7 @@ class AssessmentController extends Controller {
         }
     }
 
-    function getOtherFee($idno, $school_year, $period, $level, $program_code, $discountof, $discount_code,$request, $discountnondiscounted) {
+    function getOtherFee($idno, $school_year, $period, $level, $program_code, $discountof,$discountmf,$discountdf, $discount_code,$request, $discountnondiscounted) {
         $is_new = \App\Status::where('idno', $idno)->first()->is_new;
         if($is_new == 0){
 //            $otherfees = \App\CtrCollegeOtherFee::where('program_code', $program_code)->where('level', $level)->where('period', $period)->get();
