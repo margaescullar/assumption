@@ -188,7 +188,7 @@ function get_total($level){
             @elseif($department == "Junior High School")
             BEHS
             @elseif($department == "Senior High School")
-            Period : 1st Semester<br>
+            Period : 2nd Semester<br>
             SHS
             @endif
             <br>
@@ -455,8 +455,8 @@ function get_total($level){
             <tr>
                 <td>Mode of Payment</td>
                 <td>Upon Enrollment</td>
-                <td>Sept</td><td>Oct</td><td>Nov</td><td>Dec</td>
-                <!--<td>Feb</td><td>Mar</td><td>Apr</td><td>May</td>-->
+                <!--<td>Sept</td><td>Oct</td><td>Nov</td><td>Dec</td>-->
+                <td>Feb</td><td>Mar</td><td>Apr</td><td>May</td>
                 <td>Total</td>
             </tr>
             

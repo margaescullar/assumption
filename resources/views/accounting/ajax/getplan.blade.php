@@ -417,8 +417,8 @@ $grade2total = $grade2tuition+$grade2misc+$grade2others+$grade2dep;
     <tr>
         <td>Mode of Payment</td>
         <td>Upon Enrollment</td>
-        <td>Sept</td><td>Oct</td><td>Nov</td><td>Dec</td>
-        <!--<td>Feb</td><td>Mar</td><td>Apr</td><td>May</td>-->
+        <!--<td>Sept</td><td>Oct</td><td>Nov</td><td>Dec</td>-->
+        <td>Feb</td><td>Mar</td><td>Apr</td><td>May</td>
         <td>Total</td>
     </tr>
         <tr><td colspan="12"><b>Grade 11</b></td></tr>
