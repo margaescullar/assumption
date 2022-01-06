@@ -110,10 +110,11 @@ $checkstatus_finals3 = \App\GradeCollege::whereRaw('('.$raw.')')->join('college_
                             <td>{{$number}}<?php $number = $number + 1; ?></td>
                             <td>{{$student->idno}}</td>
                             <td>{{$student->lastname}}, {{$student->firstname}} {{$student->middlename}} @if($student->is_audit==1)(Audit-Special Learning Needs) @elseif($student->is_audit==2) (Audit-Special Interest) @elseif($student->is_audit==3) (Exchange Student) @endif</td>
+                            <td>{{$student->user->email}}</td>
                             <td>
                                 <input @if($close->midterm == 1) readonly="" @endif value="{{$student->midterm_absences}}" name="midterm_absences[{{$student->id}}]" id="midterm_absences" onchange="change_midterm_absences(this.value, {{$student->id}}, '{{$student->idno}}')"
                             </td>
-                            <td>{{$student->user->email}}</td>
+                            
                             <td>
                                 <select class="grade" name="midterm[{{$student->id}}]" id="midterm" onchange="change_midterm(this.value, {{$student->id}}, '{{$student->idno}}')"
                                 @if($student->midterm_status == 3)
