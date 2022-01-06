@@ -137,6 +137,8 @@ class AssessmentController extends Controller {
         $discountnondiscounted = 0;
         $discountsrf = 0;
         $discounttype = 0;
+        $discountmf = 0;
+        $discountdf=0;
         $school_year = $request->school_year;
         $period = $request->period;
 //        $school_year = \App\CtrEnrollmentSchoolYear::where('academic_type', 'College')->first()->school_year;
