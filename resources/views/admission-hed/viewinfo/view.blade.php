@@ -120,6 +120,7 @@ if ($adhedinfo->applying_for == "Senior High School") {
                                     <option value='2019' @if($adhedinfo->applying_for_sy == '2019') selected='' @else @endif>2019-2020</option>
                                     <option value='2020' @if($adhedinfo->applying_for_sy == '2020') selected='' @else @endif>2020-2021</option>
                                     <option value='2021' @if($adhedinfo->applying_for_sy == '2021') selected='' @else @endif>2021-2022</option>
+                                    <option value='2022' @if($adhedinfo->applying_for_sy == '2022') selected='' @else @endif>2022-2023</option>
                                 </select>                           
                             </div>                                                                  
                         </div>
